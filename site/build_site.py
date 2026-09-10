@@ -14,7 +14,6 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 SITE_SRC = ROOT / "site"
 DEFAULT_DATA_FILE = SITE_SRC / "site_data.json"
-CAREER_WIKI = ROOT / "CAREER_WIKI.md"
 PORTFOLIO = ROOT / "PORTFOLIO.md"
 ASSETS = ROOT / "assets"
 
@@ -106,12 +105,9 @@ def landing_html(data: dict) -> str:
     repo_base = repo_url()
     source_links = ""
     if repo_base:
-        source_links = (
-            f'<a class="button" href="{esc(repo_base)}/blob/main/CAREER_WIKI.md">Career Wiki on GitHub</a>'
-            f'<a class="button" href="{esc(repo_base)}/blob/main/PORTFOLIO.md">Portfolio Markdown</a>'
-        )
+      source_links = f'<a class="button" href="{esc(repo_base)}/blob/main/PORTFOLIO.md">Portfolio Markdown</a>'
     else:
-        source_links = '<a class="button" href="career-wiki.html">Detailed Career Wiki</a><a class="button" href="portfolio.html">Portfolio Markdown View</a>'
+      source_links = '<a class="button" href="portfolio.html">Portfolio Markdown View</a>'
 
     return f'''<!doctype html>
 <html lang="ko">
@@ -209,7 +205,6 @@ def landing_html(data: dict) -> str:
 </main>
 <footer class="footer">
   <div class="footer-links">
-    <a href="career-wiki.html">Detailed Career Wiki</a>
     <a href="portfolio.html">Portfolio View</a>
     <a href="{esc(github)}">GitHub</a>
   </div>
@@ -252,7 +247,7 @@ class LinkCollector(HTMLParser):
 
 def validate_output(out: Path, data: dict) -> None:
     required = {
-        "index.html", "career-wiki.html", "portfolio.html",
+      "index.html", "portfolio.html",
         "assets"
     }
     actual_top = {p.name for p in out.iterdir()}
@@ -263,7 +258,7 @@ def validate_output(out: Path, data: dict) -> None:
     if extras:
         raise RuntimeError(f"site has unexpected top-level output: {sorted(extras)}")
 
-    html_files = [out / "index.html", out / "career-wiki.html", out / "portfolio.html"]
+    html_files = [out / "index.html", out / "portfolio.html"]
     portfolio_ids: set[str] = set()
     for path in html_files:
         text = path.read_text(encoding="utf-8")
@@ -305,7 +300,6 @@ def build(out: Path, data_file: Path) -> None:
     shutil.copytree(ASSETS, out / "assets")
     shutil.copy2(SITE_SRC / "site.css", out / "assets" / "site.css")
     (out / "index.html").write_text(landing_html(data), encoding="utf-8")
-    build_markdown_page(CAREER_WIKI, out / "career-wiki.html", "강동혁 · Career Wiki")
     build_markdown_page(PORTFOLIO, out / "portfolio.html", "강동혁 · Portfolio")
     validate_output(out, data)
 
