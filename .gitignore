@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+_site/
+.DS_Store
+*.swp
+*.swo
+*.tmp
+*.bak
+*~
+.env
+.env.*
+!.env.example

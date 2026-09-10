@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "profile": {
+    "name": "강동혁",
+    "role": "Research-minded Applied ML Engineer · Time-Series / Anomaly Detection / ML Systems",
+    "lead": "의료 생체신호, 제조 센서, 보안 행동 로그 등 다양한 현장 데이터의 특성과 품질을 분석하고, 전처리·특징 추출을 거쳐 모델링에 적합한 Feature와 입력 구조를 설계해 왔다. 이를 바탕으로 분류·예측·이상탐지 모델을 개발하고, 결과를 검증·설명해 사람의 판단이나 시스템 활용에 연결하는 것을 중요하게 생각한다.",
+    "journey": "이후 의료 AI에서 fNIRS·ECG·PPG 등 생체신호 분석과 모델 검증을 경험했고, 산업 AIoT의 다변량 시계열 예측·이상탐지와 보안 UEBA로 적용 영역을 확장했다. 최근에는 UEBA와 병행해 반복 실행 가능한 Feature/Data Pipeline을 구축하고, 온프레미스 AI 모델의 API 제공부터 Runtime 제어·모델 운영·관측까지 다루는 Serving Platform으로 개발 범위를 넓히며 데이터·모델·운영 시스템을 잇는 방향으로 역할을 확장하고 있다. 이와 함께 서강대학교 AI·SW대학원 데이터사이언스 석사과정에서 실무와 병행해 AI와 데이터 분석에 대한 연구·학습을 이어가고 있다."
+  },
+  "capabilities": [
+    {
+      "title": "Data Analysis & Feature Engineering",
+      "description": "생체신호·산업 센서·보안 로그의 품질·분포와 시간적 변화·행동 패턴을 EDA와 통계적 분석으로 파악하고, 전처리·특징 추출·변환을 거쳐 모델링에 적합한 Feature와 입력 구조를 설계"
+    },
+    {
+      "title": "Classification / Prediction / Anomaly Detection",
+      "description": "의료 분류, 혈압·센서 예측, 제조·보안 이상탐지 등 데이터 특성과 활용 목적에 맞춰 문제를 정의하고 분류·회귀·이상탐지 모델을 설계·개발"
+    },
+    {
+      "title": "Validation & Explainability",
+      "description": "교차검증·독립 테스트로 모델의 일반화 성능을 확인하고, SHAP·LIME·Grad-CAM 등을 활용해 모델의 판단 근거를 분석"
+    },
+    {
+      "title": "ML Pipeline & Serving",
+      "description": "Feature 생성·저장·재처리가 가능한 데이터 파이프라인과 모델 API·Runtime lifecycle·관측·배포 구조를 설계·구현하며, 모델 개발을 반복 가능한 ML Systems로 확장"
+    }
+  ],
+  "career": [
+    {
+      "company": "위즈베라",
+      "period": "2025.08 ~ 현재",
+      "role": "AI · 대리",
+      "summary": "사용자 행위·파일·네트워크 등 여러 유형의 보안 로그 구조와 사용자별 행동 패턴을 분석해 사용자 단위 Feature로 구조화하고, UEBA 이상 후보를 선별한 뒤 모델의 판단 근거를 실제 로그 행위와 연결하는 업무를 수행하고 있다. UEBA 프로젝트와 병행해 동일 Feature를 반복 생성·재처리할 수 있는 ML/Data Pipeline을 설계·구현했고, 온프레미스 AI 모델의 공통 API 제공부터 Runtime lifecycle·모델 전환·자원 관리·관측까지 다루는 AI Model Serving Platform으로 ML Systems 개발 범위를 확장했다."
+    },
+    {
+      "company": "네비웍스",
+      "period": "2024.10 ~ 2025.08",
+      "role": "DX기술팀 연구원",
+      "summary": "AIoT 센서 기반 다변량 시계열의 변수 관계와 상태 변화를 분석하고, 이를 바탕으로 예측·이상탐지 모델과 FastAPI·Docker 기반 분석 실행 환경을 개발했다. 전력설비 PoC에서는 SOH 상태 전환 이후의 분류보다 상태 전환 이전의 이상징후를 포착하는 문제로 목표를 재구성하고, LSTM-Autoencoder 기반 이상 후보를 모니터링 화면까지 연결했다."
+    },
+    {
+      "company": "엔서",
+      "period": "2021.11 ~ 2024.06",
+      "role": "의료기기 개발·연구원",
+      "summary": "fNIRS, ECG, PPG, ART 등 생체신호에서 데이터 특성과 자극 반응을 분석하고, Feature와 입력 구조 설계, 분류·회귀·이상탐지 모델 개발, XAI와 Cross Validation·Independent Test 기반 검증을 수행했다. fNIRS 기반 의료 AI는 성능 검증·기술문서화와 식약처 인허가·규제 대응을 지원했으며 임상 단계로 이어졌다."
+    },
+    {
+      "company": "소프트웨어융합연구소",
+      "period": "2020.08 ~ 2021.05",
+      "role": "연구원",
+      "summary": "YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, Bounding Box·클래스 품질 점검, 모델 재학습과 TTA V&V 검증을 수행했다. BCG 기반 생체신호에서는 집단별 특징 분석과 만성질환·혈당 예측 프로토타입 연구에 참여했다."
+    }
+  ],
+  "featured_projects": [
+    {
+      "id": "ueba",
+      "code": "WZ-01",
+      "title": "네트워크·행위 기반 UEBA 이상탐지",
+      "category": "Security AI",
+      "period": "2025.09 ~ 2026.02",
+      "summary": "보안 행동 로그의 구조와 사용자별 패턴을 분석해 Feature를 설계하고, 이상 후보·판단 이유·원본 로그 재확인 지점까지 연결한 UEBA 분석 시스템.",
+      "tags": [
+        "Isolation Forest",
+        "EVT/POT",
+        "SHAP",
+        "UEBA"
+      ],
+      "anchor": "221-네트워크행위-기반-ueba-이상탐지",
+      "repository": "https://github.com/so9093-K/explainable-anomaly-analysis",
+      "cover_asset": "assets/ueba/02_if_evt_shap_flow.png"
+    },
+    {
+      "id": "ml-data-pipeline",
+      "code": "WZ-02",
+      "title": "ML/Data Pipeline",
+      "category": "Security AI · ML Data",
+      "period": "",
+      "summary": "UEBA 이상탐지와 병행해 원천 로그 수집부터 Feature 생성·저장·재처리·학습/추론까지 반복 실행 가능하도록 구성한 Feature/Data Pipeline.",
+      "tags": [
+        "Elasticsearch",
+        "Polars",
+        "DuckDB",
+        "PostgreSQL",
+        "Parquet"
+      ],
+      "anchor": "222-mldata-pipeline",
+      "repository": null,
+      "cover_asset": "assets/pipeline/01_log_pipeline_architecture.png"
+    },
+    {
+      "id": "on-premise-ai-model-serving-platform",
+      "code": "WZ-03",
+      "title": "On-Premise AI Model Serving Platform",
+      "category": "AI/ML Systems · Serving",
+      "period": "2026.04 ~ 현재",
+      "summary": "온프레미스 AI 모델을 공통 API로 제공하고 Runtime lifecycle·모델 전환·GPU 자원 관리·Retrieval/Risk·관측·검증/배포를 하나의 Serving Platform으로 구성.",
+      "tags": [
+        "FastAPI",
+        "OpenAI-compatible API",
+        "vLLM",
+        "Runtime Control",
+        "GPU Admission",
+        "Prometheus/Grafana"
+      ],
+      "anchor": "223-on-premise-ai-model-serving-platform",
+      "repository": "https://github.com/so9093-K/On-Premise-LLM-Serving-Platform",
+      "cover_asset": "assets/serving/07_runtime_monitoring.png"
+    },
+    {
+      "id": "manufacturing-anomaly-monitoring",
+      "code": "NB-01",
+      "title": "제조 공정 시계열 이상징후 조기탐지 및 모니터링",
+      "category": "Manufacturing AI",
+      "period": "",
+      "summary": "센서 시계열과 SOH 상태 전환을 분석해 사전 이상 구간과 Sliding Window를 구성하고, LSTM-Autoencoder의 재구성 오류와 Threshold로 이상 후보를 선별한 예지보전 PoC.",
+      "tags": [
+        "Multivariate Time-Series",
+        "Label Shifting",
+        "LSTM-Autoencoder",
+        "Attention",
+        "Threshold"
+      ],
+      "anchor": "231-제조-공정-시계열-이상징후-조기탐지-및-모니터링",
+      "repository": "https://github.com/so9093-K/multivariate-time-series-anomaly-detection-",
+      "cover_asset": "assets/manufacturing/03_lstm_ae_attention.png"
+    },
+    {
+      "id": "fnirs-amyloid-pet",
+      "code": "NS-01",
+      "title": "fNIRS 기반 아밀로이드 PET 양성 예측",
+      "category": "Medical AI",
+      "period": "2022.05 ~ 2024.04",
+      "summary": "전처리된 후각 자극 fNIRS 신호의 집단·자극 반응을 EDA·통계적으로 분석해 Feature와 입력 구조를 설계하고, 모델 튜닝·XAI·독립 Test·의료기기 검증까지 연결한 PET 양성 예측 연구.",
+      "tags": [
+        "fNIRS",
+        "LSTM-FCN",
+        "Optuna",
+        "XAI",
+        "Independent Test"
+      ],
+      "anchor": "241-fnirs-기반-아밀로이드-pet-양성-예측",
+      "repository": null,
+      "cover_asset": "assets/ncer/02_fnirs_development_validation_flow.png"
+    },
+    {
+      "id": "ecg-ppg-bp-analysis",
+      "code": "GR-01",
+      "title": "ECG·PPG 기반 혈압 설명 및 예측 분석",
+      "category": "Graduate Research",
+      "period": "2026.04 ~ 2026.05",
+      "summary": "VitalDB에서 ECG·PPG와 혈압의 분포·관련성을 EDA·통계적으로 분석하고, 추가 설명력·수치 예측 한계·위험 상태 선별 가능성을 단계적으로 검증한 대학원 연구.",
+      "tags": [
+        "VitalDB",
+        "ECG/PPG",
+        "Statistical Analysis",
+        "Case-level Split",
+        "LightGBM",
+        "AUPRC"
+      ],
+      "anchor": "261-ecgppg-기반-혈압-설명-및-예측-분석",
+      "repository": null,
+      "cover_asset": "assets/research/03_mbp_high_confusion_matrix_ko.png"
+    }
+  ],
+  "competitions": [
+    {
+      "id": "drug-ai-competition",
+      "code": "CP-01",
+      "title": "제1회 신약개발 AI 경진대회",
+      "category": "Competition",
+      "period": "2023.08.07 ~ 2023.09.25",
+      "summary": "SMILES를 RDKit descriptor·fingerprint로 변환하고 HLM·MLM별 Feature 조합과 Voting ensemble을 7-Fold CV로 검증한 DACON 프로젝트. 공식 리더보드 46위·상위 6%대.",
+      "tags": [
+        "SMILES",
+        "RDKit",
+        "MACCS",
+        "LightGBM",
+        "VotingRegressor",
+        "7-Fold CV"
+      ],
+      "anchor": "제1회-신약개발-ai-경진대회",
+      "repository": null,
+      "cover_asset": null,
+      "result": "46위 · 상위 6%대 · Final Score 28.19686"
+    },
+    {
+      "id": "jeju-traffic-competition",
+      "code": "CP-02",
+      "title": "제주도 도로 교통량 예측 AI 경진대회",
+      "category": "Competition",
+      "period": "2022.10 ~ 2022.11",
+      "summary": "약 470만 행의 정형 교통 데이터를 분석하고 입력 Feature를 구성해 도로 차량 평균속도 회귀를 MAE 기준으로 검증한 DACON 프로젝트. 공식 리더보드 63위·상위 8%대.",
+      "tags": [
+        "Tabular Data",
+        "Regression",
+        "Feature Engineering",
+        "MAE",
+        "Traffic Data"
+      ],
+      "anchor": "제주도-도로-교통량-예측-ai-경진대회",
+      "repository": null,
+      "cover_asset": null,
+      "result": "63위 · 상위 8%대 · Final Score 3.14746"
+    }
+  ],
+  "project_count": 15,
+  "publications": [
+    {
+      "year": "2022",
+      "title": "Classification of Alzheimer’s disease stage using machine learning for left and right oxygenation difference signals in the prefrontal cortex: a patient-level, single-group, diagnostic interventional trial",
+      "journal": "European Review for Medical and Pharmacological Sciences",
+      "authors": "J. Kim, S.C. Kim, D. Kang, D.K. Yon, J.G. Kim",
+      "url": "https://www.europeanreview.org/article/30122"
+    },
+    {
+      "year": "2023",
+      "title": "Feature extraction of time series data on functional near-infrared spectroscopy and comparison of deep learning performance for classifying patients with Alzheimer’s-related mild cognitive impairment: a post-hoc analysis of a diagnostic interventional trial",
+      "journal": "European Review for Medical and Pharmacological Sciences",
+      "authors": "J. Kim, S.-C. Kim, D. Kang, S.-Y. Kim, R. Kwon, D.K. Yon, J.G. Kim",
+      "url": "https://www.europeanreview.org/article/33153"
+    }
+  ],
+  "education": [
+    {
+      "school": "서강대학교 AI·SW대학원",
+      "details": [
+        "석사과정 재학",
+        "데이터사이언스 계열",
+        "2026.03 ~ 현재"
+      ]
+    },
+    {
+      "school": "조선대학교",
+      "details": [
+        "의생명과학과 학사",
+        "2013.03 ~ 2019.02",
+        "졸업"
+      ]
+    }
+  ],
+  "links": {
+    "profile": {
+      "github": "https://github.com/so9093-K",
+      "notion": "https://soyanchan.notion.site/ML-Engineer-30f3ca337c32803aac22e1a4305872db",
+      "dacon": "https://dacon.io/myprofile/415766/home"
+    },
+    "repositories": [
+      {
+        "name": "Explainable Anomaly Analysis - UEBA Public Reproduction",
+        "url": "https://github.com/so9093-K/explainable-anomaly-analysis"
+      },
+      {
+        "name": "On-Premise AI Model Serving Platform",
+        "url": "https://github.com/so9093-K/On-Premise-LLM-Serving-Platform"
+      },
+      {
+        "name": "Multivariate Time-Series Anomaly Detection",
+        "url": "https://github.com/so9093-K/multivariate-time-series-anomaly-detection-"
+      },
+      {
+        "name": "Naver Review / Recommendation Analysis",
+        "url": "https://github.com/so9093-K/Recommand_analysis"
+      }
+    ]
+  },
+  "version": "0.0.1"
+}
