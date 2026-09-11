@@ -94,11 +94,10 @@ def landing_html(data: dict) -> str:
       </article>''' for x in data["competitions"])
 
     publications = "".join(f'''
-      <article class="compact-card publication-card">
+      <article class="compact-card">
         <h3>{f'<a href="{esc(x["url"])}">{esc(x["title"])}</a>' if x.get("url") else esc(x["title"])}</h3>
-        <p class="publication-summary">{esc(x.get("summary", ""))}</p>
-        <p class="publication-meta">{esc(x["year"])} · {esc(x["journal"])}</p>
-        <p class="publication-meta">{esc(x.get("author", ""))}</p>
+        <p>{esc(x["year"])} · {esc(x["journal"])}</p>
+        <p>{esc(x["authors"])}</p>
       </article>''' for x in data["publications"])
 
     education = "".join(f'''

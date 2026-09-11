@@ -162,7 +162,6 @@ main { display: block; }
 .compact-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
 .compact-card h3 { margin: 0 0 8px; font-size: 1.03rem; line-height: 1.35; }
 .compact-card p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; }
-.publication-summary { color: var(--body-text) !important; }
 .result { color: var(--text) !important; font-weight: 700; }
 
 .footer { max-width: var(--max); margin: 0 auto; padding: 42px 24px 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
