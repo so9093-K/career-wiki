@@ -1,1 +1,21 @@
 </div>
+<script>
+  (function () {
+    function openTargetDetails() {
+      if (!window.location.hash) return;
+
+      var id = decodeURIComponent(window.location.hash.slice(1));
+      var target = document.getElementById(id);
+      if (!target) return;
+
+      var details = target.tagName === "DETAILS" ? target : target.closest("details");
+      while (details) {
+        details.open = true;
+        details = details.parentElement ? details.parentElement.closest("details") : null;
+      }
+    }
+
+    openTargetDetails();
+    window.addEventListener("hashchange", openTargetDetails);
+  }());
+</script>

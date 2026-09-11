@@ -168,8 +168,7 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 
 ### 2.2 위즈베라
 
-<a id="221-네트워크행위-기반-ueba-이상탐지"></a>
-<details>
+<details id="221-네트워크행위-기반-ueba-이상탐지">
 <summary><strong>2.2.1 네트워크·행위 기반 UEBA 이상탐지</strong></summary>
 
 
@@ -293,8 +292,7 @@ UEBA 분석과 병행해 동일한 Feature 정의를 과거 적재·증분 처�
 
 </details>
 
-<a id="222-mldata-pipeline"></a>
-<details>
+<details id="222-mldata-pipeline">
 <summary><strong>2.2.2 ML/Data Pipeline</strong></summary>
 
 
@@ -364,8 +362,7 @@ UEBA 모델에 필요한 Feature를 **반복 생성·재처리·추적 가능한
 
 </details>
 
-<a id="223-on-premise-ai-model-serving-platform"></a>
-<details>
+<details id="223-on-premise-ai-model-serving-platform">
 <summary><strong>2.2.3 On-Premise AI Model Serving Platform</strong></summary>
 
 
@@ -498,8 +495,7 @@ API Contract, Config/Schema, Runtime policy와 generated artifact의 drift를 �
 
 ### 2.3 네비웍스
 
-<a id="231-제조-공정-시계열-이상징후-조기탐지-및-모니터링"></a>
-<details>
+<details id="231-제조-공정-시계열-이상징후-조기탐지-및-모니터링">
 <summary><strong>2.3.1 제조 공정 시계열 이상징후 조기탐지 및 모니터링</strong></summary>
 
 
@@ -615,8 +611,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 </details>
 
-<a id="네비웍스-업무-범위-요약--aiot-분석-서버-및-모델-실행-환경"></a>
-<details>
+<details id="네비웍스-업무-범위-요약--aiot-분석-서버-및-모델-실행-환경">
 <summary><strong>네비웍스 업무 범위 요약 — AIoT 분석 서버 및 모델 실행 환경</strong></summary>
 
 
@@ -636,8 +631,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ### 2.4 엔서
 
-<a id="엔서-업무-범위-요약--생체신호-기반-의료-ai-연구-및-검증"></a>
-<details>
+<details id="엔서-업무-범위-요약--생체신호-기반-의료-ai-연구-및-검증">
 <summary><strong>엔서 업무 범위 요약 — 생체신호 기반 의료 AI 연구 및 검증</strong></summary>
 
 
@@ -649,8 +643,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 </details>
 
-<a id="241-fnirs-기반-아밀로이드-pet-양성-예측"></a>
-<details>
+<details id="241-fnirs-기반-아밀로이드-pet-양성-예측">
 <summary><strong>2.4.1 fNIRS 기반 아밀로이드 PET 양성 예측</strong></summary>
 
 
@@ -786,8 +779,7 @@ XAI 결과로 모델 출력에 영향을 준 특징과 시간 구간을 시각�
 
 </details>
 
-<a id="242-ppg-기반-art-혈압-추정-및-생체신호-이상탐지"></a>
-<details>
+<details id="242-ppg-기반-art-혈압-추정-및-생체신호-이상탐지">
 <summary><strong>2.4.2 PPG 기반 ART 혈압 추정 및 생체신호 이상탐지</strong></summary>
 
 
@@ -839,8 +831,7 @@ PPG 기반 ART 혈압 추정에서 초기 수집 구간의 강한 Noise, 주기�
 
 ### 2.5 소프트웨어융합연구소
 
-<a id="소프트웨어융합연구소-업무-범위-요약--vision-ai와-biosignal-연구개발"></a>
-<details>
+<details id="소프트웨어융합연구소-업무-범위-요약--vision-ai와-biosignal-연구개발">
 <summary><strong>소프트웨어융합연구소 업무 범위 요약 — Vision AI와 Biosignal 연구개발</strong></summary>
 
 
@@ -855,8 +846,7 @@ BCG 생체신호의 집단별 특징을 비교하고 MLP·머신러닝 기반 �
 
 </details>
 
-<a id="251-yolo-기반-실시간-낙상-감지"></a>
-<details>
+<details id="251-yolo-기반-실시간-낙상-감지">
 <summary><strong>2.5.1 YOLO 기반 실시간 낙상 감지</strong></summary>
 
 
@@ -921,8 +911,7 @@ Darknet 기반 YOLO 모델을 학습하고 OpenCV/PIL로 이미지 전처리와 
 
 ### 2.6 대학원 연구
 
-<a id="261-ecgppg-기반-혈압-설명-및-예측-분석"></a>
-<details>
+<details id="261-ecgppg-기반-혈압-설명-및-예측-분석">
 <summary><strong>2.6.1 ECG·PPG 기반 혈압 설명 및 예측 분석</strong></summary>
 
 
@@ -972,8 +961,7 @@ Darknet 기반 YOLO 모델을 학습하고 OpenCV/PIL로 이미지 전처리와 
 
 ### 2.7 경진대회 프로젝트
 
-<a id="제1회-신약개발-ai-경진대회"></a>
-<details>
+<details id="제1회-신약개발-ai-경진대회">
 <summary><strong>제1회 신약개발 AI 경진대회</strong></summary>
 
 
@@ -1018,8 +1006,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 </details>
 
-<a id="제주도-도로-교통량-예측-ai-경진대회"></a>
-<details>
+<details id="제주도-도로-교통량-예측-ai-경진대회">
 <summary><strong>제주도 도로 교통량 예측 AI 경진대회</strong></summary>
 
 
@@ -1053,8 +1040,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 ### 2.8 개인 프로젝트
 
-<a id="네이버-리뷰평점-기반-추천-시스템"></a>
-<details>
+<details id="네이버-리뷰평점-기반-추천-시스템">
 <summary><strong>네이버 리뷰·평점 기반 추천 시스템</strong></summary>
 
 
@@ -1088,8 +1074,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 </details>
 
-<a id="귀농-작물-정보-수집-및-구조화"></a>
-<details>
+<details id="귀농-작물-정보-수집-및-구조화">
 <summary><strong>귀농 작물 정보 수집 및 구조화</strong></summary>
 
 
@@ -1121,8 +1106,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 ### 2.9 교육 과정 프로젝트
 
-<a id="잡초병충해-판별-애플리케이션"></a>
-<details>
+<details id="잡초병충해-판별-애플리케이션">
 <summary><strong>잡초·병충해 판별 애플리케이션</strong></summary>
 
 
@@ -1144,8 +1128,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 </details>
 
-<a id="수화-번역-시스템"></a>
-<details>
+<details id="수화-번역-시스템">
 <summary><strong>수화 번역 시스템</strong></summary>
 
 
@@ -1169,8 +1152,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 </details>
 
-<a id="미세먼지-데이터-분석-기반-비즈니스-솔루션"></a>
-<details>
+<details id="미세먼지-데이터-분석-기반-비즈니스-솔루션">
 <summary><strong>미세먼지 데이터 분석 기반 비즈니스 솔루션</strong></summary>
 
 
