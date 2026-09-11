@@ -45,9 +45,10 @@ def landing_html(data: dict) -> str:
     profile = data["profile"]
     links = data["links"]["profile"]
     github = links.get("github", "")
-    hero_journey = str(profile.get("journey", "")).removeprefix("이후 ")
-    hero_journey_parts = re.split(r"(?<=\.)\s+", hero_journey, maxsplit=1)
-    hero_journey_html = "".join(f"<p>{esc(part)}</p>" for part in hero_journey_parts if part)
+    role_parts = [part.strip() for part in str(profile.get("role", "")).split(" · ", 1) if part.strip()]
+    hero_role_html = "<br>".join(esc(part) for part in role_parts)
+    hero_summary = profile.get("hero_summary") or [str(profile.get("journey", "")).removeprefix("이후 ")]
+    hero_summary_html = "".join(f"<p>{esc(part)}</p>" for part in hero_summary if part)
 
     capabilities = "".join(
         f'<article class="capability"><h3>{esc(x["title"])}</h3><p>{esc(x["description"])}</p></article>'
@@ -142,7 +143,7 @@ def landing_html(data: dict) -> str:
     <div>
       <p class="eyebrow">Applied ML · Research · ML Systems</p>
       <h1>{esc(profile["name"])}</h1>
-      <p class="hero-role">{esc(profile["role"])}</p>
+      <p class="hero-role">{hero_role_html}</p>
       <p class="hero-lead">{esc(profile["lead"])}</p>
       <div class="actions">
         <a class="button primary" href="#projects">Selected Projects</a>
@@ -151,7 +152,7 @@ def landing_html(data: dict) -> str:
       </div>
     </div>
     <aside class="hero-side">
-      {hero_journey_html}
+      {hero_summary_html}
       <div class="domain-list" aria-label="주요 도메인">
         <span>Medical Biosignal</span><span>Manufacturing Sensor</span><span>Security Behavior Log</span><span>ML Systems</span>
       </div>

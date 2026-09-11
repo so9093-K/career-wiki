@@ -4,7 +4,12 @@
     "name": "강동혁",
     "role": "Research-minded Applied ML Engineer · Time-Series / Anomaly Detection / ML Systems",
     "lead": "의료 생체신호, 제조 센서, 보안 행동 로그 등 다양한 현장 데이터의 특성과 품질을 분석하고, 전처리·특징 추출을 거쳐 모델링에 적합한 Feature와 입력 구조를 설계해 왔다. 이를 바탕으로 분류·예측·이상탐지 모델을 개발하고, 결과를 검증·설명해 사람의 판단이나 시스템 활용에 연결하는 것을 중요하게 생각한다.",
-    "journey": "이후 의료 AI에서 fNIRS·ECG·PPG 등 생체신호 분석과 모델 검증을 경험했고, 산업 AIoT의 다변량 시계열 예측·이상탐지와 보안 UEBA로 적용 영역을 확장했다. 최근에는 UEBA와 병행해 반복 실행 가능한 Feature/Data Pipeline을 구축하고, 온프레미스 AI 모델의 API 제공부터 Runtime 제어·모델 운영·관측까지 다루는 Serving Platform으로 개발 범위를 넓히며 데이터·모델·운영 시스템을 잇는 방향으로 역할을 확장하고 있다. 이와 함께 서강대학교 AI·SW대학원 데이터사이언스 석사과정에서 실무와 병행해 AI와 데이터 분석에 대한 연구·학습을 이어가고 있다."
+    "journey": "이후 의료 AI에서 fNIRS·ECG·PPG 등 생체신호 분석과 모델 검증을 경험했고, 산업 AIoT의 다변량 시계열 예측·이상탐지와 보안 UEBA로 적용 영역을 확장했다. 최근에는 UEBA와 병행해 반복 실행 가능한 Feature/Data Pipeline을 구축하고, 온프레미스 AI 모델의 API 제공부터 Runtime 제어·모델 운영·관측까지 다루는 Serving Platform으로 개발 범위를 넓히며 데이터·모델·운영 시스템을 잇는 방향으로 역할을 확장하고 있다. 이와 함께 서강대학교 AI·SW대학원 데이터사이언스 석사과정에서 실무와 병행해 AI와 데이터 분석에 대한 연구·학습을 이어가고 있다.",
+    "hero_summary": [
+      "의료 생체신호에서 제조 시계열·보안 UEBA까지 Applied ML 적용 영역을 넓혀 왔다.",
+      "최근에는 Feature/Data Pipeline과 온프레미스 Serving Platform을 구축하며 데이터·모델·운영을 연결하는 ML Systems 영역으로 역할을 넓히고 있다.",
+      "서강대학교 AI·SW대학원 데이터사이언스 석사과정을 실무와 병행하고 있다."
+    ]
   },
   "capabilities": [
     {
