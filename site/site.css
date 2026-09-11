@@ -116,6 +116,7 @@ main { display: block; }
 .section-head { display: grid; grid-template-columns: 240px 1fr; gap: 28px; margin-bottom: 32px; }
 .section-kicker { margin: 0; color: var(--muted); font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
 .section h2 { margin: 0; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.08; letter-spacing: -.04em; }
+#experience h2 { text-wrap: balance; }
 .section-intro { margin: 8px 0 0; color: var(--muted); max-width: 740px; }
 
 .capability-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -140,7 +141,7 @@ main { display: block; }
 .card-links { margin-top: auto; padding-top: 5px; display: flex; gap: 14px; flex-wrap: wrap; font-weight: 700; font-size: .9rem; }
 
 .timeline { display: grid; gap: 0; }
-.timeline-item { display: grid; grid-template-columns: 190px 1fr; gap: 28px; padding: 24px 0; border-top: 1px solid var(--line); }
+.timeline-item { display: grid; grid-template-columns: 240px 1fr; gap: 28px; padding: 24px 0; border-top: 1px solid var(--line); }
 .timeline-item:first-child { border-top: 0; }
 .timeline-period { color: var(--muted); font-size: .9rem; font-variant-numeric: tabular-nums; }
 .timeline-item h3 { margin: 0; font-size: 1.15rem; }
