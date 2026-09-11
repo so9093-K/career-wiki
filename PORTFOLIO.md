@@ -28,13 +28,13 @@
     - [2.2.3 On-Premise AI Model Serving Platform](#223-on-premise-ai-model-serving-platform)
   - [2.3 네비웍스](#23-네비웍스)
     - [2.3.1 제조 공정 시계열 이상징후 조기탐지 및 모니터링](#231-제조-공정-시계열-이상징후-조기탐지-및-모니터링)
-    - [네비웍스 업무 범위 요약 — AIoT 분석 서버 및 모델 실행 환경](#네비웍스-업무-범위-요약--aiot-분석-서버-및-모델-실행-환경)
+    - [AIoT 분석 서버 및 모델 실행 환경](#네비웍스-업무-범위-요약--aiot-분석-서버-및-모델-실행-환경)
   - [2.4 엔서](#24-엔서)
-    - [엔서 업무 범위 요약 — 생체신호 기반 의료 AI 연구 및 검증](#엔서-업무-범위-요약--생체신호-기반-의료-ai-연구-및-검증)
+    - [생체신호 기반 의료 AI 연구 및 검증](#엔서-업무-범위-요약--생체신호-기반-의료-ai-연구-및-검증)
     - [2.4.1 fNIRS 기반 아밀로이드 PET 양성 예측](#241-fnirs-기반-아밀로이드-pet-양성-예측)
     - [2.4.2 PPG 기반 ART 혈압 추정 및 생체신호 이상탐지](#242-ppg-기반-art-혈압-추정-및-생체신호-이상탐지)
   - [2.5 소프트웨어융합연구소](#25-소프트웨어융합연구소)
-    - [소프트웨어융합연구소 업무 범위 요약 — Vision AI와 Biosignal 연구개발](#소프트웨어융합연구소-업무-범위-요약--vision-ai와-biosignal-연구개발)
+    - [Vision AI와 Biosignal 연구개발](#소프트웨어융합연구소-업무-범위-요약--vision-ai와-biosignal-연구개발)
     - [2.5.1 YOLO 기반 실시간 낙상 감지](#251-yolo-기반-실시간-낙상-감지)
   - [2.6 대학원 연구](#26-대학원-연구)
     - [2.6.1 ECG·PPG 기반 혈압 설명 및 예측 분석](#261-ecgppg-기반-혈압-설명-및-예측-분석)
@@ -612,7 +612,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 </details>
 
 <details id="네비웍스-업무-범위-요약--aiot-분석-서버-및-모델-실행-환경">
-<summary><strong>네비웍스 업무 범위 요약 — AIoT 분석 서버 및 모델 실행 환경</strong></summary>
+<summary><strong>AIoT 분석 서버 및 모델 실행 환경</strong></summary>
 
 
 네비웍스에서는 AIoT 센서 기반 다변량 시계열을 대상으로 변수 관계 분석, 추이 예측, 이상탐지 모델 개발과 분석 서버 실행 환경 구성을 수행했다. 로컬 환경에서 모델을 학습·평가하고 모델 파일 또는 ONNX 형태의 아티팩트로 저장한 뒤, 분석 서버에서 이를 로드해 FastAPI·Docker 실행 흐름에 연결했다.
@@ -632,7 +632,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 ### 2.4 엔서
 
 <details id="엔서-업무-범위-요약--생체신호-기반-의료-ai-연구-및-검증">
-<summary><strong>엔서 업무 범위 요약 — 생체신호 기반 의료 AI 연구 및 검증</strong></summary>
+<summary><strong>생체신호 기반 의료 AI 연구 및 검증</strong></summary>
 
 
 엔서에서는 fNIRS, ECG, PPG, ART 등 생체신호를 대상으로 데이터 특성 분석, 특징·모델 입력 설계, 분류·예측·이상탐지 모델 연구와 일반화 성능 검증을 수행했다. fNIRS 기반 의료 AI는 성능평가·기술문서화와 의료기기 인허가·규제 대응까지 연결했다.
@@ -832,7 +832,7 @@ PPG 기반 ART 혈압 추정에서 초기 수집 구간의 강한 Noise, 주기�
 ### 2.5 소프트웨어융합연구소
 
 <details id="소프트웨어융합연구소-업무-범위-요약--vision-ai와-biosignal-연구개발">
-<summary><strong>소프트웨어융합연구소 업무 범위 요약 — Vision AI와 Biosignal 연구개발</strong></summary>
+<summary><strong>Vision AI와 Biosignal 연구개발</strong></summary>
 
 
 소프트웨어융합연구소에서는 컴퓨터비전과 생체신호 기반 AI 모델 연구·개발을 수행했다. Vision AI에서는 YOLO/Darknet 기반 낙상 감지 모델의 데이터 라벨·Bounding Box 품질을 개선하고 모델 학습·성능 검증을 수행했으며, 생체신호 연구에서는 BCG 데이터를 분석하고 MLP/ML 기반 만성질환·혈당 예측 프로토타입을 개발했다.
