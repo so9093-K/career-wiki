@@ -208,14 +208,14 @@
       "year": "2022",
       "title": "Classification of Alzheimer’s disease stage using machine learning for left and right oxygenation difference signals in the prefrontal cortex: a patient-level, single-group, diagnostic interventional trial",
       "journal": "European Review for Medical and Pharmacological Sciences",
-      "authors": "J. Kim, S.C. Kim, D. Kang, D.K. Yon, J.G. Kim",
+      "authors": "D. Kang · 제3저자 · 전전두엽 좌·우 산소화 차이 신호와 머신러닝을 이용해 Alzheimer’s disease stage 분류를 다룬 연구.",
       "url": "https://www.europeanreview.org/article/30122"
     },
     {
       "year": "2023",
       "title": "Feature extraction of time series data on functional near-infrared spectroscopy and comparison of deep learning performance for classifying patients with Alzheimer’s-related mild cognitive impairment: a post-hoc analysis of a diagnostic interventional trial",
       "journal": "European Review for Medical and Pharmacological Sciences",
-      "authors": "J. Kim, S.-C. Kim, D. Kang, S.-Y. Kim, R. Kwon, D.K. Yon, J.G. Kim",
+      "authors": "D. Kang · 제3저자 · fNIRS 시계열 특징 추출과 딥러닝 성능 비교를 통해 Alzheimer’s-related mild cognitive impairment 분류를 다룬 연구.",
       "url": "https://www.europeanreview.org/article/33153"
     }
   ],

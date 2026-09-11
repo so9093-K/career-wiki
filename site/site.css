@@ -130,9 +130,9 @@ main { display: block; }
   overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
   display: flex; flex-direction: column;
 }
-.project-cover { aspect-ratio: 16 / 9; background: var(--surface-subtle); overflow: hidden; border-bottom: 1px solid var(--line); }
+.project-cover { aspect-ratio: 16 / 9; padding: 8px; background: var(--surface-subtle); overflow: hidden; border-bottom: 1px solid var(--line); }
 .project-cover img { width: 100%; height: 100%; object-fit: contain; background: var(--figure-bg); }
-.project-body { padding: 22px; display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.project-body { padding: 22px; display: flex; flex: 1; flex-direction: column; gap: 12px; }
 .project-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .83rem; }
 .project-card h3 { margin: 0; font-size: 1.2rem; line-height: 1.3; letter-spacing: -.02em; }
 .project-card p { margin: 0; color: var(--body-text); font-size: .94rem; }
