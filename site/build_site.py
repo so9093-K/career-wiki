@@ -220,7 +220,7 @@ def build_markdown_page(source: Path, output: Path, title: str) -> None:
     cmd = [
         "pandoc", str(source),
         "-f", "gfm+raw_html", "-t", "html5",
-        "--standalone", "--section-divs", "--quiet",
+        "--standalone", "--quiet",
         "--metadata", f"title={title}",
         "--metadata", "lang=ko",
         "--css", "assets/site.css",
@@ -246,6 +246,53 @@ class LinkCollector(HTMLParser):
                 self.refs.append(str(val))
 
 
+class AccordionStructureCollector(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.details_count = 0
+        self.summary_count = 0
+        self.errors: list[str] = []
+        self._structure_stack: list[str] = []
+        self._details_summary_counts: list[int] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "details":
+            self.details_count += 1
+            self._details_summary_counts.append(0)
+        elif tag == "summary":
+            self.summary_count += 1
+            if not self._details_summary_counts:
+                self.errors.append("summary outside details")
+            else:
+                self._details_summary_counts[-1] += 1
+        if tag in {"section", "details"}:
+            self._structure_stack.append(tag)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "details":
+            if not self._details_summary_counts:
+                self.errors.append("closing details without opening details")
+            else:
+                summary_count = self._details_summary_counts.pop()
+                if summary_count != 1:
+                    self.errors.append(f"details has {summary_count} summary elements")
+        if tag in {"section", "details"}:
+            if not self._structure_stack:
+                self.errors.append(f"closing {tag} without opening tag")
+            elif self._structure_stack[-1] != tag:
+                self.errors.append(
+                    f"crossed HTML structure: expected </{self._structure_stack[-1]}>, got </{tag}>"
+                )
+            else:
+                self._structure_stack.pop()
+
+    def finish(self) -> None:
+        if self._details_summary_counts:
+            self.errors.append(f"{len(self._details_summary_counts)} unclosed details element(s)")
+        if self._structure_stack:
+            self.errors.append("unclosed section/details structure")
+
+
 def validate_output(out: Path, data: dict) -> None:
     required = {
       "index.html", "portfolio.html",
@@ -259,6 +306,14 @@ def validate_output(out: Path, data: dict) -> None:
     if extras:
         raise RuntimeError(f"site has unexpected top-level output: {sorted(extras)}")
 
+    source_portfolio = PORTFOLIO.read_text(encoding="utf-8")
+    expected_details = len(re.findall(r"<details\b", source_portfolio, flags=re.IGNORECASE))
+    expected_summaries = len(re.findall(r"<summary\b", source_portfolio, flags=re.IGNORECASE))
+    if expected_details != expected_summaries:
+        raise RuntimeError(
+            f"source portfolio accordion markup mismatch: details={expected_details}, summaries={expected_summaries}"
+        )
+
     html_files = [out / "index.html", out / "portfolio.html"]
     portfolio_ids: set[str] = set()
     for path in html_files:
@@ -271,6 +326,24 @@ def validate_output(out: Path, data: dict) -> None:
             raise RuntimeError(f"duplicate HTML id in {path.name}")
         if path.name == "portfolio.html":
             portfolio_ids = set(parser.ids)
+            accordion_parser = AccordionStructureCollector()
+            accordion_parser.feed(text)
+            accordion_parser.close()
+            accordion_parser.finish()
+            if accordion_parser.errors:
+                raise RuntimeError(
+                    "invalid portfolio accordion HTML: " + "; ".join(accordion_parser.errors)
+                )
+            if accordion_parser.details_count != expected_details:
+                raise RuntimeError(
+                    "portfolio accordion count mismatch: "
+                    f"generated={accordion_parser.details_count}, expected={expected_details}"
+                )
+            if accordion_parser.summary_count != expected_summaries:
+                raise RuntimeError(
+                    "portfolio summary count mismatch: "
+                    f"generated={accordion_parser.summary_count}, expected={expected_summaries}"
+                )
         for ref in parser.refs:
             parsed = urlparse(ref)
             if parsed.scheme in {"http", "https", "mailto", "tel"} or ref.startswith("#"):
