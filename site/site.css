@@ -1,9 +1,9 @@
 :root {
   --bg: #f7f8fa;
-  --surface: #ffffff;
+  --surface: #fbfcfd;
   --text: #1d2430;
-  --muted: #667085;
-  --line: #e4e7ec;
+  --muted: #5b6472;
+  --line: #d8dde5;
   --accent: #315b9a;
   --accent-soft: #eef4ff;
   --max: 1120px;
@@ -35,7 +35,7 @@ img { max-width: 100%; height: auto; }
   position: sticky; top: 0; z-index: 20;
   backdrop-filter: blur(12px);
   background: rgba(247, 248, 250, .93);
-  border-bottom: 1px solid rgba(228, 231, 236, .9);
+  border-bottom: 1px solid rgba(216, 221, 229, .9);
 }
 .site-nav .inner {
   max-width: var(--max); margin: 0 auto; padding: 12px 24px;

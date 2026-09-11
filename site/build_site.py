@@ -45,6 +45,7 @@ def landing_html(data: dict) -> str:
     profile = data["profile"]
     links = data["links"]["profile"]
     github = links.get("github", "")
+    hero_journey = str(profile.get("journey", "")).removeprefix("이후 ")
 
     capabilities = "".join(
         f'<article class="capability"><h3>{esc(x["title"])}</h3><p>{esc(x["description"])}</p></article>'
@@ -148,7 +149,7 @@ def landing_html(data: dict) -> str:
       </div>
     </div>
     <aside class="hero-side">
-      <p>{esc(profile["journey"])}</p>
+      <p>{esc(hero_journey)}</p>
       <div class="domain-list" aria-label="주요 도메인">
         <span>Medical Biosignal</span><span>Manufacturing Sensor</span><span>Security Behavior Log</span><span>ML Systems</span>
       </div>
@@ -158,7 +159,7 @@ def landing_html(data: dict) -> str:
   <section class="section" id="capabilities">
     <div class="section-head">
       <p class="section-kicker">Core capabilities</p>
-      <div><h2>데이터 이해에서 모델 운영 구조까지</h2><p class="section-intro">도메인이 달라도 데이터의 구조와 품질을 파악하고 Feature/Input을 설계한 뒤 모델을 검증·설명하고 실제 활용 구조로 연결하는 흐름을 중심으로 일해 왔습니다.</p></div>
+      <div><h2>데이터 이해에서 모델 운영 구조까지</h2><p class="section-intro">도메인이 달라도 데이터의 구조와 품질을 파악하고 Feature/Input을 설계한 뒤 모델을 검증·설명하고 실제 활용 구조로 연결하는 흐름을 중심으로 일해 왔다.</p></div>
     </div>
     <div class="capability-grid">{capabilities}</div>
   </section>
@@ -166,7 +167,7 @@ def landing_html(data: dict) -> str:
   <section class="section" id="projects">
     <div class="section-head">
       <p class="section-kicker">Selected projects</p>
-      <div><h2>대표 프로젝트</h2><p class="section-intro">Security AI, ML/Data Pipeline, Serving, Manufacturing Time-Series, Medical AI, Graduate Research의 대표 사례입니다. 전체 {esc(data["project_count"])}개 프로젝트는 상세 문서에서 확인할 수 있습니다.</p></div>
+      <div><h2>대표 프로젝트</h2><p class="section-intro">Security AI, ML/Data Pipeline, Serving, Manufacturing Time-Series, Medical AI, Graduate Research의 대표 사례다. 전체 {esc(data["project_count"])}개 프로젝트는 상세 문서에서 확인할 수 있다.</p></div>
     </div>
     <div class="project-grid">{"".join(projects)}</div>
   </section>
@@ -182,7 +183,7 @@ def landing_html(data: dict) -> str:
   <section class="section" id="research">
     <div class="section-head">
       <p class="section-kicker">Research</p>
-      <div><h2>연구 및 논문</h2><p class="section-intro">fNIRS 기반 Alzheimer 관련 연구와 현재 데이터사이언스 석사과정을 병행하고 있습니다.</p></div>
+      <div><h2>연구 및 논문</h2><p class="section-intro">fNIRS 기반 Alzheimer 관련 연구와 현재 데이터사이언스 석사과정을 병행하고 있다.</p></div>
     </div>
     <div class="compact-grid">{publications}</div>
   </section>
@@ -190,7 +191,7 @@ def landing_html(data: dict) -> str:
   <section class="section" id="competitions">
     <div class="section-head">
       <p class="section-kicker">Competitions</p>
-      <div><h2>경진대회 프로젝트</h2><p class="section-intro">대회 성적보다 데이터 표현, Feature 구성, 모델 검증 과정을 프로젝트 관점에서 정리했습니다.</p></div>
+      <div><h2>경진대회 프로젝트</h2><p class="section-intro">대회 성적보다 데이터 표현, Feature 구성, 모델 검증 과정을 프로젝트 관점에서 정리했다.</p></div>
     </div>
     <div class="compact-grid">{competitions}</div>
   </section>
