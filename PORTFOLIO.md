@@ -1180,6 +1180,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 **Classification of Alzheimer’s disease stage using machine learning for left and right oxygenation difference signals in the prefrontal cortex: a patient-level, single-group, diagnostic interventional trial**
 
+- 개요: 전전두엽 좌·우 산소화 차이 신호와 머신러닝을 이용해 Alzheimer’s disease stage 분류를 다룬 연구.
 - Journal: *European Review for Medical and Pharmacological Sciences*
 - Volume/Issue: 26(21)
 - Pages: 7734–7741
@@ -1192,6 +1193,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 **Feature extraction of time series data on functional near-infrared spectroscopy and comparison of deep learning performance for classifying patients with Alzheimer’s-related mild cognitive impairment: a post-hoc analysis of a diagnostic interventional trial**
 
+- 개요: fNIRS 시계열 특징 추출과 딥러닝 성능 비교를 통해 Alzheimer’s-related mild cognitive impairment 분류를 다룬 연구.
 - Journal: *European Review for Medical and Pharmacological Sciences*
 - Volume/Issue: 27(14)
 - Pages: 6824–6830
