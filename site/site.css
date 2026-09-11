@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css");
+
 :root {
   --bg: #eef1f4;
   --surface: #f6f8fa;
@@ -56,7 +58,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-family: "NanumBarunGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
   line-height: 1.72;
   -webkit-font-smoothing: antialiased;
 }
@@ -80,7 +82,7 @@ img { max-width: 100%; height: auto; }
   max-width: var(--max); margin: 0 auto; padding: 12px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
-.brand { font-weight: 750; color: var(--text); text-decoration: none; letter-spacing: -.02em; }
+.brand { font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -.02em; }
 .nav-links { display: flex; gap: 18px; flex-wrap: wrap; font-size: .93rem; }
 .nav-links a { color: var(--muted); text-decoration: none; }
 .nav-links a:hover { color: var(--text); }
@@ -99,7 +101,7 @@ main { display: block; }
 .domain-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .domain-list span, .tag {
   display: inline-flex; align-items: center; padding: 5px 9px; border-radius: 999px;
-  font-size: .82rem; font-weight: 650;
+  font-size: .82rem; font-weight: 700;
 }
 .domain-list span { background: var(--accent-soft); color: var(--accent-text); }
 .tag { background: var(--tag-bg); color: var(--tag-text); font-weight: 600; }
@@ -158,7 +160,7 @@ main { display: block; }
 .compact-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
 .compact-card h3 { margin: 0 0 8px; font-size: 1.03rem; line-height: 1.35; }
 .compact-card p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; }
-.result { color: var(--text) !important; font-weight: 750; }
+.result { color: var(--text) !important; font-weight: 700; }
 
 .footer { max-width: var(--max); margin: 0 auto; padding: 42px 24px 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
 .footer-links { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
@@ -190,7 +192,7 @@ main { display: block; }
 .detail-shell blockquote { margin: 18px 0; border-left: 3px solid var(--blockquote-line); padding: 2px 0 2px 16px; color: var(--muted); }
 .detail-shell img { display: block; margin: 24px auto 8px; max-height: 720px; object-fit: contain; }
 .detail-shell details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; margin: 14px 0; }
-.detail-shell summary { cursor: pointer; padding: 14px 0; font-weight: 750; }
+.detail-shell summary { cursor: pointer; padding: 14px 0; font-weight: 700; }
 .detail-shell details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 14px; }
 .detail-shell hr { border: 0; border-top: 1px solid var(--line); margin: 38px 0; }
 .detail-shell video { max-width: 100%; }
