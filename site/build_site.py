@@ -46,6 +46,8 @@ def landing_html(data: dict) -> str:
     links = data["links"]["profile"]
     github = links.get("github", "")
     hero_journey = str(profile.get("journey", "")).removeprefix("이후 ")
+    hero_journey_parts = re.split(r"(?<=\.)\s+", hero_journey, maxsplit=1)
+    hero_journey_html = "".join(f"<p>{esc(part)}</p>" for part in hero_journey_parts if part)
 
     capabilities = "".join(
         f'<article class="capability"><h3>{esc(x["title"])}</h3><p>{esc(x["description"])}</p></article>'
@@ -149,7 +151,7 @@ def landing_html(data: dict) -> str:
       </div>
     </div>
     <aside class="hero-side">
-      <p>{esc(hero_journey)}</p>
+      {hero_journey_html}
       <div class="domain-list" aria-label="주요 도메인">
         <span>Medical Biosignal</span><span>Manufacturing Sensor</span><span>Security Behavior Log</span><span>ML Systems</span>
       </div>
