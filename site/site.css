@@ -116,7 +116,7 @@ main { display: block; }
 .section-head { display: grid; grid-template-columns: 240px 1fr; gap: 28px; margin-bottom: 32px; }
 .section-kicker { margin: 0; color: var(--muted); font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
 .section h2 { margin: 0; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.08; letter-spacing: -.04em; }
-#experience h2 { text-wrap: balance; }
+#experience h2 { text-wrap: balance; word-break: keep-all; }
 .section-intro { margin: 8px 0 0; color: var(--muted); max-width: 740px; }
 
 .capability-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -147,6 +147,12 @@ main { display: block; }
 .timeline-item h3 { margin: 0; font-size: 1.15rem; }
 .timeline-role { margin: 2px 0 10px; color: var(--accent); font-weight: 700; font-size: .91rem; }
 .timeline-item p { margin: 0; color: var(--body-text); }
+
+@media (min-width: 821px) {
+  #experience .section-head { grid-template-columns: 190px 1fr; margin-bottom: 20px; }
+  #experience .timeline-item { grid-template-columns: 190px 1fr; }
+  #experience .timeline-item:first-child { padding-top: 16px; }
+}
 
 .compact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .compact-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
