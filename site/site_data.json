@@ -108,7 +108,7 @@
       ],
       "anchor": "223-on-premise-ai-model-serving-platform",
       "repository": "https://github.com/so9093-K/On-Premise-LLM-Serving-Platform",
-      "cover_asset": "assets/serving/07_runtime_monitoring.png"
+      "cover_asset": "https://raw.githubusercontent.com/so9093-K/On-Premise-LLM-Serving-Platform/main/assets/ai_model_serving_system_architecture.jpg"
     },
     {
       "id": "manufacturing-anomaly-monitoring",
@@ -126,7 +126,7 @@
       ],
       "anchor": "231-제조-공정-시계열-이상징후-조기탐지-및-모니터링",
       "repository": "https://github.com/so9093-K/multivariate-time-series-anomaly-detection-",
-      "cover_asset": "assets/manufacturing/03_lstm_ae_attention.png"
+      "cover_asset": "assets/manufacturing/01_ai_data_pipeline.png"
     },
     {
       "id": "fnirs-amyloid-pet",
