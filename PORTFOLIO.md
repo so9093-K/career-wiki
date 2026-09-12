@@ -1162,9 +1162,15 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 ![당시 발표자료 - 분석 데이터 테이블 구성](assets/education/source/dust_01_data_table.png)
 
+![당시 발표자료 - 유통·유동인구 분야별 통계 분석](assets/education/source/dust_06_distribution_foot_traffic_eda.png)
+
 ![당시 발표자료 - 미세먼지와 매출 데이터 연관성 분석](assets/education/source/dust_02_correlation.png)
 
+![당시 발표자료 - 미세먼지 연관성 분석의 한계 및 타당성 검토](assets/education/source/dust_07_correlation_limitations.png)
+
 ![당시 발표자료 - SNS 데이터 분석](assets/education/source/dust_03_sns_analysis.png)
+
+![당시 발표자료 - 분석 결과 요약](assets/education/source/dust_08_result_summary.png)
 
 ![당시 발표자료 - 고연령층 건강 케어 서비스 제안](assets/education/source/dust_04_business_proposal_health.png)
 
