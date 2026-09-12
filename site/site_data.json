@@ -71,7 +71,7 @@
       ],
       "anchor": "221-네트워크행위-기반-ueba-이상탐지",
       "repository": "https://github.com/so9093-K/explainable-anomaly-analysis",
-      "cover_asset": "assets/ueba/02_if_evt_shap_flow.png"
+      "cover_asset": "assets/covers/ueba_overview.svg"
     },
     {
       "id": "ml-data-pipeline",
@@ -144,7 +144,7 @@
       ],
       "anchor": "241-fnirs-기반-아밀로이드-pet-양성-예측",
       "repository": null,
-      "cover_asset": "assets/ncer/02_fnirs_development_validation_flow.png"
+      "cover_asset": "assets/covers/fnirs_pet_overview.svg"
     },
     {
       "id": "ecg-ppg-bp-analysis",
@@ -163,7 +163,7 @@
       ],
       "anchor": "261-ecgppg-기반-혈압-설명-및-예측-분석",
       "repository": null,
-      "cover_asset": "assets/research/03_mbp_high_confusion_matrix_ko.png"
+      "cover_asset": "assets/covers/ecg_ppg_bp_overview.svg"
     }
   ],
   "competitions": [
