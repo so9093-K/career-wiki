@@ -153,6 +153,7 @@ def landing_html(data: dict) -> str:
       </div>
     </div>
     <aside class="hero-side">
+      <img class="profile-portrait" src="assets/profile/profile_portrait.webp" alt="{esc(profile["name"])} 프로필 사진" width="480" height="600">
       {hero_summary_html}
       <div class="domain-list" aria-label="주요 도메인">
         <span>Medical Biosignal</span><span>Manufacturing Sensor</span><span>Security Behavior Log</span><span>ML Systems</span>

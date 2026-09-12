@@ -97,6 +97,7 @@ main { display: block; }
 .hero-role { margin: 22px 0 0; font-size: clamp(1.05rem, 2vw, 1.35rem); font-weight: 700; letter-spacing: -.02em; }
 .hero-lead { margin: 22px 0 0; max-width: 760px; color: var(--body-text); font-size: 1.06rem; }
 .hero-side { border-left: 1px solid var(--line); padding-left: 28px; }
+.profile-portrait { display: block; width: 136px; aspect-ratio: 4 / 5; object-fit: cover; border: 1px solid var(--line); border-radius: 14px; margin: 0 0 20px; background: var(--surface); }
 .hero-side p { margin: 0; color: var(--muted); word-break: keep-all; overflow-wrap: break-word; }
 .hero-side p + p { margin-top: 10px; }
 .domain-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
@@ -203,6 +204,7 @@ main { display: block; }
 @media (max-width: 820px) {
   .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 58px; }
   .hero-side { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
+  .profile-portrait { width: 96px; margin-bottom: 16px; }
   .section-head { grid-template-columns: 1fr; gap: 7px; }
   .capability-grid, .project-grid, .compact-grid { grid-template-columns: 1fr; }
   .timeline-item { grid-template-columns: 1fr; gap: 7px; }
