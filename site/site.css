@@ -137,7 +137,16 @@ main { display: block; }
   display: flex; flex-direction: column;
 }
 .project-cover { aspect-ratio: 16 / 9; padding: 8px; background: var(--surface-subtle); overflow: hidden; border-bottom: 1px solid var(--line); }
-.project-cover img { width: 100%; height: 100%; object-fit: contain; background: var(--figure-bg); }
+.project-cover img {
+  width: 100%; height: 100%; object-fit: contain; background: var(--figure-bg);
+  transition: transform .2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-cover:hover img { transform: scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-cover img { transition: none; }
+}
 .project-body { padding: 22px; display: flex; flex: 1; flex-direction: column; gap: 12px; }
 .project-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .83rem; }
 .project-card h3 { margin: 0; font-size: 1.2rem; line-height: 1.3; letter-spacing: -.02em; }

@@ -1,13 +1,72 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img"><title>On-Premise AI Model Serving</title><desc>Gateway, model runtime, retrieval/risk, runtime control and observability.</desc><rect width="960" height="540" fill="#0e1419"/>
-<text x="34" y="58" fill="#eef1f4" font-size="34" font-family="Georgia,serif">On-Premise AI Model Serving</text><text x="34" y="84" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif" letter-spacing="3">API · RUNTIME · GPU · OBSERVABILITY</text>
-<rect x="34" y="203" width="110" height="146" rx="14" fill="#121b22" stroke="#2e3b45"/><text x="58" y="235" fill="#eef1f4" font-size="17" font-family="Arial,sans-serif">Client</text><text x="58" y="271" fill="#8f99a2" font-size="12" font-family="Arial,sans-serif">Chat</text><text x="58" y="295" fill="#8f99a2" font-size="12" font-family="Arial,sans-serif">Embedding</text>
-<line x1="144" y1="276" x2="205" y2="276" stroke="#e0b77d" stroke-width="3"/><path d="M193 268l12 8-12 8" fill="none" stroke="#e0b77d" stroke-width="3"/>
-<rect x="215" y="190" width="150" height="172" rx="16" fill="#17232b" stroke="#c89b5c"/><text x="260" y="236" fill="#eef1f4" font-size="21" font-family="Arial,sans-serif">Gateway</text><text x="241" y="270" fill="#8f99a2" font-size="12" font-family="Arial,sans-serif">OpenAI-compatible API</text><text x="244" y="298" fill="#8f99a2" font-size="12" font-family="Arial,sans-serif">Routing / Orchestration</text>
-<line x1="365" y1="276" x2="418" y2="276" stroke="#8f99a2" stroke-width="2"/><path d="M406 268l12 8-12 8" fill="none" stroke="#8f99a2" stroke-width="2"/>
-<rect x="428" y="130" width="198" height="92" rx="14" fill="#121b22" stroke="#2e3b45"/><text x="454" y="166" fill="#eef1f4" font-size="17" font-family="Arial,sans-serif">Model Runtime</text><text x="454" y="194" fill="#8f99a2" font-size="11" font-family="Arial,sans-serif">vLLM · Multimodal</text>
-<rect x="428" y="238" width="198" height="92" rx="14" fill="#121b22" stroke="#2e3b45"/><text x="454" y="274" fill="#eef1f4" font-size="17" font-family="Arial,sans-serif">Retrieval / Risk</text><text x="454" y="302" fill="#8f99a2" font-size="11" font-family="Arial,sans-serif">Embedding · Prompt/PII/Secret</text>
-<rect x="428" y="346" width="198" height="92" rx="14" fill="#121b22" stroke="#2e3b45"/><text x="454" y="382" fill="#eef1f4" font-size="17" font-family="Arial,sans-serif">Runtime Control</text><text x="454" y="410" fill="#8f99a2" font-size="11" font-family="Arial,sans-serif">GPU Admission · Lifecycle</text>
-<line x1="626" y1="284" x2="680" y2="284" stroke="#8f99a2" stroke-width="2"/><path d="M668 276l12 8-12 8" fill="none" stroke="#8f99a2" stroke-width="2"/>
-<rect x="690" y="176" width="236" height="222" rx="16" fill="#121b22" stroke="#2e3b45"/><text x="716" y="216" fill="#eef1f4" font-size="20" font-family="Arial,sans-serif">Observability</text><text x="716" y="258" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif">Prometheus</text><text x="716" y="290" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif">Loki</text><text x="716" y="322" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif">Grafana</text><line x1="716" y1="344" x2="888" y2="344" stroke="#2e3b45"/><text x="716" y="375" fill="#e0b77d" font-size="12" font-family="Arial,sans-serif">Runtime · GPU · API</text>
-<text x="34" y="492" fill="#8f99a2" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">COMMON API BOUNDARY · MODEL LIFECYCLE · VALIDATION / DEPLOYMENT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">On-Premise AI Model Serving Platform</title>
+  <desc id="desc">Client and API requests enter a Gateway, which routes to Model Runtime, Retrieval and Risk, and Admin Control; observability collects metrics and logs.</desc>
+  <rect width="960" height="540" fill="#0f151b"/>
+  <g stroke="#25313a" stroke-width="1" opacity=".55">
+    <path d="M0 120H960M0 240H960M0 360H960M0 480H960"/>
+    <path d="M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540"/>
+  </g>
+
+  <rect x="34" y="40" width="6" height="62" rx="3" fill="#c1a66b"/>
+  <text x="56" y="70" fill="#eef1f4" font-size="31" font-weight="700" font-family="NanumBarunGothic, Arial, sans-serif">On-Premise AI Model Serving</text>
+  <text x="56" y="96" fill="#9aa5af" font-size="14" font-family="NanumBarunGothic, Arial, sans-serif">공통 API · Runtime · Control · Observability</text>
+
+  <!-- Client / API -->
+  <rect x="36" y="166" width="190" height="235" rx="14" fill="#141d24" stroke="#3a4852"/>
+  <text x="58" y="201" fill="#eef1f4" font-size="20" font-weight="700" font-family="NanumBarunGothic, Arial, sans-serif">Client / API</text>
+  <line x1="58" y1="216" x2="204" y2="216" stroke="#3a4852"/>
+  <g fill="#b7c1ca" font-size="14" font-family="NanumBarunGothic, Arial, sans-serif">
+    <text x="58" y="255">Chat · Multimodal</text>
+    <text x="58" y="293">Embedding · Retrieval</text>
+    <text x="58" y="331">Risk API</text>
+  </g>
+  <text x="58" y="374" fill="#7f8b95" font-size="12" font-family="NanumBarunGothic, Arial, sans-serif">OpenAI-compatible API</text>
+
+  <!-- Gateway -->
+  <rect x="292" y="155" width="220" height="257" rx="16" fill="#18232b" stroke="#c1a66b" stroke-width="2"/>
+  <text x="350" y="197" fill="#eef1f4" font-size="24" font-weight="700" font-family="NanumBarunGothic, Arial, sans-serif">Gateway</text>
+  <text x="350" y="222" fill="#c1a66b" font-size="13" font-family="NanumBarunGothic, Arial, sans-serif">외부 API · Orchestration</text>
+  <g fill="#111920" stroke="#3a4852">
+    <rect x="318" y="249" width="168" height="42" rx="8"/>
+    <rect x="318" y="304" width="168" height="42" rx="8"/>
+    <rect x="318" y="359" width="168" height="32" rx="8"/>
+  </g>
+  <g fill="#b7c1ca" font-size="13" font-family="NanumBarunGothic, Arial, sans-serif">
+    <text x="338" y="275">인증 · 요청 검증</text>
+    <text x="338" y="330">Routing / Orchestration</text>
+    <text x="338" y="380">Retrieval · Risk 연결</text>
+  </g>
+
+  <!-- flow arrows -->
+  <g fill="none" stroke="#c1a66b" stroke-width="2.4">
+    <path d="M226 284H282"/><path d="M272 277l10 7-10 7"/>
+    <path d="M512 236H560"/><path d="M550 229l10 7-10 7"/>
+    <path d="M512 299H560"/><path d="M550 292l10 7-10 7"/>
+    <path d="M512 362H560"/><path d="M550 355l10 7-10 7"/>
+  </g>
+
+  <!-- Runtime / Risk / Control -->
+  <g fill="#141d24" stroke="#3a4852">
+    <rect x="570" y="136" width="345" height="92" rx="13"/>
+    <rect x="570" y="248" width="345" height="92" rx="13"/>
+    <rect x="570" y="360" width="345" height="92" rx="13"/>
+  </g>
+  <g font-family="NanumBarunGothic, Arial, sans-serif">
+    <text x="594" y="171" fill="#eef1f4" font-size="19" font-weight="700">Model Runtime</text>
+    <text x="594" y="197" fill="#9aa5af" font-size="13">vLLM 등 target Runtime에서 inference</text>
+    <text x="594" y="283" fill="#eef1f4" font-size="19" font-weight="700">Retrieval / Risk</text>
+    <text x="594" y="309" fill="#9aa5af" font-size="13">Embedding · Retrieval · Prompt/PII/Secret Risk</text>
+    <text x="594" y="395" fill="#eef1f4" font-size="19" font-weight="700">Admin / Control</text>
+    <text x="594" y="421" fill="#9aa5af" font-size="13">Runtime lifecycle · Model 전환 · GPU Admission</text>
+  </g>
+
+  <!-- Observability -->
+  <rect x="570" y="472" width="345" height="48" rx="12" fill="#141d24" stroke="#c1a66b" stroke-dasharray="5 5"/>
+  <text x="594" y="501" fill="#eef1f4" font-size="17" font-weight="700" font-family="NanumBarunGothic, Arial, sans-serif">Observability</text>
+  <text x="722" y="501" fill="#9aa5af" font-size="12" font-family="NanumBarunGothic, Arial, sans-serif">Metrics · Logs → Prometheus / Loki / Grafana</text>
+
+  <path d="M742 452V466" stroke="#c1a66b" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M736 458l6 8 6-8" fill="none" stroke="#c1a66b" stroke-width="2"/>
+
+  <text x="36" y="505" fill="#78848e" font-size="11" letter-spacing="1.5" font-family="NanumBarunGothic, Arial, sans-serif">API 경계와 Runtime / Control 책임을 분리한 온프레미스 Serving Platform</text>
 </svg>

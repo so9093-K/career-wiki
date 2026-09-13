@@ -1,10 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img"><title>ML Data Pipeline</title><desc>Raw events to feature processing, feature store, training/inference, and managed run states.</desc><rect width="960" height="540" fill="#0e1419"/>
-<text x="34" y="58" fill="#eef1f4" font-size="36" font-family="Georgia,serif">Feature/Data Pipeline</text><text x="34" y="84" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif" letter-spacing="3">DESIGN · BUILD · REPRODUCIBLE FEATURE MATERIALIZATION</text>
-<text x="58" y="164" fill="#eef1f4" font-size="18" font-family="Arial,sans-serif">Raw Events</text><g fill="#121b22" stroke="#2e3b45"><rect x="50" y="194" width="78" height="92" rx="10"/><rect x="67" y="211" width="78" height="92" rx="10"/><rect x="84" y="228" width="78" height="92" rx="10"/></g>
-<g stroke="#8f99a2" stroke-width="2" fill="none"><path d="M162 250 C220 250 230 218 282 218"/><path d="M162 268 C220 268 230 260 282 260"/><path d="M162 286 C220 286 230 302 282 302"/></g>
-<rect x="282" y="175" width="222" height="176" rx="16" fill="#121b22" stroke="#2e3b45"/><text x="312" y="210" fill="#eef1f4" font-size="20" font-family="Arial,sans-serif">Feature Processing</text><rect x="312" y="232" width="162" height="36" rx="8" fill="#18232b"/><text x="330" y="255" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif">Extract / Facts</text><rect x="312" y="281" width="162" height="36" rx="8" fill="#18232b"/><text x="330" y="304" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif">Feature Materialize</text>
-<line x1="504" y1="263" x2="572" y2="263" stroke="#e0b77d" stroke-width="3"/><path d="M560 255l12 8-12 8" fill="none" stroke="#e0b77d" stroke-width="3"/>
-<rect x="582" y="175" width="186" height="176" rx="16" fill="#121b22" stroke="#2e3b45"/><text x="610" y="210" fill="#eef1f4" font-size="20" font-family="Arial,sans-serif">Feature Store</text><ellipse cx="675" cy="253" rx="50" ry="15" fill="#18232b" stroke="#c89b5c"/><path d="M625 253v47c0 8 22 15 50 15s50-7 50-15v-47" fill="#18232b" stroke="#c89b5c"/><ellipse cx="675" cy="276" rx="50" ry="15" fill="none" stroke="#2e3b45"/><text x="621" y="333" fill="#8f99a2" font-size="12" font-family="Arial,sans-serif">PostgreSQL · Parquet</text>
-<line x1="768" y1="263" x2="824" y2="263" stroke="#8f99a2" stroke-width="2"/><path d="M812 255l12 8-12 8" fill="none" stroke="#8f99a2" stroke-width="2"/><rect x="830" y="211" width="96" height="106" rx="12" fill="#18232b" stroke="#2e3b45"/><text x="847" y="250" fill="#eef1f4" font-size="13" font-family="Arial,sans-serif">Training</text><text x="847" y="283" fill="#eef1f4" font-size="13" font-family="Arial,sans-serif">Inference</text>
-<line x1="80" y1="418" x2="884" y2="418" stroke="#2e3b45" stroke-width="2"/><g font-family="Arial,sans-serif" font-size="12" text-anchor="middle"><circle cx="145" cy="418" r="6" fill="#e0b77d"/><text x="145" y="450" fill="#8f99a2">Catchup</text><circle cx="300" cy="418" r="6" fill="#e0b77d"/><text x="300" y="450" fill="#8f99a2">Steady</text><circle cx="455" cy="418" r="6" fill="#e0b77d"/><text x="455" y="450" fill="#8f99a2">Resume</text><circle cx="610" cy="418" r="6" fill="#e0b77d"/><text x="610" y="450" fill="#8f99a2">Late Arrival</text><circle cx="765" cy="418" r="6" fill="#e0b77d"/><text x="765" y="450" fill="#8f99a2">Watermark</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+<title id="title">Feature/Data Pipeline 설계 및 구축</title>
+<desc id="desc">원천 로그를 반복 가능한 Feature 흐름으로 전환하고 저장·재처리한 뒤 동일 데이터를 학습과 추론에서 재사용하는 Feature/Data Pipeline 개념도.</desc>
+<rect width="960" height="540" fill="#11171c"/>
+<g font-family="NanumBarunGothic, Noto Sans KR, Apple SD Gothic Neo, sans-serif">
+  <text x="46" y="62" fill="#c9a66b" font-size="13" letter-spacing="2.2">ML/Data Pipeline</text>
+  <line x1="165" y1="57" x2="914" y2="57" stroke="#37414a" stroke-width="1"/>
+  <text x="46" y="114" fill="#eef1f4" font-size="34" font-weight="700">Feature/Data Pipeline 설계 및 구축</text>
+  <text x="46" y="145" fill="#a9b2ba" font-size="16">원천 로그를 반복 가능한 Feature 흐름으로 전환</text>
+
+  <rect x="44" y="188" width="190" height="220" rx="16" fill="#161e24" stroke="#46515b"/>
+  <text x="68" y="222" fill="#eef1f4" font-size="22" font-weight="700">원천 로그</text>
+  <line x1="68" y1="238" x2="210" y2="238" stroke="#6b5a38"/>
+  <g fill="#c4ccd3" font-size="15">
+    <text x="88" y="277">Elasticsearch</text>
+    <text x="88" y="319">시스템 로그</text>
+    <text x="88" y="361">보안 로그</text>
+    <text x="88" y="393">애플리케이션 로그</text>
+  </g>
+  <g fill="none" stroke="#87939d" stroke-width="2">
+    <ellipse cx="67" cy="273" rx="10" ry="4"/><path d="M57 273v14c0 3 5 5 10 5s10-2 10-5v-14"/>
+    <rect x="59" y="305" width="16" height="20" rx="2"/><line x1="62" y1="310" x2="72" y2="310"/><line x1="62" y1="315" x2="72" y2="315"/>
+    <path d="M67 342l12 6v10c0 9-6 14-12 17-6-3-12-8-12-17v-10z"/>
+    <rect x="56" y="380" width="22" height="15" rx="2"/><line x1="56" y1="384" x2="78" y2="384"/>
+  </g>
+
+  <path d="M245 298h36" stroke="#c9a66b" stroke-width="3"/><path d="M272 289l12 9-12 9" fill="none" stroke="#c9a66b" stroke-width="3"/>
+
+  <rect x="296" y="188" width="280" height="220" rx="16" fill="#161e24" stroke="#c9a66b" stroke-width="1.8"/>
+  <text x="320" y="222" fill="#eef1f4" font-size="22" font-weight="700">Feature 생성</text>
+  <line x1="320" y1="238" x2="552" y2="238" stroke="#6b5a38"/>
+  <g>
+    <rect x="322" y="257" width="228" height="42" rx="8" fill="#1d262d" stroke="#39454f"/>
+    <rect x="322" y="309" width="228" height="42" rx="8" fill="#1d262d" stroke="#39454f"/>
+    <rect x="322" y="361" width="228" height="42" rx="8" fill="#1d262d" stroke="#39454f"/>
+    <text x="370" y="284" fill="#c9d0d6" font-size="15">Extract</text>
+    <text x="370" y="336" fill="#c9d0d6" font-size="15">Facts</text>
+    <text x="370" y="388" fill="#c9d0d6" font-size="15">Feature Materialization</text>
+    <g stroke="#c9a66b" fill="none" stroke-width="2">
+      <path d="M339 270h16v16h-16z"/><line x1="343" y1="274" x2="351" y2="274"/><line x1="343" y1="279" x2="351" y2="279"/>
+      <circle cx="347" cy="330" r="4"/><circle cx="337" cy="340" r="4"/><circle cx="357" cy="340" r="4"/><line x1="344" y1="333" x2="340" y2="337"/><line x1="350" y1="333" x2="354" y2="337"/>
+      <rect x="337" y="372" width="20" height="18" rx="2"/><line x1="337" y1="378" x2="357" y2="378"/><line x1="344" y1="378" x2="344" y2="390"/><line x1="351" y1="378" x2="351" y2="390"/>
+    </g>
+  </g>
+
+  <path d="M587 298h36" stroke="#c9a66b" stroke-width="3"/><path d="M614 289l12 9-12 9" fill="none" stroke="#c9a66b" stroke-width="3"/>
+
+  <rect x="638" y="188" width="190" height="220" rx="16" fill="#161e24" stroke="#46515b"/>
+  <text x="662" y="222" fill="#eef1f4" font-size="22" font-weight="700">저장 / 재처리</text>
+  <line x1="662" y1="238" x2="804" y2="238" stroke="#6b5a38"/>
+  <g fill="#c4ccd3" font-size="15">
+    <text x="696" y="276">PostgreSQL</text>
+    <text x="696" y="315">Parquet</text>
+    <text x="696" y="354">Resume</text>
+    <text x="696" y="393">Late Arrival · Watermark</text>
+  </g>
+  <g fill="none" stroke="#87939d" stroke-width="2">
+    <ellipse cx="675" cy="270" rx="10" ry="4"/><path d="M665 270v14c0 3 5 5 10 5s10-2 10-5v-14"/>
+    <rect x="667" y="302" width="16" height="20" rx="2"/><line x1="670" y1="307" x2="680" y2="307"/><line x1="670" y1="312" x2="680" y2="312"/>
+    <path d="M684 344a11 11 0 1 0 2 14"/><path d="M687 341v8h-8"/>
+    <circle cx="675" cy="383" r="10"/><line x1="675" y1="383" x2="675" y2="376"/><line x1="675" y1="383" x2="681" y2="386"/>
+  </g>
+
+  <path d="M839 298h30" stroke="#7d8993" stroke-width="2"/><path d="M860 291l10 7-10 7" fill="none" stroke="#7d8993" stroke-width="2"/>
+  <rect x="879" y="242" width="58" height="112" rx="12" fill="#182129" stroke="#3e4a54"/>
+  <text x="908" y="278" text-anchor="middle" fill="#d7dde2" font-size="13" font-weight="700">학습</text>
+  <line x1="891" y1="294" x2="925" y2="294" stroke="#3e4a54"/>
+  <text x="908" y="326" text-anchor="middle" fill="#d7dde2" font-size="13" font-weight="700">추론</text>
+
+  <text x="46" y="452" fill="#8f99a2" font-size="12" letter-spacing="1.6">관리형 실행 흐름</text>
+  <line x1="148" y1="448" x2="905" y2="448" stroke="#46515b"/>
+  <g font-size="12" text-anchor="middle">
+    <g fill="#c9a66b"><circle cx="235" cy="448" r="4"/><circle cx="390" cy="448" r="4"/><circle cx="545" cy="448" r="4"/><circle cx="700" cy="448" r="4"/><circle cx="855" cy="448" r="4"/></g>
+    <g fill="#c4ccd3"><text x="235" y="475">Catchup</text><text x="390" y="475">Steady</text><text x="545" y="475">Resume</text><text x="700" y="475">Late Arrival</text><text x="855" y="475">Watermark</text></g>
+  </g>
+  <text x="46" y="510" fill="#69747e" font-size="11">동일 Feature 정의를 반복 생성·재처리하고 학습·추론에서 재사용</text>
+</g>
 </svg>
