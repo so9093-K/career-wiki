@@ -59,7 +59,12 @@ def landing_html(data: dict) -> str:
     for p in data["featured_projects"]:
         cover = p.get("cover_asset")
         cover_html = (
-            f'<div class="project-cover"><img src="{esc(cover)}" alt="{esc(p["title"])} 대표 이미지" loading="lazy"></div>'
+            f'''<a class="project-cover" href="{project_detail_href(p)}" aria-label="{esc(p["title"])} 상세 보기">
+              <img class="project-cover-thumb" src="{esc(cover)}" alt="{esc(p["title"])} 대표 이미지" loading="lazy">
+            </a>
+            <div class="project-cover-preview" aria-hidden="true">
+              <img src="{esc(cover)}" alt="">
+            </div>'''
             if cover else ""
         )
         repo = p.get("repository")

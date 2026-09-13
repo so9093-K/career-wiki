@@ -138,52 +138,49 @@ main { display: block; }
   display: flex; flex-direction: column;
 }
 .project-cover {
-  position: relative;
-  aspect-ratio: 16 / 9; padding: 8px; background: var(--surface-subtle); overflow: hidden;
-  border-bottom: 1px solid var(--line);
-}
-.project-cover img {
-  width: 100%; height: 100%; object-fit: contain; background: var(--figure-bg);
-  pointer-events: none;
-}
-.card-links a:first-child::before {
-  content: "";
-  position: absolute; inset: 0 0 auto 0; z-index: 40;
+  display: block;
   aspect-ratio: 16 / 9;
+  padding: 8px;
+  background: var(--surface-subtle);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
   cursor: pointer;
 }
-.project-card:has(.card-links a:first-child:focus-visible) .project-cover {
+.project-cover:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: -3px;
 }
+.project-cover-thumb {
+  display: block;
+  width: 100%; height: 100%; object-fit: contain; background: var(--figure-bg);
+}
+.project-cover-preview {
+  display: none;
+  pointer-events: none;
+}
 @media (hover: hover) and (pointer: fine) and (min-width: 821px) {
-  .project-card:has(.card-links a:first-child:hover),
-  .project-card:has(.card-links a:first-child:focus-visible) {
-    z-index: 10;
-    overflow: visible;
-  }
-  .project-card:has(.card-links a:first-child:hover) .project-cover,
-  .project-card:has(.card-links a:first-child:focus-visible) .project-cover {
-    z-index: 11;
-    overflow: visible;
-  }
-  .project-card:has(.card-links a:first-child:hover) .project-cover img,
-  .project-card:has(.card-links a:first-child:focus-visible) .project-cover img {
+  .project-cover-preview {
     position: fixed;
     left: 50%; top: 50%;
     z-index: 1000;
     width: min(880px, calc(100vw - 64px));
-    height: auto;
-    max-width: calc(100vw - 64px);
-    max-height: calc(100vh - 64px);
     aspect-ratio: 16 / 9;
-    object-fit: contain;
     padding: 10px;
     background: var(--figure-bg);
     border: 1px solid var(--line);
     border-radius: 12px;
     box-shadow: 0 24px 64px rgba(0, 0, 0, .46);
     transform: translate(-50%, -50%);
+  }
+  .project-cover:hover + .project-cover-preview,
+  .project-cover:focus-visible + .project-cover-preview {
+    display: block;
+  }
+  .project-cover-preview img {
+    display: block;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    background: var(--figure-bg);
   }
 }
 .project-body { padding: 22px; display: flex; flex: 1; flex-direction: column; gap: 12px; }
