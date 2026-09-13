@@ -133,19 +133,34 @@ main { display: block; }
 
 .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .project-card {
+  position: relative;
   overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
   display: flex; flex-direction: column;
 }
-.project-cover { aspect-ratio: 16 / 9; padding: 8px; background: var(--surface-subtle); overflow: hidden; border-bottom: 1px solid var(--line); }
+.project-cover {
+  aspect-ratio: 16 / 9; padding: 8px; background: var(--surface-subtle); overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
 .project-cover img {
   width: 100%; height: 100%; object-fit: contain; background: var(--figure-bg);
   transition: transform .2s ease;
 }
+.card-links a:first-child::before {
+  content: "";
+  position: absolute; inset: 0 0 auto 0; z-index: 1;
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+}
+.project-card:has(.card-links a:first-child:focus-visible) .project-cover {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
 @media (hover: hover) and (pointer: fine) {
-  .project-cover:hover img { transform: scale(1.04); }
+  .project-card:has(.card-links a:first-child:hover) .project-cover img { transform: scale(1.04); }
 }
 @media (prefers-reduced-motion: reduce) {
   .project-cover img { transition: none; }
+  .project-card:has(.card-links a:first-child:hover) .project-cover img { transform: none; }
 }
 .project-body { padding: 22px; display: flex; flex: 1; flex-direction: column; gap: 12px; }
 .project-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .83rem; }
@@ -153,6 +168,7 @@ main { display: block; }
 .project-card p { margin: 0; color: var(--body-text); font-size: .94rem; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .card-links { margin-top: auto; padding-top: 5px; display: flex; gap: 14px; flex-wrap: wrap; font-weight: 700; font-size: .9rem; }
+.card-links a { z-index: 2; }
 
 .timeline { display: grid; gap: 0; }
 .timeline-item { display: grid; grid-template-columns: 240px 1fr; gap: 28px; padding: 24px 0; border-top: 1px solid var(--line); }
