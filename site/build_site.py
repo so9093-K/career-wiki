@@ -59,12 +59,9 @@ def landing_html(data: dict) -> str:
     for p in data["featured_projects"]:
         cover = p.get("cover_asset")
         cover_html = (
-            f'''<a class="project-cover" href="{project_detail_href(p)}" aria-label="{esc(p["title"])} 상세 보기">
-              <img class="project-cover-thumb" src="{esc(cover)}" alt="{esc(p["title"])} 대표 이미지" loading="lazy">
-            </a>
-            <div class="project-cover-preview" aria-hidden="true">
-              <img src="{esc(cover)}" alt="">
-            </div>'''
+            f'''<a class="project-cover" href="{project_detail_href(p)}" aria-label="{esc(p["title"])} 상세 보기" draggable="false" data-preview-src="{esc(cover)}">
+              <img class="project-cover-thumb" src="{esc(cover)}" alt="{esc(p["title"])} 대표 이미지" loading="lazy" draggable="false">
+            </a>'''
             if cover else ""
         )
         repo = p.get("repository")
@@ -130,6 +127,24 @@ def landing_html(data: dict) -> str:
   <meta property="og:description" content="Time-Series · Anomaly Detection · ML Systems">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .project-cover, .project-cover-thumb {{ -webkit-user-drag: none; user-select: none; }}
+    #project-preview-layer[hidden] {{ display: none !important; }}
+    #project-preview-layer {{
+      position: fixed; left: 50%; top: 50%; z-index: 1000;
+      width: min(880px, calc(100vw - 64px)); aspect-ratio: 16 / 9; padding: 10px;
+      background: var(--figure-bg); border: 1px solid var(--line); border-radius: 12px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, .46); transform: translate(-50%, -50%);
+      pointer-events: none;
+    }}
+    #project-preview-layer img {{
+      display: block; width: 100%; height: 100%; object-fit: contain;
+      background: var(--figure-bg); -webkit-user-drag: none; user-select: none;
+    }}
+    @media (hover: none), (pointer: coarse), (max-width: 820px) {{
+      #project-preview-layer {{ display: none !important; }}
+    }}
+  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">본문으로 이동</a>
@@ -214,6 +229,7 @@ def landing_html(data: dict) -> str:
     <div class="compact-grid">{education}</div>
   </section>
 </main>
+<div id="project-preview-layer" hidden aria-hidden="true"><img alt=""></div>
 <footer class="footer">
   <div class="footer-links">
     <a href="portfolio.html">Portfolio View</a>
@@ -221,6 +237,69 @@ def landing_html(data: dict) -> str:
   </div>
   <div>Version {esc(data["version"])} · GitHub Pages build output is generated, not maintained as source.</div>
 </footer>
+<script>
+(() => {{
+  const media = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 821px)');
+  const preview = document.getElementById('project-preview-layer');
+  const previewImage = preview?.querySelector('img');
+  const covers = Array.from(document.querySelectorAll('.project-cover'));
+  if (!preview || !previewImage || covers.length === 0) return;
+
+  let openTimer = 0;
+  let activeCover = null;
+
+  const clearOpenTimer = () => {{
+    if (openTimer) {{ window.clearTimeout(openTimer); openTimer = 0; }}
+  }};
+
+  const hidePreview = () => {{
+    clearOpenTimer();
+    activeCover = null;
+    preview.hidden = true;
+    previewImage.removeAttribute('src');
+  }};
+
+  const showPreview = (cover) => {{
+    if (!media.matches) return;
+    const src = cover.dataset.previewSrc;
+    if (!src) return;
+    activeCover = cover;
+    previewImage.src = src;
+    preview.hidden = false;
+  }};
+
+  const schedulePreview = (cover) => {{
+    clearOpenTimer();
+    if (!media.matches) return;
+    openTimer = window.setTimeout(() => {{
+      openTimer = 0;
+      if (cover.matches(':hover') || cover === document.activeElement) showPreview(cover);
+    }}, 180);
+  }};
+
+  covers.forEach((cover) => {{
+    cover.addEventListener('pointerenter', () => schedulePreview(cover));
+    cover.addEventListener('pointerleave', () => {{
+      clearOpenTimer();
+      if (activeCover === cover) hidePreview();
+    }});
+    cover.addEventListener('focus', () => schedulePreview(cover));
+    cover.addEventListener('blur', () => {{
+      clearOpenTimer();
+      if (activeCover === cover) hidePreview();
+    }});
+    cover.addEventListener('dragstart', (event) => event.preventDefault());
+  }});
+
+  document.addEventListener('dragstart', (event) => {{
+    if (event.target instanceof Element && event.target.closest('.project-cover')) event.preventDefault();
+  }}, true);
+
+  media.addEventListener?.('change', (event) => {{
+    if (!event.matches) hidePreview();
+  }});
+}})();
+</script>
 </body>
 </html>
 '''
