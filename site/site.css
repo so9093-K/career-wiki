@@ -145,11 +145,14 @@ main { display: block; }
 .project-cover img {
   width: 100%; height: 100%; object-fit: contain; background: var(--figure-bg);
   pointer-events: none;
-  transition: transform .22s ease, box-shadow .22s ease;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+  transition: transform .16s ease-out, box-shadow .16s ease-out;
 }
 .card-links a:first-child::before {
   content: "";
-  position: absolute; inset: 0 0 auto 0; z-index: 1;
+  position: absolute; inset: 0 0 auto 0; z-index: 20;
   aspect-ratio: 16 / 9;
   cursor: pointer;
 }
@@ -172,15 +175,20 @@ main { display: block; }
   .project-card:has(.card-links a:first-child:focus-visible) .project-cover img {
     position: relative;
     z-index: 12;
-    transform: scale(1.45);
+    transform: translateZ(0) scale(1.45);
     border: 1px solid var(--line);
     border-radius: 10px;
     box-shadow: 0 18px 48px rgba(0, 0, 0, .36);
   }
+  .project-card:has(.card-links a:first-child:hover) .card-links a:first-child::before {
+    transform: scale(1.45);
+  }
+  .project-card:nth-child(odd) .card-links a:first-child::before,
   .project-card:nth-child(odd):has(.card-links a:first-child:hover) .project-cover img,
   .project-card:nth-child(odd):has(.card-links a:first-child:focus-visible) .project-cover img {
     transform-origin: left center;
   }
+  .project-card:nth-child(even) .card-links a:first-child::before,
   .project-card:nth-child(even):has(.card-links a:first-child:hover) .project-cover img,
   .project-card:nth-child(even):has(.card-links a:first-child:focus-visible) .project-cover img {
     transform-origin: right center;
@@ -192,6 +200,9 @@ main { display: block; }
   .project-card:has(.card-links a:first-child:focus-visible) .project-cover img {
     transform: none;
     box-shadow: none;
+  }
+  .project-card:has(.card-links a:first-child:hover) .card-links a:first-child::before {
+    transform: none;
   }
 }
 .project-body { padding: 22px; display: flex; flex: 1; flex-direction: column; gap: 12px; }
