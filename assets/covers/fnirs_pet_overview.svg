@@ -1,14 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img"><title>fNIRS PET prediction research</title><desc>fNIRS response curves, olfactory stimulus onset, and prefrontal measurement context.</desc><rect width="960" height="540" fill="#0e1419"/>
-<text x="36" y="56" fill="#eef1f4" font-size="38" font-family="Georgia,serif">fNIRS</text>
-<text x="36" y="82" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif" letter-spacing="3">HEMODYNAMIC RESPONSE · OLFACTORY STIMULUS</text>
-<g stroke="#2e3b45" stroke-width="1" opacity=".45"><path d="M40 130H710M40 190H710M40 250H710M40 310H710M40 370H710M100 112V430M180 112V430M260 112V430M340 112V430M420 112V430M500 112V430M580 112V430M660 112V430"/></g>
-<line x1="185" y1="115" x2="185" y2="435" stroke="#e0b77d" stroke-width="2" stroke-dasharray="8 7"/><text x="198" y="132" fill="#e0b77d" font-size="13" font-family="Arial,sans-serif">Stimulus onset</text>
-<path d="M50 368 C110 370 150 368 190 350 C230 332 260 280 305 242 C344 209 378 208 412 232 C452 260 478 304 520 320 C566 338 605 326 650 330 C674 332 694 330 712 330" fill="none" stroke="#e0b77d" stroke-width="4"/>
-<path d="M50 390 C112 392 152 389 192 372 C234 354 266 319 307 287 C348 255 383 254 420 275 C462 300 488 331 530 342 C570 353 610 345 712 354" fill="none" stroke="#c89b5c" stroke-width="3" opacity=".9"/>
-<path d="M50 410 C112 412 154 408 196 395 C240 380 278 354 320 337 C360 320 401 323 438 335 C482 349 520 366 560 368 C612 370 654 367 712 374" fill="none" stroke="#eef1f4" stroke-width="2.5" opacity=".75"/>
-<path d="M50 426 C112 426 158 424 200 416 C250 405 290 392 334 387 C382 382 420 388 460 400 C510 416 558 413 610 408 C652 404 685 408 712 410" fill="none" stroke="#8f99a2" stroke-width="2.2" opacity=".6"/>
-<text x="758" y="92" fill="#eef1f4" font-size="21" font-family="Arial,sans-serif">Prefrontal channels</text>
-<ellipse cx="842" cy="225" rx="72" ry="88" fill="#121b22" stroke="#2e3b45" stroke-width="2"/><line x1="842" y1="142" x2="842" y2="307" stroke="#8f99a2" stroke-dasharray="5 6" opacity=".5"/>
-<g fill="#e0b77d"><circle cx="803" cy="194" r="6"/><circle cx="819" cy="185" r="6"/><circle cx="837" cy="181" r="6"/><circle cx="855" cy="181" r="6"/><circle cx="873" cy="186" r="6"/><circle cx="889" cy="195" r="6"/><circle cx="798" cy="216" r="6"/><circle cx="817" cy="207" r="6"/><circle cx="837" cy="203" r="6"/><circle cx="857" cy="203" r="6"/><circle cx="877" cy="208" r="6"/><circle cx="896" cy="217" r="6"/></g>
-<text x="770" y="344" fill="#8f99a2" font-size="11" font-family="Arial,sans-serif" letter-spacing="2">SIGNAL RESPONSE</text><text x="770" y="368" fill="#8f99a2" font-size="11" font-family="Arial,sans-serif" letter-spacing="2">→ PET CLASSIFICATION</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">fNIRS 기반 아밀로이드 PET 양성 예측</title>
+  <desc id="desc">전처리된 후각 자극 fNIRS 시계열을 ALSTM-FCN 계열 모델로 추론하고, 모델별 확률을 집계해 Threshold로 최종 PET 양성 여부를 판정하며 Stratified CV와 Independent Test로 검증하는 흐름.</desc>
+  <rect width="1280" height="720" fill="#0f171d"/>
+  <rect x="40" y="48" width="6" height="84" rx="2" fill="#e7ba58"/>
+  <text x="70" y="90" fill="#f2f4f6" font-size="42" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">fNIRS 기반 아밀로이드 PET 양성 예측</text>
+  <text x="70" y="128" fill="#aeb6be" font-size="22" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">모델 추론과 검증 흐름</text>
+  <rect x="30" y="165" width="305" height="378" rx="10" fill="#121d24" stroke="#3c4d57"/>
+  <rect x="52" y="188" width="38" height="38" rx="6" fill="none" stroke="#e7ba58"/>
+  <path d="M60 215 L67 207 L73 216 L79 200 L86 209" fill="none" stroke="#e7ba58" stroke-width="2.2"/>
+  <text x="110" y="216" fill="#f2f4f6" font-size="25" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">후각 자극 fNIRS</text>
+  <line x1="52" y1="239" x2="312" y2="239" stroke="#465761"/>
+  <text x="52" y="272" fill="#c7cdd2" font-size="16" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">전처리된 신호 입력</text>
+  <rect x="93" y="305" width="138" height="112" fill="#0f181f"/>
+  <g stroke="#2b3a44" stroke-width="1"><line x1="93" y1="329" x2="231" y2="329"/><line x1="93" y1="353" x2="231" y2="353"/><line x1="93" y1="377" x2="231" y2="377"/><line x1="93" y1="401" x2="231" y2="401"/><line x1="121" y1="305" x2="121" y2="417"/><line x1="149" y1="305" x2="149" y2="417"/><line x1="177" y1="305" x2="177" y2="417"/><line x1="205" y1="305" x2="205" y2="417"/></g>
+  <rect x="144" y="305" width="56" height="112" fill="#e7ba58" opacity="0.10"/>
+  <line x1="144" y1="305" x2="144" y2="417" stroke="#e7ba58" stroke-dasharray="5 5" opacity="0.8"/>
+  <line x1="200" y1="305" x2="200" y2="417" stroke="#e7ba58" stroke-dasharray="5 5" opacity="0.8"/>
+  <text x="172" y="298" text-anchor="middle" fill="#e7ba58" font-size="12" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">후각 자극 구간</text>
+  <path d="M93 349 C112 350 126 349 142 343 C151 337 160 326 170 319 C181 312 190 314 201 322 C213 331 218 339 231 343" fill="none" stroke="#8cb4d8" stroke-width="2.2"/>
+  <path d="M93 369 C113 369 128 368 143 365 C153 360 162 351 172 347 C182 344 190 345 201 351 C211 357 219 363 231 365" fill="none" stroke="#e7ba58" stroke-width="2.4"/>
+  <path d="M93 389 C113 390 127 389 143 386 C155 383 164 378 175 376 C185 376 195 378 205 382 C216 387 222 387 231 387" fill="none" stroke="#9aa7b2" stroke-width="1.8" opacity="0.8"/>
+  <text x="52" y="455" fill="#8fa0ab" font-size="13" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">HbO/Hb 변화 · 자극 구간 Window</text>
+  <line x1="335" y1="350" x2="357" y2="350" stroke="#e7ba58" stroke-width="3"/>
+  <path d="M357 350 l-10 -7 v14 z" fill="#e7ba58"/>
+  <rect x="365" y="165" width="325" height="378" rx="10" fill="#121d24" stroke="#e7ba58" stroke-width="1.5"/>
+  <circle cx="400" cy="206" r="18" fill="#e7ba58" opacity="0.9"/>
+  <circle cx="400" cy="206" r="7" fill="#121d24"/>
+  <g stroke="#121d24" stroke-width="4"><line x1="400" y1="182" x2="400" y2="190"/><line x1="400" y1="222" x2="400" y2="230"/><line x1="376" y1="206" x2="384" y2="206"/><line x1="416" y1="206" x2="424" y2="206"/></g>
+  <text x="438" y="211" fill="#f2f4f6" font-size="25" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">모델 추론</text>
+  <text x="438" y="238" fill="#aeb6be" font-size="17" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">ALSTM-FCN 계열</text>
+  <line x1="390" y1="257" x2="666" y2="257" stroke="#465761"/>
+  <rect x="390" y="286" width="126" height="164" rx="8" fill="#18242c" stroke="#43545e"/>
+  <text x="453" y="317" text-anchor="middle" fill="#e8ebee" font-size="16" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">특징 추출</text>
+  <path d="M414 401 L414 347 L454 323 L454 378 Z" fill="none" stroke="#83a9c8" stroke-width="2"/><path d="M425 408 L425 355 L465 331 L465 386 Z" fill="none" stroke="#83a9c8" stroke-width="2"/><path d="M438 414 L438 364 L478 340 L478 393 Z" fill="none" stroke="#e7ba58" stroke-width="2"/>
+  <line x1="516" y1="368" x2="548" y2="368" stroke="#b9c2c9" stroke-width="2"/><path d="M548 368 l-8 -6 v12 z" fill="#b9c2c9"/>
+  <rect x="548" y="286" width="118" height="164" rx="8" fill="#18242c" stroke="#43545e"/>
+  <text x="607" y="317" text-anchor="middle" fill="#e8ebee" font-size="16" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">분류기</text>
+  <g fill="#9aa7b2" stroke="#d0d6db"><circle cx="575" cy="350" r="9"/><circle cx="575" cy="389" r="9"/><circle cx="607" cy="369" r="9"/><circle cx="638" cy="369" r="9" fill="#e7ba58" stroke="#e7ba58"/></g>
+  <g stroke="#b9c2c9"><line x1="584" y1="350" x2="598" y2="366"/><line x1="584" y1="389" x2="598" y2="372"/><line x1="616" y1="369" x2="629" y2="369"/></g>
+  <text x="528" y="495" text-anchor="middle" fill="#aeb6be" font-size="15" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">전처리된 자극 구간을 모델별로 추론</text>
+  <line x1="690" y1="350" x2="712" y2="350" stroke="#e7ba58" stroke-width="3"/><path d="M712 350 l-10 -7 v14 z" fill="#e7ba58"/>
+  <rect x="720" y="165" width="280" height="378" rx="10" fill="#121d24" stroke="#3c4d57"/>
+  <rect x="742" y="191" width="7" height="24" fill="#e7ba58"/><rect x="753" y="183" width="7" height="32" fill="#e7ba58"/><rect x="764" y="174" width="7" height="41" fill="#e7ba58"/>
+  <text x="790" y="211" fill="#f2f4f6" font-size="25" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">확률 집계</text>
+  <line x1="742" y1="239" x2="978" y2="239" stroke="#465761"/>
+  <text x="742" y="268" fill="#c7cdd2" font-size="15" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">모델별 PET 양성 확률을 평균</text>
+  <g font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif" font-size="14" fill="#dce1e5"><text x="744" y="315">모델 1</text><text x="744" y="348">모델 2</text><text x="744" y="381">모델 3</text><text x="744" y="431">모델 N</text></g>
+  <g fill="#27343d"><rect x="805" y="302" width="142" height="13" rx="3"/><rect x="805" y="335" width="142" height="13" rx="3"/><rect x="805" y="368" width="142" height="13" rx="3"/><rect x="805" y="418" width="142" height="13" rx="3"/></g>
+  <g fill="#d9ad50"><rect x="805" y="302" width="92" height="13" rx="3"/><rect x="805" y="335" width="82" height="13" rx="3"/><rect x="805" y="368" width="105" height="13" rx="3"/><rect x="805" y="418" width="88" height="13" rx="3"/></g>
+  <text x="876" y="406" text-anchor="middle" fill="#9ca9b2" font-size="16">···</text>
+  <path d="M781 451 V462 H961 V451" fill="none" stroke="#d9ad50"/>
+  <line x1="871" y1="462" x2="871" y2="476" stroke="#d9ad50"/>
+  <rect x="752" y="479" width="217" height="45" rx="6" fill="#172129" stroke="#8b733d"/>
+  <text x="787" y="507" fill="#dce1e5" font-size="15" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">평균 확률</text>
+  <rect x="869" y="496" width="75" height="11" rx="3" fill="#2b3740"/><rect x="869" y="496" width="49" height="11" rx="3" fill="#e7ba58"/>
+  <line x1="1000" y1="350" x2="1022" y2="350" stroke="#e7ba58" stroke-width="3"/><path d="M1022 350 l-10 -7 v14 z" fill="#e7ba58"/>
+  <rect x="1030" y="165" width="220" height="378" rx="10" fill="#121d24" stroke="#3c4d57"/>
+  <rect x="1053" y="188" width="30" height="38" rx="3" fill="none" stroke="#e7ba58"/><line x1="1060" y1="198" x2="1076" y2="198" stroke="#e7ba58"/><line x1="1060" y1="206" x2="1076" y2="206" stroke="#e7ba58"/><line x1="1060" y1="214" x2="1071" y2="214" stroke="#e7ba58"/>
+  <text x="1100" y="214" fill="#f2f4f6" font-size="23" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">PET 양성 예측</text>
+  <line x1="1052" y1="239" x2="1228" y2="239" stroke="#465761"/>
+  <text x="1052" y="269" fill="#c7cdd2" font-size="14" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">Threshold 기반 최종 판정</text>
+  <rect x="1055" y="302" width="170" height="78" rx="7" fill="#172129" stroke="#43545e"/>
+  <text x="1140" y="327" text-anchor="middle" fill="#aeb6be" font-size="14" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">PET 양성 확률</text>
+  <rect x="1082" y="346" width="116" height="12" rx="3" fill="#2a363e"/><rect x="1082" y="346" width="74" height="12" rx="3" fill="#e7ba58"/>
+  <line x1="1140" y1="380" x2="1140" y2="405" stroke="#e7ba58" stroke-width="2"/><path d="M1140 405 l-6 -8 h12 z" fill="#e7ba58"/>
+  <rect x="1055" y="410" width="170" height="92" rx="7" fill="#172129" stroke="#43545e"/>
+  <text x="1140" y="439" text-anchor="middle" fill="#aeb6be" font-size="14" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">Threshold 판정</text>
+  <line x1="1075" y1="455" x2="1205" y2="455" stroke="#e7ba58" stroke-dasharray="5 4"/>
+  <text x="1140" y="484" text-anchor="middle" fill="#e7ba58" font-size="18" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">최종 결과 출력</text>
+  <rect x="30" y="575" width="1220" height="100" rx="10" fill="#121d24" stroke="#3c4d57"/>
+  <path d="M60 601 L75 595 L90 601 V620 C90 637 75 647 75 647 C75 647 60 637 60 620 Z" fill="none" stroke="#e7ba58" stroke-width="2.5"/>
+  <text x="108" y="625" fill="#f2f4f6" font-size="24" font-weight="700" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">검증</text>
+  <text x="188" y="625" fill="#9ca9b2" font-size="15" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">일반화 성능을 별도 평가</text>
+  <line x1="420" y1="593" x2="420" y2="657" stroke="#52616a"/>
+  <rect x="465" y="607" width="5" height="23" fill="#e7ba58"/><rect x="474" y="600" width="5" height="30" fill="#e7ba58"/><rect x="483" y="592" width="5" height="38" fill="#e7ba58"/>
+  <text x="515" y="612" fill="#f2f4f6" font-size="19" font-weight="700" font-family="Arial, sans-serif">Stratified CV</text>
+  <text x="515" y="638" fill="#aeb6be" font-size="15" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">계층화 교차검증으로 모델 비교</text>
+  <line x1="830" y1="593" x2="830" y2="657" stroke="#52616a"/>
+  <ellipse cx="875" cy="605" rx="15" ry="7" fill="none" stroke="#b6c0c7" stroke-width="2"/><path d="M860 605 V635 C860 644 890 644 890 635 V605" fill="none" stroke="#b6c0c7" stroke-width="2"/><ellipse cx="875" cy="635" rx="15" ry="7" fill="none" stroke="#b6c0c7" stroke-width="2"/>
+  <text x="910" y="612" fill="#f2f4f6" font-size="19" font-weight="700" font-family="Arial, sans-serif">Independent Test</text>
+  <text x="910" y="638" fill="#aeb6be" font-size="15" font-family="NanumBarunGothic, 'Noto Sans CJK KR', sans-serif">독립 테스트셋으로 최종 일반화 확인</text>
 </svg>
