@@ -1,16 +1,81 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img"><title>ECG PPG blood pressure analysis</title><desc>ECG and PPG waveforms with blood-pressure analysis context.</desc><rect width="960" height="540" fill="#0e1419"/>
-<g stroke="#2e3b45" stroke-width="1" opacity=".45"><path d="M30 86H705M30 152H705M30 218H705M30 284H705M30 350H705M30 416H705"/><path d="M64 55V455M128 55V455M192 55V455M256 55V455M320 55V455M384 55V455M448 55V455M512 55V455M576 55V455M640 55V455"/></g>
-<text x="36" y="52" fill="#8f99a2" font-size="15" font-family="Arial,sans-serif" letter-spacing="4">BIOMEDICAL SIGNAL ANALYSIS</text>
-<text x="38" y="132" fill="#eef1f4" font-size="24" font-family="Arial,sans-serif">ECG</text>
-<path d="M30 174 H94 L104 168 L111 150 L120 210 L128 115 L136 224 L146 172 L166 172 L178 160 L188 145 L198 172 H244 L254 166 L261 150 L270 210 L278 115 L286 224 L296 172 L316 172 L328 160 L338 145 L348 172 H394 L404 166 L411 150 L420 210 L428 115 L436 224 L446 172 L466 172 L478 160 L488 145 L498 172 H544 L554 166 L561 150 L570 210 L578 115 L586 224 L596 172 L616 172 L628 160 L638 145 L648 172 H702" fill="none" stroke="#eef1f4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-<text x="38" y="292" fill="#e0b77d" font-size="24" font-family="Arial,sans-serif">PPG</text>
-<path d="M30 356 C56 360 78 372 102 382 C126 392 142 380 153 350 C164 316 176 300 194 307 C212 314 220 345 232 360 C244 375 258 383 276 383 C294 383 307 370 318 344 C330 316 342 302 360 308 C379 315 386 347 398 361 C410 376 426 383 444 383 C462 383 475 370 486 344 C498 316 510 302 528 308 C547 315 554 347 566 361 C578 376 594 383 612 383 C630 383 643 370 654 344 C666 316 678 302 696 308 C711 313 720 332 728 347" fill="none" stroke="#e0b77d" stroke-width="4" stroke-linecap="round"/>
-<text x="758" y="104" fill="#eef1f4" font-size="40" font-family="Georgia,serif">ECG · PPG</text>
-<line x1="760" y1="126" x2="820" y2="126" stroke="#e0b77d" stroke-width="3"/>
-<text x="760" y="162" fill="#8f99a2" font-size="12" font-family="Arial,sans-serif" letter-spacing="1.5">SIGNALS → BP CONTEXT</text>
-<rect x="760" y="208" width="166" height="164" rx="16" fill="#121b22" stroke="#2e3b45"/>
-<text x="778" y="242" fill="#eef1f4" font-size="19" font-family="Arial,sans-serif">BP context</text>
-<path d="M780 330 C810 315 838 317 865 299 C882 288 899 292 910 277" fill="none" stroke="#e0b77d" stroke-width="3"/><path d="M780 344 C810 334 838 336 865 323 C887 312 901 317 912 309" fill="none" stroke="#8f99a2" stroke-width="2"/>
-<circle cx="780" cy="330" r="4" fill="#e0b77d"/><circle cx="865" cy="299" r="4" fill="#e0b77d"/><circle cx="910" cy="277" r="4" fill="#e0b77d"/>
-<text x="760" y="404" fill="#8f99a2" font-size="13" font-family="Arial,sans-serif">relationship · prediction limits</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">ECG·PPG 기반 혈압 설명 및 예측 분석</title>
+  <desc id="desc">ECG와 PPG 신호의 상대 시간 지연, 절대 혈압 예측의 극단 구간 오차 증가, MBP 고위험 상태 보조 선별 결과를 담백하게 정리한 프로젝트 커버.</desc>
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#26323c" stroke-width="1" opacity="0.24"/>
+    </pattern>
+    <style>
+      .ko{font-family:'NanumSquare','Noto Sans KR','Apple SD Gothic Neo',Arial,sans-serif}
+      .title{font-size:42px;font-weight:700;fill:#eef2f5}
+      .subtitle{font-size:22px;font-weight:400;fill:#a9b2ba}
+      .section{font-size:25px;font-weight:700;fill:#e8edf1}
+      .label{font-size:20px;font-weight:600;fill:#dbe1e6}
+      .small{font-size:15px;font-weight:400;fill:#a2adb6}
+      .metric{font-size:23px;font-weight:700;fill:#e8edf1}
+      .accent{fill:#e0b55f}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#111a21"/>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+
+  <text x="54" y="84" class="ko title">ECG·PPG 기반 <tspan fill="#e0b55f">혈압</tspan> 설명 및 예측 분석</text>
+  <text x="56" y="122" class="ko subtitle">수치 예측 한계 · 위험 상태 선별</text>
+
+  <line x1="640" y1="150" x2="640" y2="642" stroke="#5f6b74" stroke-width="1" opacity="0.65"/>
+
+  <text x="52" y="282" class="ko label">ECG</text>
+  <path d="M52 320 C80 320 92 320 106 318 C112 317 118 307 122 309 C130 312 136 321 144 320 L154 320 L162 316 L168 293 L175 352 L182 262 L188 360 L196 318 C205 319 212 321 220 320 C228 319 234 306 242 307 C250 308 256 322 264 320 L292 320 L300 317 L306 294 L313 350 L320 272 L326 356 L334 318 C344 319 351 321 360 320 C369 319 375 307 383 307 C392 308 398 322 406 320 L436 320 L444 317 L450 292 L457 351 L464 268 L470 356 L478 318 C487 319 494 321 504 320 C514 319 520 306 528 307 C536 309 542 322 550 320 L602 320" fill="none" stroke="#dbe8f5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="175" cy="262" r="5" fill="#e0b55f"/>
+  <text x="170" y="246" class="ko small" fill="#d8dee4">R</text>
+
+  <text x="52" y="472" class="ko label">PPG</text>
+  <path d="M52 522 C95 522 106 521 118 512 C130 503 136 468 154 455 C171 443 184 455 194 475 C205 498 221 505 235 507 C250 510 258 521 278 522 C316 522 326 520 338 512 C349 504 355 469 373 453 C390 438 405 452 414 476 C424 497 440 505 456 507 C472 510 480 521 500 522 C534 522 548 521 560 512 C572 504 579 472 596 458 C602 453 608 452 614 453" fill="none" stroke="#e0b55f" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="373" cy="453" r="5" fill="#e0b55f"/>
+
+  <line x1="175" y1="275" x2="175" y2="450" stroke="#d4a94e" stroke-width="1.5" stroke-dasharray="7 7" opacity="0.8"/>
+  <line x1="373" y1="466" x2="373" y2="450" stroke="#d4a94e" stroke-width="1.5" stroke-dasharray="7 7" opacity="0.8"/>
+  <line x1="175" y1="392" x2="373" y2="392" stroke="#e0b55f" stroke-width="1.5"/>
+  <path d="M175 392l11-6v12zM373 392l-11-6v12z" fill="#e0b55f"/>
+  <text x="228" y="381" class="ko small" fill="#e0b55f">ECG–PPG 상대 시간 지연</text>
+  <text x="54" y="672" class="ko small">Case-level split 기반 검증</text>
+
+  <text x="682" y="204" class="ko section">절대 혈압 예측</text>
+  <text x="1018" y="202" class="ko small">최고 test R² · MBP 0.312</text>
+
+  <line x1="748" y1="482" x2="1206" y2="482" stroke="#abb5bd" stroke-width="1.5"/>
+  <line x1="748" y1="482" x2="748" y2="252" stroke="#abb5bd" stroke-width="1.5"/>
+  <text x="941" y="516" class="ko small">실제값 (mmHg)</text>
+  <text x="690" y="386" class="ko small" transform="rotate(-90 690 386)">예측값 (mmHg)</text>
+
+  <path d="M770 456 C860 420 940 386 1030 340 C1100 305 1155 278 1192 260" fill="none" stroke="#e0b55f" stroke-width="2"/>
+  <path d="M774 460 C846 434 930 392 1015 354 C1098 316 1150 285 1188 270" fill="none" stroke="#73808a" stroke-width="1" opacity="0.55"/>
+
+  <g fill="#d7dde2" opacity="0.72">
+    <circle cx="824" cy="427" r="3"/><circle cx="836" cy="420" r="3"/><circle cx="844" cy="415" r="3"/><circle cx="852" cy="418" r="3"/><circle cx="861" cy="406" r="3"/><circle cx="870" cy="410" r="3"/>
+    <circle cx="881" cy="398" r="3"/><circle cx="889" cy="403" r="3"/><circle cx="898" cy="394" r="3"/><circle cx="906" cy="389" r="3"/><circle cx="916" cy="391" r="3"/><circle cx="925" cy="382" r="3"/>
+    <circle cx="934" cy="378" r="3"/><circle cx="944" cy="381" r="3"/><circle cx="952" cy="369" r="3"/><circle cx="963" cy="373" r="3"/><circle cx="971" cy="360" r="3"/><circle cx="981" cy="364" r="3"/>
+    <circle cx="989" cy="354" r="3"/><circle cx="998" cy="350" r="3"/><circle cx="1006" cy="352" r="3"/><circle cx="1015" cy="342" r="3"/><circle cx="1024" cy="345" r="3"/><circle cx="1032" cy="336" r="3"/>
+    <circle cx="1040" cy="333" r="3"/><circle cx="1048" cy="337" r="3"/><circle cx="1057" cy="326" r="3"/><circle cx="1066" cy="331" r="3"/><circle cx="1075" cy="317" r="3"/><circle cx="1083" cy="321" r="3"/>
+    <circle cx="1091" cy="312" r="3"/><circle cx="1100" cy="309" r="3"/><circle cx="1108" cy="314" r="3"/><circle cx="1118" cy="298" r="3"/><circle cx="1127" cy="303" r="3"/>
+  </g>
+
+  <g fill="#d2a859" opacity="0.9">
+    <circle cx="779" cy="446" r="3.3"/><circle cx="789" cy="434" r="3.3"/><circle cx="798" cy="448" r="3.3"/><circle cx="809" cy="417" r="3.3"/><circle cx="815" cy="455" r="3.3"/><circle cx="825" cy="397" r="3.3"/>
+    <circle cx="1136" cy="320" r="3.3"/><circle cx="1147" cy="288" r="3.3"/><circle cx="1154" cy="310" r="3.3"/><circle cx="1163" cy="272" r="3.3"/><circle cx="1170" cy="305" r="3.3"/><circle cx="1180" cy="254" r="3.3"/><circle cx="1190" cy="292" r="3.3"/>
+  </g>
+
+  <ellipse cx="803" cy="430" rx="48" ry="38" fill="none" stroke="#d4a94e" stroke-width="1.4" stroke-dasharray="7 6"/>
+  <ellipse cx="1164" cy="287" rx="62" ry="45" fill="none" stroke="#d4a94e" stroke-width="1.4" stroke-dasharray="7 6"/>
+  <text x="1087" y="360" class="ko small" fill="#e0b55f">극단 구간 오차 증가</text>
+
+  <line x1="682" y1="548" x2="1208" y2="548" stroke="#55616a" stroke-width="1"/>
+  <text x="682" y="592" class="ko metric">MBP ≥ 100</text>
+  <text x="856" y="592" class="ko small">Sensitivity</text>
+  <text x="955" y="592" class="ko metric" fill="#e0b55f">0.916</text>
+  <line x1="1045" y1="566" x2="1045" y2="600" stroke="#8e7a50" stroke-width="1"/>
+  <text x="1074" y="592" class="ko small">Precision</text>
+  <text x="1166" y="592" class="ko metric" fill="#e0b55f">0.193</text>
+  <text x="856" y="628" class="ko small">정밀한 절대값 예측보다 위험 상태 보조 선별 가능성 평가</text>
 </svg>
