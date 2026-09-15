@@ -174,11 +174,11 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 
 **기간:** 2025.09 ~ 2026.02
 
-- **문제:** 정답 라벨이 제한된 보안 로그에서 우선 검토할 이상 후보를 줄이고 판단 근거를 실제 행위까지 연결
+- **문제:** 사용자별 행동 편차가 크고 정답 라벨이 제한된 보안 로그에서는 이상 후보의 우선순위를 정하기 어렵고, 이상점수만으로 실제 행위의 맥락을 판단하기 어려움
 - **데이터:** 사용자 행위 로그 · 파일 접근/쓰기 로그 · 네트워크 행위 로그
 - **담당 범위:** PoC 설계 · 로그/행동 패턴 분석 · 사용자 단위 특징 설계 · Isolation Forest/EVT-POT · SHAP 설명 · 분석 리포트
-- **핵심 결과:** 이상 후보 → 점수·Threshold → 특징 기여 → 프로세스·네트워크 행위를 연결한 관제 보조형 분석 흐름 구현
-- **핵심 구조:** `Raw Log → Behavior Feature → Isolation Forest → EVT/POT → SHAP → Analyst Report`
+- **구현 내용:** 이상 후보의 우선순위, 점수·Threshold, 특징 기여도, 프로세스·네트워크 행위를 하나의 분석 리포트로 연결
+- **분석 흐름:** `Raw Log → Behavior Feature → Isolation Forest → EVT/POT → SHAP → Analyst Report`
 
 ##### 배경 및 문제 정의
 
@@ -303,8 +303,8 @@ UEBA 분석과 병행해 동일한 Feature 정의를 과거 적재·증분 처�
 - **문제:** UEBA의 데이터 분석과 Feature 설계 결과를 일회성 분석 코드에 머물지 않고 과거 적재·증분 처리·재시작·Late Arrival까지 반복 가능한 데이터 흐름으로 전환
 - **시스템 범위:** Elasticsearch → Polars/DuckDB → PostgreSQL/Parquet → Training/Inference
 - **담당 범위:** Feature/Data Pipeline 설계 · 구현 · 실행 상태/성공 지점 관리 · 재처리 흐름 구성
-- **핵심 결과:** 동일 Feature 정의를 학습·추론에서 재사용하고, 실패 후 Resume와 최근 구간 재처리가 가능한 데이터 계층 구성
-- **핵심 구조:** `Extract → Facts → Feature Materialization → Sink → Manifest/Watermark → Training/Inference`
+- **구현 결과:** 동일 Feature 정의를 학습·추론에서 재사용하고, 실패 후 Resume와 최근 구간 재처리가 가능한 데이터 계층 구성
+- **처리 흐름:** `Extract → Facts → Feature Materialization → Sink → Manifest/Watermark → Training/Inference`
 
 ##### 배경 및 문제 정의
 
@@ -371,8 +371,8 @@ UEBA 모델에 필요한 Feature를 **반복 생성·재처리·추적 가능한
 - **문제:** 온프레미스 환경의 LLM·Embedding 등 AI 모델을 서비스마다 개별 연결하지 않고, 공통 API와 일관된 운영 방식으로 제공
 - **시스템 범위:** Chat · Embedding · Retrieval · Prompt/PII/Secret Risk · Multimodal · Model Runtime Control · Observability · Validation/Deployment
 - **담당 범위:** 요구사항 분석·시스템 설계 · FastAPI Gateway · OpenAI-compatible API Contract · Runtime/Model Profile 운영 구조 · Admin/Control 경계 · GPU Resource Admission · Risk/Monitoring 연결 · 검증·배포 흐름
-- **핵심 결과:** 외부 API 처리, 모델 Inference, 권한이 필요한 Runtime Control의 책임을 분리하고 모델 실행·전환·관측·검증을 하나의 온프레미스 Serving Platform으로 구성
-- **핵심 구조:** `Client → Gateway → Model Runtime / Risk Adapter` + `Gateway → Admin/Control Sidecar → Runtime Lifecycle` + `Metrics/Logs → Prometheus/Loki → Grafana`
+- **구현 결과:** 외부 API 처리, 모델 Inference, 권한이 필요한 Runtime Control의 책임을 분리하고 모델 실행·전환·관측·검증을 하나의 온프레미스 Serving Platform으로 구성
+- **시스템 구조:** `Client → Gateway → Model Runtime / Risk Adapter` + `Gateway → Admin/Control Sidecar → Runtime Lifecycle` + `Metrics/Logs → Prometheus/Loki → Grafana`
 
 ##### 배경 및 문제 정의
 
@@ -504,8 +504,8 @@ API Contract, Config/Schema, Runtime policy와 generated artifact의 drift를 �
 - **문제:** 설비 상태가 경고로 전환된 뒤 분류하는 대신, 전환 이전 시계열에서 점검할 이상 후보를 조기에 선별
 - **데이터:** AI Hub 전력 설비 에너지 품질 AI 데이터 · 35종 전력품질 변수 · SOH 정상/경고 라벨
 - **담당 범위:** 센서/SOH 데이터 분석 · 문제 정의 · Label Shifting/Sliding Window · LSTM-Autoencoder with Attention · Threshold 평가 · 모니터링 연결
-- **핵심 결과:** Accuracy 92% · Sensitivity 71% · Specificity 93% · Precision 33%; 오탐 한계를 명시하고 점검 후보 신호로 활용
-- **핵심 구조:** `Sensor → Pre-anomaly Window → Sliding Window → LSTM-AE → Reconstruction Error → Threshold → Monitoring`
+- **주요 결과:** Accuracy 92% · Sensitivity 71% · Specificity 93% · Precision 33%; 오탐 한계를 명시하고 점검 후보 신호로 활용
+- **탐지 흐름:** `Sensor → Pre-anomaly Window → Sliding Window → LSTM-AE → Reconstruction Error → Threshold → Monitoring`
 
 ##### 배경 및 문제 정의
 
@@ -652,7 +652,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 - **문제:** 후각 자극 fNIRS 신호에서 아밀로이드 PET 양성 여부와 관련된 패턴을 학습하고 제한된 의료 데이터에서 일반화 가능성을 검증
 - **데이터:** 후각 자극 기반 다변량 fNIRS · PET 양성/음성 라벨
 - **담당 범위:** 전처리된 fNIRS 신호 EDA·통계 분석 · 특징/입력 설계 · 모델 개발/튜닝 · XAI · Cross Validation · Independent Test
-- **핵심 결과:** 시계열 분류 연구를 XAI·독립 검증과 의료기기 성능평가/규제 대응 자료까지 연결; 관련 논문 2편 제3저자 참여
+- **연구 결과:** 시계열 분류 연구를 XAI·독립 검증과 의료기기 성능평가/규제 대응 자료까지 연결; 관련 논문 2편 제3저자 참여
 - **범위 경계:** Raw→HbO/Hb 변환, Motion Artifact 처리, Noise Filtering 등 신호 전처리는 별도 담당 영역
 
 ##### 연구 배경
@@ -788,8 +788,8 @@ XAI 결과로 모델 출력에 영향을 준 특징과 시간 구간을 시각�
 - **문제:** PPG→ART 혈압 추정 입력을 흔드는 Noise·Spike·비정상 파형을 정제하고 반복되는 이상 구간 선별을 자동화
 - **데이터:** ECG · PPG · ART 생체신호
 - **담당 범위:** 신호 품질 분석 · 정상/비정상 기준 정립 · Filtering · 혈압 추정 평가 · Autoencoder/CNN-Autoencoder 이상탐지
-- **핵심 결과:** 정제된 PPG 기반 ART 혈압 추정 MAE 7.0 mmHg; 수작업 이상 구간 정제를 Reconstruction Error 기반 탐지 문제로 확장
-- **핵심 구조:** `Signal Quality → Filtering → PPG→ART Estimation → Autoencoder → Reconstruction Error → Anomaly Candidate`
+- **주요 결과:** 정제된 PPG 기반 ART 혈압 추정 MAE 7.0 mmHg; 수작업 이상 구간 정제를 Reconstruction Error 기반 탐지 문제로 확장
+- **분석 흐름:** `Signal Quality → Filtering → PPG→ART Estimation → Autoencoder → Reconstruction Error → Anomaly Candidate`
 
 ##### 배경 및 문제
 
@@ -855,8 +855,8 @@ BCG 생체신호의 집단별 특징을 비교하고 MLP·머신러닝 기반 �
 - **문제:** 낙상/정상 클래스와 Bounding Box 품질 불일치로 불안정한 실시간 Object Detection 성능 개선
 - **데이터:** 약 2만 장 규모의 CCTV/영상 이미지와 낙상·정상 Bounding Box 라벨
 - **담당 범위:** 데이터 분석 · 라벨/Bounding Box 품질 점검 · YOLO/Darknet 학습 · 성능 검증
-- **핵심 결과:** 내부 검증 mAP 약 60~70% 수준에서 라벨 품질 재검토·재학습 후 95%; TTA V&V 검증으로 연결
-- **핵심 구조:** `Data/Label QA → YOLO Training → Detection → mAP Validation → TTA V&V`
+- **주요 결과:** 내부 검증 mAP 약 60~70% 수준에서 라벨 품질 재검토·재학습 후 95%; TTA V&V 검증으로 연결
+- **개발·검증 흐름:** `Data/Label QA → YOLO Training → Detection → mAP Validation → TTA V&V`
 
 ##### 프로젝트 목표
 
@@ -922,7 +922,7 @@ Darknet 기반 YOLO 모델을 학습하고 OpenCV/PIL로 이미지 전처리와 
 - **데이터:** VitalDB · 3,729개 분석 가능 사례 중 500개 사용 · 1,526,607개 시간 구간
 - **평가 분할:** 같은 수술 사례가 학습과 시험에 섞이지 않도록 Case-level Train/Validation/Test 분할
 - **담당 범위:** EDA · 신호 특징 정의 · 통계 분석 · 회귀/분류 모델 비교 · Case-level 검증 · 결과 해석
-- **핵심 결과:** 시험 R² 최고 MBP 0.312로 절대값 예측 한계를 확인하고, MBP ≥100 위험 분류의 30초 LightGBM에서 AUPRC 0.407 · Sensitivity 0.916 · Precision 0.193을 확인했다. 높은 위양성 부담을 함께 검토해 결과를 보조 선별 가능성으로 제한해 해석했다.
+- **연구 결과:** 시험 R² 최고 MBP 0.312로 절대값 예측 한계를 확인하고, MBP ≥100 위험 분류의 30초 LightGBM에서 AUPRC 0.407 · Sensitivity 0.916 · Precision 0.193을 확인했다. 높은 위양성 부담을 함께 검토해 결과를 보조 선별 가능성으로 제한해 해석했다.
 
 ##### 데이터 분석과 EDA
 
