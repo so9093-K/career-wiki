@@ -238,9 +238,6 @@ main { display: block; }
 .detail-shell th { background: var(--surface-subtle); }
 
 @media (min-width: 821px) {
-  .detail-shell #커리어-흐름 + table {
-    table-layout: fixed;
-  }
   .detail-shell #커리어-흐름 + table th:nth-child(1),
   .detail-shell #커리어-흐름 + table td:nth-child(1) {
     width: 100px;
@@ -249,14 +246,6 @@ main { display: block; }
   .detail-shell #커리어-흐름 + table th:nth-child(2),
   .detail-shell #커리어-흐름 + table td:nth-child(2) {
     width: 190px;
-    white-space: nowrap;
-  }
-  .detail-shell #커리어-흐름 + table td:nth-child(3) {
-    word-break: keep-all;
-    overflow-wrap: normal;
-  }
-  .detail-shell #커리어-흐름 + table .career-experience-item {
-    display: inline-block;
     white-space: nowrap;
   }
 }

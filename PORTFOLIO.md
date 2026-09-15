@@ -81,10 +81,10 @@
 
 | 시기 | 중심 영역 | 대표 경험 |
 |---|---|---|
-| 2020–2021 | Computer Vision · Biosignal | <span class="career-experience-item">YOLO 낙상감지</span> · <span class="career-experience-item">BCG 기반 생체신호 예측</span> |
-| 2021–2024 | Medical AI · XAI | <span class="career-experience-item">fNIRS/PET 예측</span> · <span class="career-experience-item">PPG/ART 혈압 추정·이상탐지</span> · <span class="career-experience-item">XAI/독립 검증</span> · <span class="career-experience-item">식약처 인허가</span> |
-| 2024–2025 | Industrial AI · Time-Series | <span class="career-experience-item">센서 분석 API</span> · <span class="career-experience-item">시계열 예측·이상탐지</span> · <span class="career-experience-item">예지보전</span> |
-| 2025–현재 | Security AI · ML Systems | <span class="career-experience-item">UEBA 이상탐지</span> · <span class="career-experience-item">Feature/Data Pipeline</span> · <span class="career-experience-item">On-Premise AI Model Serving Platform</span> |
+| 2020–2021 | Computer Vision · Biosignal | YOLO 낙상감지 · BCG 기반 생체신호 예측 |
+| 2021–2024 | Medical AI · XAI | fNIRS/PET 예측 · PPG/ART 혈압 추정·이상탐지<br>XAI/독립 검증 · 식약처 인허가 |
+| 2024–2025 | Industrial AI · Time-Series | 센서 분석 API · 시계열 예측·이상탐지 · 예지보전 |
+| 2025–현재 | Security AI · ML Systems | UEBA 이상탐지 · Feature/Data Pipeline<br>On-Premise AI Model Serving Platform |
 
 ### 핵심 역량
 
