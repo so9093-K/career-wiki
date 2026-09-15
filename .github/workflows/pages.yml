@@ -18,6 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      GA4_MEASUREMENT_ID: G-98ZCKPQTLP
     steps:
       - name: Checkout public projection
         uses: actions/checkout@v6
