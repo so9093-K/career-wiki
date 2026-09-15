@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
 from pathlib import Path
 import re
 import shutil
@@ -15,6 +16,41 @@ SITE_SRC = ROOT / "site"
 DEFAULT_DATA_FILE = SITE_SRC / "site_data.json"
 PORTFOLIO = ROOT / "PORTFOLIO.md"
 ASSETS = ROOT / "assets"
+GA_MEASUREMENT_ID_RE = re.compile(r"^G-[A-Z0-9]+$")
+
+
+def google_analytics_measurement_id() -> str:
+    value = os.environ.get("GA4_MEASUREMENT_ID", "").strip()
+    if value and not GA_MEASUREMENT_ID_RE.fullmatch(value):
+        raise RuntimeError("GA4_MEASUREMENT_ID must match G-[A-Z0-9]+")
+    return value
+
+
+def google_analytics_head() -> str:
+    measurement_id = google_analytics_measurement_id()
+    if not measurement_id:
+        return ""
+    return f'''<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={measurement_id}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {{ dataLayer.push(arguments); }}
+  gtag('js', new Date());
+  gtag('config', '{measurement_id}', {{
+    'allow_google_signals': false,
+    'allow_ad_personalization_signals': false
+  }});
+</script>'''
+
+
+def inject_google_analytics_head(output: Path) -> None:
+    snippet = google_analytics_head()
+    if not snippet:
+        return
+    text = output.read_text(encoding="utf-8")
+    if "</head>" not in text:
+        raise RuntimeError(f"generated page has no </head>: {output.name}")
+    output.write_text(text.replace("</head>", f"{snippet}\n</head>", 1), encoding="utf-8")
 
 
 def esc(value: object) -> str:
@@ -48,7 +84,7 @@ def landing_html(data: dict) -> str:
     for p in data["featured_projects"]:
         cover = p.get("cover_asset")
         cover_html = (
-            f'''<a class="project-cover" href="{project_detail_href(p)}" aria-label="{esc(p["title"])} 상세 보기" draggable="false" data-preview-src="{esc(cover)}">
+            f'''<a class="project-cover" href="{project_detail_href(p)}" aria-label="{esc(p["title"])} 상세 보기" draggable="false" data-preview-src="{esc(cover)}" data-analytics-event="click_project_details" data-analytics-location="project-cover" data-project-anchor="{esc(p.get("anchor", ""))}" data-project-title="{esc(p["title"])}">
               <img class="project-cover-thumb" src="{esc(cover)}" alt="{esc(p["title"])} 대표 이미지" loading="lazy" draggable="false">
             </a>'''
             if cover else ""
@@ -63,7 +99,7 @@ def landing_html(data: dict) -> str:
             <h3>{esc(p["title"])}</h3>
             <p>{esc(p["summary"])}</p>
             <div class="tags">{render_tags(p.get("tags", []))}</div>
-            <div class="card-links"><a href="{project_detail_href(p)}">Details</a>{repo_link}</div>
+            <div class="card-links"><a href="{project_detail_href(p)}" data-analytics-event="click_project_details" data-analytics-location="project-card" data-project-anchor="{esc(p.get("anchor", ""))}" data-project-title="{esc(p["title"])}">Details</a>{repo_link}</div>
           </div>
         </article>''')
 
@@ -98,13 +134,14 @@ def landing_html(data: dict) -> str:
         <p>{" · ".join(esc(d) for d in x["details"])}</p>
       </article>''' for x in data["education"])
 
-    portfolio_link = '<a class="button" href="portfolio.html">Full Portfolio</a>'
+    portfolio_link = '<a class="button" href="portfolio.html" data-analytics-event="click_full_portfolio" data-analytics-location="hero">Full Portfolio</a>'
 
     return f'''<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {google_analytics_head()}
   <title>{esc(profile["name"])} · ML Engineer Portfolio</title>
   <meta name="description" content="Research-minded Applied ML Engineer portfolio covering medical biosignals, manufacturing time-series, security UEBA and ML Systems.">
   <meta property="og:title" content="{esc(profile["name"])} · ML Engineer Portfolio">
@@ -153,7 +190,7 @@ def landing_html(data: dict) -> str:
       <div class="actions">
         <a class="button primary" href="#projects">Selected Projects</a>
         {portfolio_link}
-        <a class="button" href="{esc(github)}">GitHub</a>
+        <a class="button" href="{esc(github)}" data-analytics-event="click_github" data-analytics-location="hero">GitHub</a>
       </div>
     </div>
     <aside class="hero-side">
@@ -216,11 +253,26 @@ def landing_html(data: dict) -> str:
 <div id="project-preview-layer" hidden aria-hidden="true"><img alt=""></div>
 <footer class="footer">
   <div class="footer-links">
-    <a href="portfolio.html">Full Portfolio</a>
-    <a href="{esc(github)}">GitHub</a>
+    <a href="portfolio.html" data-analytics-event="click_full_portfolio" data-analytics-location="footer">Full Portfolio</a>
+    <a href="{esc(github)}" data-analytics-event="click_github" data-analytics-location="footer">GitHub</a>
   </div>
   <div>Version {esc(data["version"])} · GitHub Pages build output is generated, not maintained as source.</div>
+  <div>방문 통계 확인을 위해 Google Analytics를 사용합니다.</div>
 </footer>
+<script>
+document.addEventListener('click', (event) => {{
+  const link = event.target instanceof Element ? event.target.closest('a[data-analytics-event]') : null;
+  if (!link || typeof window.gtag !== 'function') return;
+  const params = {{
+    link_url: link.href,
+    link_text: (link.textContent || '').trim(),
+    location: link.dataset.analyticsLocation || ''
+  }};
+  if (link.dataset.projectAnchor) params.project_anchor = link.dataset.projectAnchor;
+  if (link.dataset.projectTitle) params.project_title = link.dataset.projectTitle;
+  window.gtag('event', link.dataset.analyticsEvent, params);
+}});
+</script>
 <script>
 (() => {{
   const media = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 821px)');
@@ -302,6 +354,7 @@ def build_markdown_page(source: Path, output: Path, title: str) -> None:
         "-o", str(output),
     ]
     subprocess.run(cmd, cwd=ROOT, check=True)
+    inject_google_analytics_head(output)
 
 
 class LinkCollector(HTMLParser):
@@ -391,6 +444,12 @@ def validate_output(out: Path, data: dict) -> None:
     portfolio_ids: set[str] = set()
     for path in html_files:
         text = path.read_text(encoding="utf-8")
+        measurement_id = google_analytics_measurement_id()
+        if measurement_id:
+            loader = f"https://www.googletagmanager.com/gtag/js?id={measurement_id}"
+            config_call = f"gtag('config', '{measurement_id}'"
+            if text.count(loader) != 1 or text.count(config_call) != 1:
+                raise RuntimeError(f"GA4 tag missing or duplicated in {path.name}")
         if "sources/" in text or "_internal/" in text:
             raise RuntimeError(f"internal/evidence path leaked into site: {path.name}")
         parser = LinkCollector()
