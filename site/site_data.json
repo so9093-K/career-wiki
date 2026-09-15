@@ -61,7 +61,7 @@
       "code": "WZ-01",
       "title": "네트워크·행위 기반 UEBA 이상탐지",
       "category": "Security AI",
-      "period": "2025.09 ~ 2026.02",
+      "period": "2025.09 ~ 2026.03",
       "summary": "보안 행동 로그의 구조와 사용자별 패턴을 분석해 Feature를 설계하고, 이상 후보·판단 이유·원본 로그 재확인 지점까지 연결한 UEBA 분석 시스템.",
       "tags": [
         "Isolation Forest",
@@ -133,7 +133,7 @@
       "code": "NS-01",
       "title": "fNIRS 기반 아밀로이드 PET 양성 예측",
       "category": "Medical AI",
-      "period": "2022.05 ~ 2024.04",
+      "period": "2021.11 ~ 2024.05",
       "summary": "전처리된 후각 자극 fNIRS 신호의 집단·자극 반응을 EDA·통계적으로 분석해 Feature와 입력 구조를 설계하고, 모델 튜닝·XAI·독립 Test·의료기기 검증까지 연결한 PET 양성 예측 연구.",
       "tags": [
         "fNIRS",
@@ -172,7 +172,7 @@
       "code": "CP-01",
       "title": "제1회 신약개발 AI 경진대회",
       "category": "Competition",
-      "period": "2023.08.07 ~ 2023.09.25",
+      "period": "2023.08 ~ 2023.09",
       "summary": "SMILES를 RDKit descriptor·fingerprint로 변환하고 HLM·MLM별 Feature 조합과 Voting ensemble을 7-Fold CV로 검증한 DACON 프로젝트. 공식 리더보드 46위·상위 6%대.",
       "tags": [
         "SMILES",
