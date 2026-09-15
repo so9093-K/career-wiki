@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import html
 import json
-import os
 from pathlib import Path
 import re
 import shutil
@@ -20,16 +19,6 @@ ASSETS = ROOT / "assets"
 
 def esc(value: object) -> str:
     return html.escape(str(value or ""), quote=True)
-
-
-def repo_url() -> str:
-    explicit = os.environ.get("PORTFOLIO_REPOSITORY_URL", "").strip()
-    if explicit:
-        return explicit.rstrip("/")
-    repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
-    if repo:
-        return f"https://github.com/{repo}"
-    return ""
 
 
 def render_tags(tags: list[str]) -> str:
@@ -109,12 +98,7 @@ def landing_html(data: dict) -> str:
         <p>{" · ".join(esc(d) for d in x["details"])}</p>
       </article>''' for x in data["education"])
 
-    repo_base = repo_url()
-    source_links = ""
-    if repo_base:
-      source_links = f'<a class="button" href="{esc(repo_base)}/blob/main/PORTFOLIO.md">Portfolio Markdown</a>'
-    else:
-      source_links = '<a class="button" href="portfolio.html">Portfolio Markdown View</a>'
+    portfolio_link = '<a class="button" href="portfolio.html">Full Portfolio</a>'
 
     return f'''<!doctype html>
 <html lang="ko">
@@ -168,7 +152,7 @@ def landing_html(data: dict) -> str:
       <p class="hero-lead">{esc(profile["lead"])}</p>
       <div class="actions">
         <a class="button primary" href="#projects">Selected Projects</a>
-        {source_links}
+        {portfolio_link}
         <a class="button" href="{esc(github)}">GitHub</a>
       </div>
     </div>
@@ -232,7 +216,7 @@ def landing_html(data: dict) -> str:
 <div id="project-preview-layer" hidden aria-hidden="true"><img alt=""></div>
 <footer class="footer">
   <div class="footer-links">
-    <a href="portfolio.html">Portfolio View</a>
+    <a href="portfolio.html">Full Portfolio</a>
     <a href="{esc(github)}">GitHub</a>
   </div>
   <div>Version {esc(data["version"])} · GitHub Pages build output is generated, not maintained as source.</div>

@@ -236,6 +236,19 @@ main { display: block; }
 .detail-shell table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: .92rem; }
 .detail-shell th, .detail-shell td { border-bottom: 1px solid var(--line); padding: 10px 9px; text-align: left; vertical-align: top; }
 .detail-shell th { background: var(--surface-subtle); }
+
+@media (min-width: 821px) {
+  .detail-shell #커리어-흐름 + table th:nth-child(1),
+  .detail-shell #커리어-흐름 + table td:nth-child(1) {
+    width: 100px;
+    white-space: nowrap;
+  }
+  .detail-shell #커리어-흐름 + table th:nth-child(2),
+  .detail-shell #커리어-흐름 + table td:nth-child(2) {
+    width: 190px;
+    white-space: nowrap;
+  }
+}
 .detail-shell pre { overflow-x: auto; background: var(--code-bg); color: var(--code-text); padding: 16px; border-radius: 10px; font-size: .86rem; }
 .detail-shell code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .detail-shell p > code, .detail-shell li > code { background: var(--inline-code-bg); color: var(--body-text); padding: 2px 5px; border-radius: 5px; }
