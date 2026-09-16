@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE_SRC = ROOT / "site"
 DEFAULT_DATA_FILE = SITE_SRC / "site_data.json"
 PORTFOLIO = ROOT / "PORTFOLIO.md"
+PRIVACY = SITE_SRC / "privacy.md"
 ASSETS = ROOT / "assets"
 GA_MEASUREMENT_ID_RE = re.compile(r"^G-[A-Z0-9]+$")
 
@@ -255,9 +256,9 @@ def landing_html(data: dict) -> str:
   <div class="footer-links">
     <a href="portfolio.html" data-analytics-event="click_full_portfolio" data-analytics-location="footer">Full Portfolio</a>
     <a href="{esc(github)}" data-analytics-event="click_github" data-analytics-location="footer">GitHub</a>
+    <a href="privacy.html">Privacy</a>
   </div>
   <div>Version {esc(data["version"])} · GitHub Pages build output is generated, not maintained as source.</div>
-  <div>방문 통계 확인을 위해 Google Analytics를 사용합니다.</div>
 </footer>
 <script>
 document.addEventListener('click', (event) => {{
@@ -421,7 +422,7 @@ class AccordionStructureCollector(HTMLParser):
 
 def validate_output(out: Path, data: dict) -> None:
     required = {
-      "index.html", "portfolio.html",
+      "index.html", "portfolio.html", "privacy.html",
         "assets"
     }
     actual_top = {p.name for p in out.iterdir()}
@@ -440,7 +441,7 @@ def validate_output(out: Path, data: dict) -> None:
             f"source portfolio accordion markup mismatch: details={expected_details}, summaries={expected_summaries}"
         )
 
-    html_files = [out / "index.html", out / "portfolio.html"]
+    html_files = [out / "index.html", out / "portfolio.html", out / "privacy.html"]
     portfolio_ids: set[str] = set()
     for path in html_files:
         text = path.read_text(encoding="utf-8")
@@ -507,6 +508,7 @@ def build(out: Path, data_file: Path) -> None:
     shutil.copy2(SITE_SRC / "site.css", out / "assets" / "site.css")
     (out / "index.html").write_text(landing_html(data), encoding="utf-8")
     build_markdown_page(PORTFOLIO, out / "portfolio.html", "강동혁 · Portfolio")
+    build_markdown_page(PRIVACY, out / "privacy.html", "강동혁 · Privacy")
     validate_output(out, data)
 
 
