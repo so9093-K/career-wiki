@@ -255,7 +255,7 @@ main { display: block; }
   }
   .detail-shell #커리어-흐름 + table th:nth-child(2),
   .detail-shell #커리어-흐름 + table td:nth-child(2) {
-    width: 190px;
+    width: 220px;
     white-space: nowrap;
     text-align: center;
   }
