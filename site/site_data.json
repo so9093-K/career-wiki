@@ -94,7 +94,7 @@
     {
       "id": "on-premise-ai-model-serving-platform",
       "code": "WZ-03",
-      "title": "On-Premise AI Model Serving Platform",
+      "title": "On-Premises AI Model Serving Platform",
       "category": "AI/ML Systems · Serving",
       "period": "2026.04 ~ 현재",
       "summary": "온프레미스 AI 모델을 공통 API로 제공하고 Runtime lifecycle·모델 전환·GPU 자원 관리·Retrieval/Risk·관측·검증/배포를 하나의 Serving Platform으로 구성.",
@@ -106,8 +106,8 @@
         "GPU Admission",
         "Prometheus/Grafana"
       ],
-      "anchor": "223-on-premise-ai-model-serving-platform",
-      "repository": "https://github.com/so9093-K/On-Premise-LLM-Serving-Platform",
+      "anchor": "223-on-premises-ai-model-serving-platform",
+      "repository": "https://github.com/so9093-K/On-Premises-LLM-Serving-Platform",
       "cover_asset": "assets/covers/serving_platform_overview.webp"
     },
     {
@@ -258,8 +258,8 @@
         "url": "https://github.com/so9093-K/explainable-anomaly-analysis"
       },
       {
-        "name": "On-Premise AI Model Serving Platform",
-        "url": "https://github.com/so9093-K/On-Premise-LLM-Serving-Platform"
+        "name": "On-Premises AI Model Serving Platform",
+        "url": "https://github.com/so9093-K/On-Premises-LLM-Serving-Platform"
       },
       {
         "name": "Multivariate Time-Series Anomaly Detection",

@@ -25,7 +25,7 @@
   - [2.2 위즈베라](#22-위즈베라)
     - [2.2.1 네트워크·행위 기반 UEBA 이상탐지](#221-네트워크행위-기반-ueba-이상탐지)
     - [2.2.2 ML/Data Pipeline](#222-mldata-pipeline)
-    - [2.2.3 On-Premise AI Model Serving Platform](#223-on-premise-ai-model-serving-platform)
+    - [2.2.3 On-Premises AI Model Serving Platform](#223-on-premises-ai-model-serving-platform)
   - [2.3 네비웍스](#23-네비웍스)
     - [2.3.1 제조 공정 시계열 이상징후 조기탐지 및 모니터링](#231-제조-공정-시계열-이상징후-조기탐지-및-모니터링)
     - [AIoT 분석 서버 및 모델 실행 환경](#네비웍스-업무-범위-요약--aiot-분석-서버-및-모델-실행-환경)
@@ -84,7 +84,7 @@
 | 2020–2021 | Computer Vision · Biosignal | YOLO 낙상감지 · BCG 기반 생체신호 예측 |
 | 2021–2024 | Medical AI · XAI | fNIRS/PET 예측 · PPG/ART 혈압 추정·이상탐지<br>XAI/독립 검증 · 식약처 인허가 |
 | 2024–2025 | Industrial AI · Time-Series | 센서 분석 API · 시계열 예측·이상탐지 · 예지보전 |
-| 2025–현재 | Security AI · ML Systems | UEBA 이상탐지 · Feature/Data Pipeline<br>On-Premise AI Model Serving Platform |
+| 2025–현재 | Security AI · ML Systems | UEBA 이상탐지 · Feature/Data Pipeline<br>On-Premises AI Model Serving Platform |
 
 ### 핵심 역량
 
@@ -107,7 +107,7 @@
 **관련 프로젝트**
 - [네트워크·행위 기반 UEBA 이상탐지](#221-네트워크행위-기반-ueba-이상탐지)
   - 연계 구현: [ML/Data Pipeline](#222-mldata-pipeline)
-- [On-Premise AI Model Serving Platform](#223-on-premise-ai-model-serving-platform)
+- [On-Premises AI Model Serving Platform](#223-on-premises-ai-model-serving-platform)
 
 ### 1.2 네비웍스
 
@@ -149,7 +149,7 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 **Security AI / ML Systems**
 - **[UEBA 이상탐지](#221-네트워크행위-기반-ueba-이상탐지)** · 2025.09 ~ 2026.03 — 보안 행동 로그의 사용자별 패턴을 분석해 Feature를 구성하고, 이상 후보와 모델 판단 근거를 실제 행위까지 연결
   - ↳ **[ML/Data Pipeline](#222-mldata-pipeline) · UEBA와 병행** — 같은 Feature 규칙으로 과거 적재·증분 처리·재처리가 가능한 데이터 흐름 설계·구현
-- **[On-Premise AI Model Serving Platform](#223-on-premise-ai-model-serving-platform)** · 2026.04 ~ 현재 — AI 모델을 공통 API로 제공하고 Runtime 실행·전환·자원 관리·관측과 검증·배포를 하나의 온프레미스 플랫폼으로 구성
+- **[On-Premises AI Model Serving Platform](#223-on-premises-ai-model-serving-platform)** · 2026.04 ~ 현재 — AI 모델을 공통 API로 제공하고 Runtime 실행·전환·자원 관리·관측과 검증·배포를 하나의 온프레미스 플랫폼으로 구성
 
 **Industrial AI**
 - **[제조 시계열 이상징후 조기탐지](#231-제조-공정-시계열-이상징후-조기탐지-및-모니터링)** — 센서 변화와 SOH 상태 전환을 분석해 사전 이상 구간과 입력 Window를 구성하고, 이상 후보를 실시간 모니터링까지 연결
@@ -362,8 +362,8 @@ UEBA 모델에 필요한 Feature를 **반복 생성·재처리·추적 가능한
 
 </details>
 
-<details id="223-on-premise-ai-model-serving-platform">
-<summary><strong>2.2.3 On-Premise AI Model Serving Platform</strong></summary>
+<details id="223-on-premises-ai-model-serving-platform">
+<summary><strong>2.2.3 On-Premises AI Model Serving Platform</strong></summary>
 
 
 **기간:** 2026.04 ~ 현재
@@ -449,31 +449,31 @@ API Contract, Config/Schema, Runtime policy와 generated artifact의 drift를 �
 
 ###### OpenAI-compatible Chat API
 
-![On-Premise AI Model Serving Platform - Chat API](assets/serving/02_scalar_chat_completion.png)
+![On-Premises AI Model Serving Platform - Chat API](assets/serving/02_scalar_chat_completion.png)
 
 *그림 10. Scalar API Reference에서 Chat Completion의 request schema, 예제 요청과 OpenAI-compatible response 구조를 확인하는 화면.*
 
 ###### Embedding API
 
-![On-Premise AI Model Serving Platform - Embedding API](assets/serving/03_scalar_embedding_vector.png)
+![On-Premises AI Model Serving Platform - Embedding API](assets/serving/03_scalar_embedding_vector.png)
 
 *그림 11. 동일한 Platform API 경계에서 Embedding 입력과 vector response 구조를 확인하는 화면.*
 
 ###### Prompt Risk API
 
-![On-Premise AI Model Serving Platform - Prompt Risk](assets/serving/04_scalar_prompt_risk_signal.png)
+![On-Premises AI Model Serving Platform - Prompt Risk](assets/serving/04_scalar_prompt_risk_signal.png)
 
 *그림 12. Prompt 위험 분석 결과를 상위 서비스가 사용할 수 있는 Risk 응답 구조로 확인하는 화면.*
 
 ###### Multimodal Chat
 
-![On-Premise AI Model Serving Platform - Multimodal Chat](assets/serving/05_multimodal_chat.png)
+![On-Premises AI Model Serving Platform - Multimodal Chat](assets/serving/05_multimodal_chat.png)
 
 *그림 13. Chat Completion 계열 인터페이스에서 텍스트와 이미지 입력을 함께 처리한 실행 화면.*
 
 ###### Runtime Monitoring
 
-![On-Premise AI Model Serving Platform - Runtime Monitoring](assets/serving/07_runtime_monitoring.png)
+![On-Premises AI Model Serving Platform - Runtime Monitoring](assets/serving/07_runtime_monitoring.png)
 
 *그림 14. 모델 Runtime과 GPU·Container 상태를 함께 관측하는 Grafana 기반 실행 화면.*
 
@@ -487,7 +487,7 @@ API Contract, Config/Schema, Runtime policy와 generated artifact의 drift를 �
 
 ##### 관련 저장소
 
-- [On-Premise LLM Serving Platform - GitHub](https://github.com/so9093-K/On-Premise-LLM-Serving-Platform)
+- [On-Premises LLM Serving Platform - GitHub](https://github.com/so9093-K/On-Premises-LLM-Serving-Platform)
 
 ---
 
@@ -1336,7 +1336,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 ### 주요 GitHub 저장소
 
 - [Explainable Anomaly Analysis - UEBA Public Reproduction](https://github.com/so9093-K/explainable-anomaly-analysis)
-- [On-Premise AI Model Serving Platform](https://github.com/so9093-K/On-Premise-LLM-Serving-Platform)
+- [On-Premises AI Model Serving Platform](https://github.com/so9093-K/On-Premises-LLM-Serving-Platform)
 - [Multivariate Time-Series Anomaly Detection](https://github.com/so9093-K/multivariate-time-series-anomaly-detection-)
 - [Naver Review / Recommendation Analysis](https://github.com/so9093-K/Recommand_analysis)
 
