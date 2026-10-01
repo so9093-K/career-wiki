@@ -84,11 +84,11 @@
 | 2020–2021 | Computer Vision · Biosignal | YOLO 낙상감지 · BCG 기반 생체신호 예측 |
 | 2021–2024 | Medical AI · XAI | fNIRS/PET 예측 · PPG/ART 혈압 추정·이상탐지<br>XAI/독립 검증 · 식약처 인허가 |
 | 2024–2025 | Industrial AI · Time-Series | 센서 분석 API · 시계열 예측·이상탐지 · 예지보전 |
-| 2025–현재 | Security AI · ML Systems | UEBA 이상탐지 · Feature/Data Pipeline<br>On-Premises AI Model Serving Platform |
+| 2025–현재 | Security AI · Behavior Analytics · ML Systems | UEBA 이상탐지 · Behavior Analytics<br>Feature/Data Pipeline · On-Premises AI Model Serving Platform |
 
 ### 핵심 역량
 
-- **Data Analysis & Feature Engineering:** 생체신호·산업 센서·보안 로그의 품질·분포와 시간적 변화·행동 패턴을 EDA와 통계적 분석으로 파악하고, 전처리·특징 추출·변환을 거쳐 모델링에 적합한 Feature와 입력 구조를 설계
+- **Data Analysis & Feature Engineering:** 생체신호·산업 센서·보안·사용 로그의 품질·분포와 시간적 변화·행동 패턴을 EDA와 통계적 분석으로 파악하고, 전처리·특징 추출·변환을 거쳐 모델링에 적합한 Feature와 입력 구조를 설계
 - **Classification / Prediction / Anomaly Detection:** 의료 분류, 혈압·센서 예측, 제조·보안 이상탐지 등 데이터 특성과 활용 목적에 맞춰 문제를 정의하고 분류·회귀·이상탐지 모델을 설계·개발
 - **Validation & Explainability:** 교차검증·독립 테스트로 모델의 일반화 성능을 확인하고, SHAP·LIME·Grad-CAM 등을 활용해 모델의 판단 근거를 분석
 - **ML Pipeline & Serving:** Feature 생성·저장·재처리가 가능한 데이터 파이프라인과 모델 API·Runtime lifecycle·관측·배포 구조를 설계·구현하며, 모델 개발을 반복 가능한 ML Systems로 확장
@@ -102,10 +102,11 @@
 **기간:** 2025.08 ~ 현재  
 **직무:** AI · 대리
 
-사용자 행위·파일·네트워크 등 여러 유형의 보안 로그 구조와 사용자별 행동 패턴을 분석해 사용자 단위 Feature로 구조화하고, UEBA 이상 후보를 선별한 뒤 모델의 판단 근거를 실제 로그 행위와 연결하는 업무를 수행하고 있다. **UEBA 프로젝트와 병행해 동일 Feature를 반복 생성·재처리할 수 있는 ML/Data Pipeline을 설계·구현**했고, 온프레미스 AI 모델의 공통 API 제공부터 Runtime lifecycle·모델 전환·자원 관리·관측까지 다루는 **AI Model Serving Platform**으로 ML Systems 개발 범위를 확장했다.
+사용자 행위·파일·네트워크 보안 로그와 AI 사용 이벤트의 구조·행동 패턴을 분석하고, 사용자·세션·대화·콘텐츠 단위의 분석 구조와 Feature를 구성해 왔다. UEBA에서는 이상 후보와 모델 판단 근거를 실제 로그 행위까지 연결하고, 연계 분석으로 AI 사용·반복 패턴과 이상 구간을 원 이벤트까지 추적했다. **동일 Feature를 반복 생성·재처리할 수 있는 ML/Data Pipeline을 병행해 설계·구현**했으며, **On-Premises AI Model Serving Platform**으로 모델 운영·관측 영역까지 개발 범위를 확장했다.
 
 **관련 프로젝트**
 - [네트워크·행위 기반 UEBA 이상탐지](#221-네트워크행위-기반-ueba-이상탐지)
+  - 연계 분석: AI 사용·행동 분석
   - 연계 구현: [ML/Data Pipeline](#222-mldata-pipeline)
 - [On-Premises AI Model Serving Platform](#223-on-premises-ai-model-serving-platform)
 
@@ -146,8 +147,9 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 
 ### 2.1 프로젝트 맵
 
-**Security AI / ML Systems**
-- **[UEBA 이상탐지](#221-네트워크행위-기반-ueba-이상탐지)** · 2025.09 ~ 2026.03 — 보안 행동 로그의 사용자별 패턴을 분석해 Feature를 구성하고, 이상 후보와 모델 판단 근거를 실제 행위까지 연결
+**Security AI / Behavior Analytics / ML Systems**
+- **[UEBA 이상탐지](#221-네트워크행위-기반-ueba-이상탐지)** · 2025.09 ~ 2026.04 — 보안 행동 로그의 사용자별 패턴을 분석해 Feature를 구성하고, 이상 후보와 모델 판단 근거를 실제 행위까지 연결
+  - ↳ **AI 사용·행동 분석** — AI 사용 이벤트를 사용자·세션·대화·콘텐츠 단위로 재구성하고, 사용·반복 패턴과 이상 구간을 실제 이벤트까지 추적
   - ↳ **[ML/Data Pipeline](#222-mldata-pipeline) · UEBA와 병행** — 같은 Feature 규칙으로 과거 적재·증분 처리·재처리가 가능한 데이터 흐름 설계·구현
 - **[On-Premises AI Model Serving Platform](#223-on-premises-ai-model-serving-platform)** · 2026.04 ~ 현재 — AI 모델을 공통 API로 제공하고 Runtime 실행·전환·자원 관리·관측과 검증·배포를 하나의 온프레미스 플랫폼으로 구성
 
@@ -172,12 +174,12 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 <summary><strong>2.2.1 네트워크·행위 기반 UEBA 이상탐지</strong></summary>
 
 
-**기간:** 2025.09 ~ 2026.03
+**기간:** 2025.09 ~ 2026.04
 
 - **문제:** 사용자별 행동 편차가 크고 정답 라벨이 제한된 보안 로그에서는 이상 후보의 우선순위를 정하기 어렵고, 이상점수만으로 실제 행위의 맥락을 판단하기 어려움
-- **데이터:** 사용자 행위 로그 · 파일 접근/쓰기 로그 · 네트워크 행위 로그
-- **담당 범위:** PoC 설계 · 로그/행동 패턴 분석 · 사용자 단위 특징 설계 · Isolation Forest/EVT-POT · SHAP 설명 · 분석 리포트
-- **구현 내용:** 이상 후보의 우선순위, 점수·Threshold, 특징 기여도, 프로세스·네트워크 행위를 하나의 분석 리포트로 연결
+- **데이터:** 사용자 행위 로그 · 파일 접근/쓰기 로그 · 네트워크 행위 로그 · AI 사용 이벤트
+- **담당 범위:** PoC 설계 · 로그/행동 패턴 분석 · 사용자 단위 특징 설계 · Isolation Forest/EVT-POT · SHAP 설명 · 사용·행동 분석 · 이벤트 Drill-down
+- **구현 내용:** 이상 후보의 우선순위, 점수·Threshold, 특징 기여도, 프로세스·네트워크 행위를 분석 리포트로 연결하고 AI 사용 이벤트를 행동 단위와 원 이벤트까지 추적
 - **분석 흐름:** `Raw Log → Behavior Feature → Isolation Forest → EVT/POT → SHAP → Analyst Report`
 
 ##### 배경 및 문제 정의
@@ -216,11 +218,17 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 - **EVT/POT:** 이상점수 분포의 꼬리를 기준으로 극단 후보를 분리
 - **SHAP:** 후보의 점수 상승에 기여한 주요 특징을 분해
 
+Train / Calibration / Test의 이상점수 분포를 비교하고, Calibration에서 설정한 EVT/POT 기준을 Test에 고정 적용했다.
+
+![Isolation Forest 점수 분포와 EVT/POT 기준](assets/ueba/03_score_distribution.webp)
+
+*그림 3. Train·Calibration·Test 이상점수 분포와 Calibration에서 설정한 EVT/POT 기준.*
+
 ###### 결과 A - 점수와 임계값
 
 ![UEBA 점수와 임계값 분석 화면](assets/ueba/report/02_score_threshold_report.png)
 
-*그림 3. 주요 특징 기여도와 이상점수·EVT/POT Threshold를 함께 배치한 분석 화면.*
+*그림 4. 주요 특징 기여도와 이상점수·EVT/POT Threshold를 함께 배치한 분석 화면.*
 
 후보의 이상점수와 Threshold, 주요 특징 기여도를 같은 화면에 배치해 **우선순위와 점수 상승 요인**을 함께 볼 수 있게 했다.
 
@@ -230,7 +238,7 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 
 ![UEBA 분석 리포트](assets/ueba/report/01_why_what_report_overview.png)
 
-*그림 4. 이상 후보, 특징 기여도, 프로세스·네트워크 행위를 한 화면에서 연결한 분석 리포트.*
+*그림 5. 이상 후보, 특징 기여도, 프로세스·네트워크 행위를 한 화면에서 연결한 분석 리포트.*
 
 - **후보:** 사용자·행위 단위 이상 후보와 우선순위
 - **특징 기여:** 이상점수, Threshold, 주요 SHAP 기여도
@@ -243,7 +251,7 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 
 ![특정 이상 후보의 SHAP waterfall](assets/ueba/report/03a_why_feature_contribution.png)
 
-*그림 5. 특정 이상 후보의 SHAP waterfall. 외부송신 웹 트래픽, 잘 알려진 포트 트래픽, TCP 수신량, 초당 데이터 전송량 등이 이상점수에 미친 기여도.*
+*그림 6. 특정 이상 후보의 SHAP waterfall. 외부송신 웹 트래픽, 잘 알려진 포트 트래픽, TCP 수신량, 초당 데이터 전송량 등이 이상점수에 미친 기여도.*
 
 SHAP으로 이상점수에 영향을 준 상위 특징을 분해하고, 다음 단계에서 해당 특징과 연결된 실제 행위를 분석했다.
 
@@ -251,7 +259,7 @@ SHAP으로 이상점수에 영향을 준 상위 특징을 분해하고, 다음 �
 
 ![프로세스별 네트워크 데이터 사용량](assets/ueba/report/03b_what_process_pattern.png)
 
-*그림 6. 이상 후보와 같은 분석 구간의 프로세스별 네트워크 데이터 사용량.*
+*그림 7. 이상 후보와 같은 분석 구간의 프로세스별 네트워크 데이터 사용량.*
 
 같은 시간대의 프로세스·네트워크 사용량을 비교해 `외부송신 트래픽 증가`와 같은 모델 특징을 실제 실행 프로세스의 활동과 연결했다.
 
@@ -259,9 +267,53 @@ SHAP으로 이상점수에 영향을 준 상위 특징을 분해하고, 다음 �
 
 ![프로세스별 네트워크 통신량](assets/ueba/report/03c_network_traffic_detail.png)
 
-*그림 7. 탐지 시점의 외부·내부 통신을 프로세스와 송수신 방향별로 비교한 상세 내역.*
+*그림 8. 탐지 시점의 외부·내부 통신을 프로세스와 송수신 방향별로 비교한 상세 내역.*
 
 외부·내부 통신을 전체, 송신, 수신으로 나누고 프로세스별 데이터 사용량을 비교해 이상점수에 영향을 준 네트워크 활동의 실제 규모를 분석했다.
+
+##### 4. 연계 분석 — AI 사용·행동 분석
+
+UEBA에서 사용한 **행동 단위 구성 → 패턴·이상 후보 분석 → 원 이벤트 확인** 방식으로 AI 사용 이벤트를 함께 분석했다. 원천 이벤트의 JSON 구조와 주요 필드를 정리하고, 사용자별 이벤트를 시간 순서로 구성해 세션·대화·콘텐츠 단위의 활동을 분석했다.
+
+Prompt와 File/Tool 사용, Provider, 정책 처리 결과를 함께 비교할 수 있도록 이벤트를 사용자·세션·대화·콘텐츠 단위로 재구성했다.
+
+부서별 주요 업무 구성을 비교하고, 업무별 Provider와 파일·도구 활용을 함께 분석해 조직과 업무에 따른 AI 사용 패턴을 확인했다.
+
+![부서별 주요 AI 업무 구성](assets/behavior/01_department_work_profile.webp)
+
+*그림 9. 부서와 업무 유형별 AI 사용 구성.*
+
+파일 첨부와 도구 사용의 누적 사용자를 추적해 새로운 기능과 사용 방식이 확산되는 흐름을 분석했다.
+
+![파일·도구 기능의 누적 사용 확산](assets/behavior/02_feature_adoption.webp)
+
+*그림 10. 파일 첨부와 도구 사용의 누적 사용자 변화.*
+
+##### 5. 반복·규모 패턴과 이벤트 Drill-down
+
+동일 콘텐츠의 반복 발생과 일별 고유 콘텐츠 수를 비교해 사용자 활동의 반복 패턴을 분석했다.
+
+![콘텐츠 반복과 변화 구조](assets/behavior/03_repeat_structure.webp)
+
+*그림 11. 신규·반복 콘텐츠와 일별 고유 콘텐츠 변화.*
+
+파일 첨부 건수와 실제 데이터 사용량을 함께 비교해 사용량 변화의 규모를 분석했다.
+
+![입력 활동의 건수와 데이터량](assets/behavior/04_volume_magnitude.webp)
+
+*그림 12. 첨부 건수, 총 데이터량과 파일 크기 분포 비교.*
+
+1분 단위 운영 이벤트를 10분 상태로 요약해 평소와 다른 구간을 선별하고, 탐지된 구간은 다시 1분 이벤트로 내려가 이벤트 수·첨부 용량·차단·반복 콘텐츠 변화를 확인했다.
+
+![탐지된 10분 구간의 1분 이벤트 상세](assets/behavior/05_detected_window_drilldown.webp)
+
+*그림 13. 탐지된 10분 구간을 1분 이벤트 단위로 내려가 확인한 상세 흐름.*
+
+반복 관측이나 정책 결과 변화가 있는 콘텐츠를 선택해 Provider와 처리 결과가 시간에 따라 어떻게 나타나는지 실제 이벤트 발생 순서로 추적했다.
+
+![선택 콘텐츠 타임라인](assets/behavior/06_event_timeline.webp)
+
+*그림 14. 선택한 콘텐츠의 Provider·정책 처리 결과와 이벤트 발생 순서.*
 
 ##### 결과 및 활용
 
@@ -272,6 +324,7 @@ SHAP으로 이상점수에 영향을 준 상위 특징을 분해하고, 다음 �
 3. EVT/POT로 데이터 분포를 반영한 Threshold 구성
 4. SHAP으로 후보의 주요 점수 상승 요인 설명
 5. 프로세스·네트워크 활동과 통신 이벤트를 분석 리포트에 연결
+6. AI 사용 이벤트를 사용자·세션·콘텐츠 단위로 재구성하고 이상 구간을 원 이벤트까지 추적
 
 정답 라벨이 제한된 PoC에서 **후보를 줄이고, 점수 근거와 실제 행위를 함께 제시하는 관제 보조형 UEBA 분석 흐름**을 구현했다.
 
@@ -314,7 +367,7 @@ UEBA 이상탐지 프로젝트를 진행하면서, 로그 분석을 통해 정�
 
 ![로그 파이프라인 아키텍처](assets/pipeline/01_log_pipeline_architecture.png)
 
-*그림 8. Elasticsearch 원천 로그를 Feature 생성과 저장 계층으로 연결하고, 동일한 데이터 흐름을 학습·추론에서 재사용하는 파이프라인 구조.*
+*그림 15. Elasticsearch 원천 로그를 Feature 생성과 저장 계층으로 연결하고, 동일한 데이터 흐름을 학습·추론에서 재사용하는 파이프라인 구조.*
 
 파이프라인은 **원천 로그 추출 결과 → 재현 가능한 중간 데이터 → Feature Row → 저장 결과**를 단계별로 분리했다. 분석 코드와 데이터 수집 로직의 결합도를 낮추고, 동일한 Feature 생성 흐름을 반복 실행할 수 있도록 구성했다.
 
@@ -328,7 +381,7 @@ UEBA 이상탐지 프로젝트를 진행하면서, 로그 분석을 통해 정�
 
 ![Managed Pipeline 실행 모드](assets/pipeline/02_managed_run_modes.png)
 
-*그림 9. 과거 데이터 적재에서 최신 로그 처리로 전환하는 Catchup → Handoff → Steady 실행 흐름.*
+*그림 16. 과거 데이터 적재에서 최신 로그 처리로 전환하는 Catchup → Handoff → Steady 실행 흐름.*
 
 - **Catchup:** 과거 로그를 순차적으로 처리해 Feature Store를 채움
 - **Handoff:** 과거 적재가 최신 구간에 도달하면 운영 처리 방식으로 전환
@@ -451,31 +504,31 @@ API Contract, Config/Schema, Runtime policy와 generated artifact의 drift를 �
 
 ![On-Premises AI Model Serving Platform - Chat API](assets/serving/02_scalar_chat_completion.png)
 
-*그림 10. Scalar API Reference에서 Chat Completion의 request schema, 예제 요청과 OpenAI-compatible response 구조를 확인하는 화면.*
+*그림 17. Scalar API Reference에서 Chat Completion의 request schema, 예제 요청과 OpenAI-compatible response 구조를 확인하는 화면.*
 
 ###### Embedding API
 
 ![On-Premises AI Model Serving Platform - Embedding API](assets/serving/03_scalar_embedding_vector.png)
 
-*그림 11. 동일한 Platform API 경계에서 Embedding 입력과 vector response 구조를 확인하는 화면.*
+*그림 18. 동일한 Platform API 경계에서 Embedding 입력과 vector response 구조를 확인하는 화면.*
 
 ###### Prompt Risk API
 
 ![On-Premises AI Model Serving Platform - Prompt Risk](assets/serving/04_scalar_prompt_risk_signal.png)
 
-*그림 12. Prompt 위험 분석 결과를 상위 서비스가 사용할 수 있는 Risk 응답 구조로 확인하는 화면.*
+*그림 19. Prompt 위험 분석 결과를 상위 서비스가 사용할 수 있는 Risk 응답 구조로 확인하는 화면.*
 
 ###### Multimodal Chat
 
 ![On-Premises AI Model Serving Platform - Multimodal Chat](assets/serving/05_multimodal_chat.png)
 
-*그림 13. Chat Completion 계열 인터페이스에서 텍스트와 이미지 입력을 함께 처리한 실행 화면.*
+*그림 20. Chat Completion 계열 인터페이스에서 텍스트와 이미지 입력을 함께 처리한 실행 화면.*
 
 ###### Runtime Monitoring
 
 ![On-Premises AI Model Serving Platform - Runtime Monitoring](assets/serving/07_runtime_monitoring.png)
 
-*그림 14. 모델 Runtime과 GPU·Container 상태를 함께 관측하는 Grafana 기반 실행 화면.*
+*그림 21. 모델 Runtime과 GPU·Container 상태를 함께 관측하는 Grafana 기반 실행 화면.*
 
 ##### 결과 및 현재 상태
 
@@ -625,7 +678,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![AIoT 분석 서버 및 모델 실행 흐름](assets/nebiworks/01_aiot_model_execution_flow.png)
 
-*그림 15. AIoT 센서 데이터의 분석·모델 학습·아티팩트 저장·FastAPI/Docker 실행을 연결한 흐름.*
+*그림 22. AIoT 센서 데이터의 분석·모델 학습·아티팩트 저장·FastAPI/Docker 실행을 연결한 흐름.*
 
 </details>
 
@@ -663,7 +716,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![fNIRS 측정부터 PET 양성 확률까지](assets/ncer/01_fnirs_measurement_inference_flow.png)
 
-*그림 16. 후각 자극 fNIRS 측정부터 신호 처리, 모델 추론, PET 양성 확률 출력까지의 전체 연구 흐름.*
+*그림 23. 후각 자극 fNIRS 측정부터 신호 처리, 모델 추론, PET 양성 확률 출력까지의 전체 연구 흐름.*
 
 ##### 1. 데이터와 측정
 
@@ -671,7 +724,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![후각 테스트 측정 프로토콜과 fNIRS 시계열](assets/ncer/04_fnirs_olfactory_protocol.png)
 
-*그림 17. 안정 구간과 후각 자극 구간이 반복되는 측정 프로토콜과 실제 fNIRS 시계열 예시.*
+*그림 24. 안정 구간과 후각 자극 구간이 반복되는 측정 프로토콜과 실제 fNIRS 시계열 예시.*
 
 프로젝트 기간 동안 데이터 수집 기기와 Probe 변경으로 재수집이 이루어졌고, 활용 가능한 의료 생체신호 표본도 제한적이었다. PET 양성/음성 라벨 불균형과 피험자 간 신호 변동성을 고려해 모델 성능뿐 아니라 일반화와 과적합 위험을 함께 검토했다.
 
@@ -687,7 +740,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![집단별 fNIRS 시계열과 95% 신뢰구간](assets/ncer/05_fnirs_group_eda.png)
 
-*그림 18. 집단별 시간축 반응과 95% 신뢰구간을 비교한 EDA 결과.*
+*그림 25. 집단별 시간축 반응과 95% 신뢰구간을 비교한 EDA 결과.*
 
 집단별 분포와 통계적 차이를 함께 검토하고, **실제 생체신호의 시간 변화와 변동성**을 특징 후보와 모델 입력 Window 설계에 반영했다.
 
@@ -704,13 +757,13 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![PCA 전후 fNIRS 시계열 비교](assets/ncer/06_fnirs_pca_reduction.png)
 
-*그림 19. 다채널 Raw fNIRS를 PCA로 축소해 주요 변동 구조를 비교한 실험.*
+*그림 26. 다채널 Raw fNIRS를 PCA로 축소해 주요 변동 구조를 비교한 실험.*
 
 시계열을 다른 형태로 표현했을 때 패턴을 더 잘 분리할 수 있는지도 탐색했다. Raw signal을 CWT, Spectrogram, Gramian Angular Field, Markov Transition Field, Recurrence Plot 등의 이미지 표현으로 변환해 시계열 표현 방법을 비교했다.
 
 ![fNIRS 시계열 이미지 표현 연구](assets/ncer/07_fnirs_timeseries_representation.png)
 
-*그림 20. Raw 시계열을 CWT·Spectrogram·GAF·MTF·Recurrence Plot 형태로 변환한 표현 연구.*
+*그림 27. Raw 시계열을 CWT·Spectrogram·GAF·MTF·Recurrence Plot 형태로 변환한 표현 연구.*
 
 이 이미지화 연구는 최종 분류 경로를 대체하기 위한 것이 아니라, **제한된 생체신호에서 특징 표현과 데이터 증강 가능성을 탐색한 연구 범위**였다.
 
@@ -720,7 +773,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![Conditional GAN 기반 fNIRS 데이터 증강 연구](assets/ncer/08_fnirs_cgan_augmentation.png)
 
-*그림 21. Original signal을 CWT 이미지로 변환하고 Conditional GAN으로 생성한 synthetic image와 비교한 증강 연구.*
+*그림 28. Original signal을 CWT 이미지로 변환하고 Conditional GAN으로 생성한 synthetic image와 비교한 증강 연구.*
 
 Conditional GAN은 최종 임상 모델의 필수 입력 단계라기보다 **데이터 부족 문제에 대응하기 위해 검토한 증강 연구**로 구분했다.
 
@@ -734,7 +787,7 @@ Conditional GAN은 최종 임상 모델의 필수 입력 단계라기보다 **�
 
 ![fNIRS 모델 추론부터 결과 출력까지](assets/ncer/03_fnirs_model_operation_flow.png)
 
-*그림 22. 시계열 입력에서 복수 모델 추론, 확률 앙상블, Threshold 판정으로 이어지는 모델 동작 구조.*
+*그림 29. 시계열 입력에서 복수 모델 추론, 확률 앙상블, Threshold 판정으로 이어지는 모델 동작 구조.*
 
 ##### 7. Main Development Path — XAI
 
@@ -747,7 +800,7 @@ XAI 결과로 모델 출력에 영향을 준 특징과 시간 구간을 시각�
 
 ![시계열 분류 모델의 XAI 연구 결과](assets/ncer/source/fnirs_xai_source.png)
 
-*그림 23. 특징 기반 모델과 시계열 모델에서 주요 판단 요인·시간 구간을 확인한 XAI 연구 결과.*
+*그림 30. 특징 기반 모델과 시계열 모델에서 주요 판단 요인·시간 구간을 확인한 XAI 연구 결과.*
 
 ##### 8. Main Development Path — 모델 검증
 
@@ -755,7 +808,7 @@ XAI 결과로 모델 출력에 영향을 준 특징과 시간 구간을 시각�
 
 ![fNIRS 모델 개발 및 검증 흐름](assets/ncer/02_fnirs_development_validation_flow.png)
 
-*그림 24. 학습 데이터 구성, Stratified Cross Validation, 모델 선택·앙상블, 독립 검증으로 이어지는 검증 흐름.*
+*그림 31. 학습 데이터 구성, Stratified Cross Validation, 모델 선택·앙상블, 독립 검증으로 이어지는 검증 흐름.*
 
 초기 개발에서는 5-Fold 기반 실험을 진행했고, 후속 Clinical Validation에서는 **10-Fold Stratified Cross Validation과 Independent Test**로 검증 범위를 확장했다.
 

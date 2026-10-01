@@ -14,7 +14,7 @@
   "capabilities": [
     {
       "title": "Data Analysis & Feature Engineering",
-      "description": "생체신호·산업 센서·보안 로그의 품질·분포와 시간적 변화·행동 패턴을 EDA와 통계적 분석으로 파악하고, 전처리·특징 추출·변환을 거쳐 모델링에 적합한 Feature와 입력 구조를 설계"
+      "description": "생체신호·산업 센서·보안·사용 로그의 품질·분포와 시간적 변화·행동 패턴을 EDA와 통계적 분석으로 파악하고, 전처리·특징 추출·변환을 거쳐 모델링에 적합한 Feature와 입력 구조를 설계"
     },
     {
       "title": "Classification / Prediction / Anomaly Detection",
@@ -34,7 +34,7 @@
       "company": "위즈베라",
       "period": "2025.08 ~ 현재",
       "role": "AI · 대리",
-      "summary": "사용자 행위·파일·네트워크 등 여러 유형의 보안 로그 구조와 사용자별 행동 패턴을 분석해 사용자 단위 Feature로 구조화하고, UEBA 이상 후보를 선별한 뒤 모델의 판단 근거를 실제 로그 행위와 연결하는 업무를 수행하고 있다. UEBA 프로젝트와 병행해 동일 Feature를 반복 생성·재처리할 수 있는 ML/Data Pipeline을 설계·구현했고, 온프레미스 AI 모델의 공통 API 제공부터 Runtime lifecycle·모델 전환·자원 관리·관측까지 다루는 AI Model Serving Platform으로 ML Systems 개발 범위를 확장했다."
+      "summary": "사용자 행위·파일·네트워크 보안 로그와 AI 사용 이벤트의 구조·행동 패턴을 분석하고, 사용자·세션·대화·콘텐츠 단위의 분석 구조와 Feature를 구성해 왔다. UEBA에서는 이상 후보와 모델 판단 근거를 실제 로그 행위까지 연결하고, 연계 분석으로 AI 사용·반복 패턴과 이상 구간을 원 이벤트까지 추적했다. 동일 Feature를 반복 생성·재처리할 수 있는 ML/Data Pipeline을 병행해 설계·구현했으며, On-Premises AI Model Serving Platform으로 모델 운영·관측 영역까지 개발 범위를 확장했다."
     },
     {
       "company": "네비웍스",
@@ -61,7 +61,7 @@
       "code": "WZ-01",
       "title": "네트워크·행위 기반 UEBA 이상탐지",
       "category": "Security AI",
-      "period": "2025.09 ~ 2026.03",
+      "period": "2025.09 ~ 2026.04",
       "summary": "보안 행동 로그의 구조와 사용자별 패턴을 분석해 Feature를 설계하고, 이상 후보·판단 이유·원본 로그 재확인 지점까지 연결한 UEBA 분석 시스템.",
       "tags": [
         "Isolation Forest",
