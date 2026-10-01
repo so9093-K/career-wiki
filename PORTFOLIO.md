@@ -176,7 +176,7 @@ YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, B
 
 **기간:** 2025.09 ~ 2026.04
 
-- **문제:** 사용자별 행동 편차가 크고 정답 라벨이 제한된 보안 로그에서는 이상 후보의 우선순위를 정하기 어렵고, 이상점수만으로 실제 행위의 맥락을 판단하기 어려움
+- **목표:** 정답 라벨이 제한된 보안 로그에서 사용자별 행동 차이를 반영해 이상 후보를 선별하고, 점수 근거와 실제 행위를 함께 확인할 수 있는 UEBA 분석 구조 구성
 - **데이터:** 사용자 행위 로그 · 파일 접근/쓰기 로그 · 네트워크 행위 로그 · AI 사용 이벤트
 - **담당 범위:** PoC 설계 · 로그/행동 패턴 분석 · 사용자 단위 특징 설계 · Isolation Forest/EVT-POT · SHAP 설명 · 사용·행동 분석 · 이벤트 Drill-down
 - **구현 내용:** 이상 후보의 우선순위, 점수·Threshold, 특징 기여도, 프로세스·네트워크 행위를 분석 리포트로 연결하고 AI 사용 이벤트를 행동 단위와 원 이벤트까지 추적
@@ -315,20 +315,6 @@ Prompt와 File/Tool 사용, Provider, 정책 처리 결과를 함께 비교할 �
 
 *그림 14. 선택한 콘텐츠의 Provider·정책 처리 결과와 이벤트 발생 순서.*
 
-##### 결과 및 활용
-
-프로젝트는 다음 요소를 하나의 분석 흐름으로 연결했다.
-
-1. 보안 원천 로그를 사용자 행동 특징으로 변환
-2. Isolation Forest로 우선 검토 후보를 압축
-3. EVT/POT로 데이터 분포를 반영한 Threshold 구성
-4. SHAP으로 후보의 주요 점수 상승 요인 설명
-5. 프로세스·네트워크 활동과 통신 이벤트를 분석 리포트에 연결
-6. AI 사용 이벤트를 사용자·세션·콘텐츠 단위로 재구성하고 이상 구간을 원 이벤트까지 추적
-
-정답 라벨이 제한된 PoC에서 **후보를 줄이고, 점수 근거와 실제 행위를 함께 제시하는 관제 보조형 UEBA 분석 흐름**을 구현했다.
-
-UEBA 분석과 병행해 동일한 Feature 정의를 과거 적재·증분 처리·재처리에서도 반복 사용할 수 있도록 [**ML/Data Pipeline**](#222-mldata-pipeline)을 함께 설계·구현했다.
 
 ##### 구현 및 실행 결과
 
@@ -353,7 +339,7 @@ UEBA 분석과 병행해 동일한 Feature 정의를 과거 적재·증분 처�
 
 **수행 시점:** UEBA 이상탐지 프로젝트와 병행
 
-- **문제:** UEBA의 데이터 분석과 Feature 설계 결과를 일회성 분석 코드에 머물지 않고 과거 적재·증분 처리·재시작·Late Arrival까지 반복 가능한 데이터 흐름으로 전환
+- **목표:** UEBA Feature 정의를 과거 적재·증분 처리·재시작·Late Arrival까지 반복 가능한 데이터 흐름으로 전환
 - **시스템 범위:** Elasticsearch → Polars/DuckDB → PostgreSQL/Parquet → Training/Inference
 - **담당 범위:** Feature/Data Pipeline 설계 · 구현 · 실행 상태/성공 지점 관리 · 재처리 흐름 구성
 - **구현 결과:** 동일 Feature 정의를 학습·추론에서 재사용하고, 실패 후 Resume와 최근 구간 재처리가 가능한 데이터 계층 구성
@@ -421,122 +407,65 @@ UEBA 모델에 필요한 Feature를 **반복 생성·재처리·추적 가능한
 
 **기간:** 2026.04 ~ 현재
 
-- **문제:** 온프레미스 환경의 LLM·Embedding 등 AI 모델을 서비스마다 개별 연결하지 않고, 공통 API와 일관된 운영 방식으로 제공
-- **시스템 범위:** Chat · Embedding · Retrieval · Prompt/PII/Secret Risk · Multimodal · Model Runtime Control · Observability · Validation/Deployment
-- **담당 범위:** 요구사항 분석·시스템 설계 · FastAPI Gateway · OpenAI-compatible API Contract · Runtime/Model Profile 운영 구조 · Admin/Control 경계 · GPU Resource Admission · Risk/Monitoring 연결 · 검증·배포 흐름
-- **구현 결과:** 외부 API 처리, 모델 Inference, 권한이 필요한 Runtime Control의 책임을 분리하고 모델 실행·전환·관측·검증을 하나의 온프레미스 Serving Platform으로 구성
-- **시스템 구조:** `Client → Gateway → Model Runtime / Risk Adapter` + `Gateway → Admin/Control Sidecar → Runtime Lifecycle` + `Metrics/Logs → Prometheus/Loki → Grafana`
+- **목표:** 여러 AI 모델의 API·Runtime·자원 관리를 공통화해 모델 추가·전환에 따른 서비스·운영 복잡도를 줄이는 Serving Platform 구성
+- **담당 범위:** 시스템 설계 · API Gateway · Runtime/Model 운영 · GPU 자원 관리 · Observability
+- **구현:** 외부 API, 모델 추론, Runtime Control을 분리하고 모델 실행·전환·관측을 하나의 운영 구조로 구성
 
-##### 배경 및 문제 정의
+##### 1. Serving Platform 구조
 
-사내에서 생성형 AI와 Embedding 기능을 활용하면서 모델별 Runtime 주소와 실행 방식을 각 서비스가 직접 관리하지 않고, **여러 AI 모델을 하나의 API 경계에서 사용하면서 실행 상태와 모델 전환, 자원, 관측까지 함께 관리할 수 있는 온프레미스 Serving Platform**이 필요했다.
+Gateway를 API 진입점으로 두고, 모델 추론은 Model Runtime, Runtime start/stop·Main Model 전환·GPU 자원 관리는 Runtime Controller로 분리했다.
 
-Chat·Embedding·Prompt Risk와 Multimodal 호출뿐 아니라 Retrieval, 모델 Runtime lifecycle, Main Model profile 전환, GPU 자원 판단, 로그·메트릭 관측, 검증·배포까지 하나의 플랫폼 범위에서 다룬다.
+![AI 모델 서빙 플랫폼 시스템 구성도](https://raw.githubusercontent.com/so9093-K/On-Premises-LLM-Serving-Platform/bf37e1c925621d88bd8a2dba5c6716f8e7e3733b/assets/ai_model_serving_system_architecture.png)
 
-##### 1. API 경계와 Runtime 책임 분리
+*그림 17. Gateway와 Model Runtime, Runtime Controller, Risk Signal Service, Observability로 구성한 Serving Platform 구조.*
 
-플랫폼은 Gateway를 외부 API와 orchestration의 진입점으로 두고, 실제 모델 추론과 Runtime 제어를 별도 책임으로 분리한다.
+##### 2. 공통 API와 AI 기능
 
-```text
-Client / Application
-        │
-        ▼
-Gateway
-  ├─ Chat / Multimodal ───────► Main Model Runtime
-  ├─ Embedding / Retrieval ───► Embedding Runtime
-  ├─ Risk ────────────────────► Risk Adapter / Prompt Runtime
-  └─ Admin Control ───────────► Admin / Control Sidecar
-                                      │
-                                      └─ Runtime Lifecycle / GPU Admission
+Chat·Responses·Embedding·Retrieval·Risk API를 하나의 Gateway에서 제공하고, 요청을 검증해 기능별 Runtime으로 전달하도록 구성했다.
 
-Metrics ─► Prometheus ─► Grafana
-Logs    ─► Alloy / Loki ─► Grafana
-```
+![Serving Platform API Reference](assets/serving/02_scalar_api_reference.jpg)
 
-- **Gateway:** OpenAI-compatible API, 인증·요청 검증, Routing/Orchestration, Retrieval과 Risk API 연결
-- **Model Runtime:** vLLM 또는 target에 맞는 Runtime에서 실제 모델 inference 수행
-- **Admin / Control Sidecar:** Gateway와 권한 경계를 분리해 Runtime start/stop, Main Model 전환, GPU budget 판단과 Docker lifecycle 관리
-- **Observability:** 서비스·Runtime·GPU·Container의 Metrics와 Logs를 수집해 요청 상태와 자원 상태를 함께 확인
+*그림 18. 공통 API와 request/response contract를 확인하는 Scalar API Reference.*
 
-Gateway는 **Serving Platform의 외부 API·orchestration 컴포넌트**로 두고 Runtime·Control 계층과 책임을 분리한다.
+Prompt Injection·PII·Secret 탐지 결과는 상위 서비스가 사용할 수 있는 위험 신호로 정규화했다.
 
-##### 2. Model Runtime과 Main Model 운영
+![Prompt Risk API](assets/serving/04_scalar_prompt_risk_signal.png)
 
-외부 Chat API는 논리적인 Main Model ID를 유지하고, 실제 실행 모델은 profile을 통해 model/revision, Runtime image, context/concurrency, modality와 실행 조건을 관리하도록 구성했다.
+*그림 19. Prompt 위험 탐지 결과를 signal-only 구조로 제공하는 Risk API.*
 
-Main Model 전환에서는 신규 요청을 제한하고 기존 요청을 drain한 뒤 Runtime을 교체·검증하는 흐름을 사용한다.
+텍스트와 이미지 입력은 같은 Chat Completion 계열 인터페이스에서 처리했다.
 
-`Profile 선택 → GPU Admission → 신규 요청 Gate → In-flight Drain → Runtime 교체 → Readiness/Chat 검증`
+![Multimodal Chat](assets/serving/05_multimodal_chat.png)
 
-이 구조를 통해 클라이언트 API를 유지하면서 내부 모델과 실행 조건을 운영 단위로 변경할 수 있도록 했다.
+*그림 20. 이미지 입력을 포함한 Multimodal Chat 실행 결과.*
 
-##### 3. Retrieval · Risk · Multimodal
+##### 3. Model Runtime과 Control Plane 운영
 
-Chat과 Embedding 외에도 Korean Retrieval과 Prompt/PII/Secret Risk를 공통 API surface에 연결했다. Retrieval은 query/document Embedding과 similarity/rerank 흐름을 Gateway 서비스 내부에서 처리하며, Risk 영역은 Prompt detector와 로컬 위험 신호를 상위 서비스가 사용할 수 있는 응답 구조로 정규화한다.
+논리적인 Main Model ID와 실제 Runtime을 분리하고, 실행 환경과 GPU 자원 상태에 따라 모델 시작·중지·전환을 관리했다. Control Plane에서는 현재 모델 상태를 확인하고 실제 API 응답을 테스트할 수 있도록 했다.
 
-텍스트와 이미지 입력이 필요한 경우에도 동일한 Chat Completion 계열 인터페이스를 유지해 Multimodal inference를 연결한다.
+![Control Plane 채팅 테스트](assets/serving/06_control_plane_chat_test.webp)
+
+*그림 21. 모델 응답과 첫 토큰 시간·전체 시간·토큰 수·request_id를 함께 확인하는 Control Plane.*
 
 ##### 4. Observability와 운영 진단
 
-Prometheus·Grafana와 Loki 기반으로 API 요청, Runtime, GPU, Container 상태와 로그를 함께 확인하도록 구성했다. 요청량·지연·오류뿐 아니라 vLLM Queue, KV Cache, Token Throughput, GPU Memory/Utilization, Container 자원과 재시작 신호를 운영 관점에서 연결한다.
+API 요청과 Runtime·GPU 상태를 같은 시간축에서 확인하고, 이상 상태는 Request ID를 기준으로 실제 요청 로그까지 추적했다.
 
-요청 로그는 Request ID, Route, Status/Error Code, Latency, Token Usage 등을 중심으로 추적하고 Prompt 원문·생성 결과·인증 정보 같은 민감 데이터는 기본 관측 정보에 포함하지 않는 방향으로 관리한다.
+![Serving Platform 서비스 개요](assets/serving/07_grafana_service_overview.png)
 
-##### 5. AI-assisted Development
+*그림 22. 요청·지연과 vLLM·GPU 상태를 함께 확인하는 Service Overview.*
 
-요구사항 분석·설계·구현·테스트 전 과정에서 **AI 개발 도구를 활용해 대안 탐색과 반복 구현을 진행**하고 있다. 개발 속도를 높이는 데만 두지 않고, 시스템의 책임 경계와 API Contract, 설정 구조, 테스트 기준을 함께 정리하면서 구현 결과를 지속적으로 검토·개선하는 방식으로 사용한다.
+![GPU 용량과 Runtime 상태](assets/serving/08_grafana_gpu_capacity.png)
 
-특히 AI를 활용한 구현도 저장소의 명시적인 검증 흐름 안에서 확인한다. 정적 계약과 자동화 테스트를 통과한 뒤 실제 실행 환경의 readiness와 Runtime 동작까지 확인해, **AI 활용과 시스템 검증을 하나의 개발 흐름으로 연결**하고 있다.
+*그림 23. GPU 메모리와 OOM 위험, vLLM queue·KV Cache를 확인하는 GPU Dashboard.*
 
-##### 6. 검증과 배포 경계
+![Request Log Explorer](assets/serving/09_request_log_explorer_overview.png)
 
-코드·설정 변경은 정적 정합성, Unit/Contract Test, 실행 준비 상태, 실제 Runtime 검증으로 범위를 넓혀 확인하도록 구성했다.
-
-`Validate → Test → Ready/Smoke → Runtime Validate`
-
-API Contract, Config/Schema, Runtime policy와 generated artifact의 drift를 먼저 확인하고, 실제 환경에서는 Gateway·vLLM·GPU·Monitoring 연결까지 검증한다. 배포는 애플리케이션 계층만 갱신하는 경우와 모델 Runtime까지 포함하는 경우를 구분하고, immutable image/digest와 Health/Readiness 확인을 기준으로 운영 흐름을 구성한다.
-
-##### 구현 및 실행 결과
-
-아래 화면은 현재 Serving Platform에서 제공하는 API와 운영 기능의 실행 결과를 보여준다.
-
-###### OpenAI-compatible Chat API
-
-![On-Premises AI Model Serving Platform - Chat API](assets/serving/02_scalar_chat_completion.png)
-
-*그림 17. Scalar API Reference에서 Chat Completion의 request schema, 예제 요청과 OpenAI-compatible response 구조를 확인하는 화면.*
-
-###### Embedding API
-
-![On-Premises AI Model Serving Platform - Embedding API](assets/serving/03_scalar_embedding_vector.png)
-
-*그림 18. 동일한 Platform API 경계에서 Embedding 입력과 vector response 구조를 확인하는 화면.*
-
-###### Prompt Risk API
-
-![On-Premises AI Model Serving Platform - Prompt Risk](assets/serving/04_scalar_prompt_risk_signal.png)
-
-*그림 19. Prompt 위험 분석 결과를 상위 서비스가 사용할 수 있는 Risk 응답 구조로 확인하는 화면.*
-
-###### Multimodal Chat
-
-![On-Premises AI Model Serving Platform - Multimodal Chat](assets/serving/05_multimodal_chat.png)
-
-*그림 20. Chat Completion 계열 인터페이스에서 텍스트와 이미지 입력을 함께 처리한 실행 화면.*
-
-###### Runtime Monitoring
-
-![On-Premises AI Model Serving Platform - Runtime Monitoring](assets/serving/07_runtime_monitoring.png)
-
-*그림 21. 모델 Runtime과 GPU·Container 상태를 함께 관측하는 Grafana 기반 실행 화면.*
-
-##### 결과 및 현재 상태
-
-**온프레미스 AI Model Serving Platform**으로 API 계약, Model Runtime lifecycle, Main Model 전환, GPU 자원 판단, Retrieval/Risk, Metrics·Logs 관측, 검증·배포 경계를 하나의 시스템으로 관리한다. 클라이언트가 사용하는 API와 내부 Runtime 운영 책임을 분리해 모델과 실행 환경의 변화가 상위 서비스에 직접 전파되지 않도록 구성했다.
+*그림 24. Request ID 기준으로 상태·route·latency·token usage를 조회하는 Request Log Explorer.*
 
 ##### 주요 기술
 
-`Python` · `FastAPI` · `OpenAI-compatible API` · `vLLM` · `MLX-VLM` · `Docker` · `Model Runtime Control` · `GPU Admission` · `Retrieval` · `Prompt/PII/Secret Risk` · `Prometheus` · `Grafana` · `Loki` · `DCGM Exporter` · `cAdvisor` · `OpenAPI/JSON Schema`
+`Python` · `FastAPI` · `OpenAI-compatible API` · `vLLM` · `MLX-VLM` · `Docker` · `Model Runtime Control` · `GPU Admission` · `Retrieval` · `Prompt/PII/Secret Risk` · `Prometheus` · `Grafana` · `Loki` · `Alloy` · `DCGM Exporter` · `cAdvisor` · `OpenAPI/JSON Schema`
 
 ##### 관련 저장소
 
@@ -554,7 +483,7 @@ API Contract, Config/Schema, Runtime policy와 generated artifact의 drift를 �
 
 **수행 시점:** 네비웍스 재직 중
 
-- **문제:** 설비 상태가 경고로 전환된 뒤 분류하는 대신, 전환 이전 시계열에서 점검할 이상 후보를 조기에 선별
+- **목표:** 설비 상태가 경고로 전환되기 전 시계열에서 점검할 이상 후보를 조기에 선별
 - **데이터:** AI Hub 전력 설비 에너지 품질 AI 데이터 · 35종 전력품질 변수 · SOH 정상/경고 라벨
 - **담당 범위:** 센서/SOH 데이터 분석 · 문제 정의 · Label Shifting/Sliding Window · LSTM-Autoencoder with Attention · Threshold 평가 · 모니터링 연결
 - **주요 결과:** Accuracy 92% · Sensitivity 71% · Specificity 93% · Precision 33%; 오탐 한계를 명시하고 점검 후보 신호로 활용
@@ -678,7 +607,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![AIoT 분석 서버 및 모델 실행 흐름](assets/nebiworks/01_aiot_model_execution_flow.png)
 
-*그림 22. AIoT 센서 데이터의 분석·모델 학습·아티팩트 저장·FastAPI/Docker 실행을 연결한 흐름.*
+*그림 25. AIoT 센서 데이터의 분석·모델 학습·아티팩트 저장·FastAPI/Docker 실행을 연결한 흐름.*
 
 </details>
 
@@ -702,7 +631,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 **기간:** 2021.11 ~ 2024.05
 
-- **문제:** 후각 자극 fNIRS 신호에서 아밀로이드 PET 양성 여부와 관련된 패턴을 학습하고 제한된 의료 데이터에서 일반화 가능성을 검증
+- **목표:** 후각 자극 fNIRS 신호에서 아밀로이드 PET 양성과 관련된 패턴을 학습하고 제한된 의료 데이터에서 일반화 가능성을 검증
 - **데이터:** 후각 자극 기반 다변량 fNIRS · PET 양성/음성 라벨
 - **담당 범위:** 전처리된 fNIRS 신호 EDA·통계 분석 · 특징/입력 설계 · 모델 개발/튜닝 · XAI · Cross Validation · Independent Test
 - **연구 결과:** 시계열 분류 연구를 XAI·독립 검증과 의료기기 성능평가/규제 대응 자료까지 연결; 관련 논문 2편 제3저자 참여
@@ -716,7 +645,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![fNIRS 측정부터 PET 양성 확률까지](assets/ncer/01_fnirs_measurement_inference_flow.png)
 
-*그림 23. 후각 자극 fNIRS 측정부터 신호 처리, 모델 추론, PET 양성 확률 출력까지의 전체 연구 흐름.*
+*그림 26. 후각 자극 fNIRS 측정부터 신호 처리, 모델 추론, PET 양성 확률 출력까지의 전체 연구 흐름.*
 
 ##### 1. 데이터와 측정
 
@@ -724,7 +653,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![후각 테스트 측정 프로토콜과 fNIRS 시계열](assets/ncer/04_fnirs_olfactory_protocol.png)
 
-*그림 24. 안정 구간과 후각 자극 구간이 반복되는 측정 프로토콜과 실제 fNIRS 시계열 예시.*
+*그림 27. 안정 구간과 후각 자극 구간이 반복되는 측정 프로토콜과 실제 fNIRS 시계열 예시.*
 
 프로젝트 기간 동안 데이터 수집 기기와 Probe 변경으로 재수집이 이루어졌고, 활용 가능한 의료 생체신호 표본도 제한적이었다. PET 양성/음성 라벨 불균형과 피험자 간 신호 변동성을 고려해 모델 성능뿐 아니라 일반화와 과적합 위험을 함께 검토했다.
 
@@ -740,7 +669,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![집단별 fNIRS 시계열과 95% 신뢰구간](assets/ncer/05_fnirs_group_eda.png)
 
-*그림 25. 집단별 시간축 반응과 95% 신뢰구간을 비교한 EDA 결과.*
+*그림 28. 집단별 시간축 반응과 95% 신뢰구간을 비교한 EDA 결과.*
 
 집단별 분포와 통계적 차이를 함께 검토하고, **실제 생체신호의 시간 변화와 변동성**을 특징 후보와 모델 입력 Window 설계에 반영했다.
 
@@ -757,13 +686,13 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![PCA 전후 fNIRS 시계열 비교](assets/ncer/06_fnirs_pca_reduction.png)
 
-*그림 26. 다채널 Raw fNIRS를 PCA로 축소해 주요 변동 구조를 비교한 실험.*
+*그림 29. 다채널 Raw fNIRS를 PCA로 축소해 주요 변동 구조를 비교한 실험.*
 
 시계열을 다른 형태로 표현했을 때 패턴을 더 잘 분리할 수 있는지도 탐색했다. Raw signal을 CWT, Spectrogram, Gramian Angular Field, Markov Transition Field, Recurrence Plot 등의 이미지 표현으로 변환해 시계열 표현 방법을 비교했다.
 
 ![fNIRS 시계열 이미지 표현 연구](assets/ncer/07_fnirs_timeseries_representation.png)
 
-*그림 27. Raw 시계열을 CWT·Spectrogram·GAF·MTF·Recurrence Plot 형태로 변환한 표현 연구.*
+*그림 30. Raw 시계열을 CWT·Spectrogram·GAF·MTF·Recurrence Plot 형태로 변환한 표현 연구.*
 
 이 이미지화 연구는 최종 분류 경로를 대체하기 위한 것이 아니라, **제한된 생체신호에서 특징 표현과 데이터 증강 가능성을 탐색한 연구 범위**였다.
 
@@ -773,7 +702,7 @@ https://github.com/so9093-K/multivariate-time-series-anomaly-detection-
 
 ![Conditional GAN 기반 fNIRS 데이터 증강 연구](assets/ncer/08_fnirs_cgan_augmentation.png)
 
-*그림 28. Original signal을 CWT 이미지로 변환하고 Conditional GAN으로 생성한 synthetic image와 비교한 증강 연구.*
+*그림 31. Original signal을 CWT 이미지로 변환하고 Conditional GAN으로 생성한 synthetic image와 비교한 증강 연구.*
 
 Conditional GAN은 최종 임상 모델의 필수 입력 단계라기보다 **데이터 부족 문제에 대응하기 위해 검토한 증강 연구**로 구분했다.
 
@@ -787,7 +716,7 @@ Conditional GAN은 최종 임상 모델의 필수 입력 단계라기보다 **�
 
 ![fNIRS 모델 추론부터 결과 출력까지](assets/ncer/03_fnirs_model_operation_flow.png)
 
-*그림 29. 시계열 입력에서 복수 모델 추론, 확률 앙상블, Threshold 판정으로 이어지는 모델 동작 구조.*
+*그림 32. 시계열 입력에서 복수 모델 추론, 확률 앙상블, Threshold 판정으로 이어지는 모델 동작 구조.*
 
 ##### 7. Main Development Path — XAI
 
@@ -800,7 +729,7 @@ XAI 결과로 모델 출력에 영향을 준 특징과 시간 구간을 시각�
 
 ![시계열 분류 모델의 XAI 연구 결과](assets/ncer/source/fnirs_xai_source.png)
 
-*그림 30. 특징 기반 모델과 시계열 모델에서 주요 판단 요인·시간 구간을 확인한 XAI 연구 결과.*
+*그림 33. 특징 기반 모델과 시계열 모델에서 주요 판단 요인·시간 구간을 확인한 XAI 연구 결과.*
 
 ##### 8. Main Development Path — 모델 검증
 
@@ -808,7 +737,7 @@ XAI 결과로 모델 출력에 영향을 준 특징과 시간 구간을 시각�
 
 ![fNIRS 모델 개발 및 검증 흐름](assets/ncer/02_fnirs_development_validation_flow.png)
 
-*그림 31. 학습 데이터 구성, Stratified Cross Validation, 모델 선택·앙상블, 독립 검증으로 이어지는 검증 흐름.*
+*그림 34. 학습 데이터 구성, Stratified Cross Validation, 모델 선택·앙상블, 독립 검증으로 이어지는 검증 흐름.*
 
 초기 개발에서는 5-Fold 기반 실험을 진행했고, 후속 Clinical Validation에서는 **10-Fold Stratified Cross Validation과 Independent Test**로 검증 범위를 확장했다.
 
@@ -838,7 +767,7 @@ XAI 결과로 모델 출력에 영향을 준 특징과 시간 구간을 시각�
 
 **기간:** 2022.01 ~ 2022.04
 
-- **문제:** PPG→ART 혈압 추정 입력을 흔드는 Noise·Spike·비정상 파형을 정제하고 반복되는 이상 구간 선별을 자동화
+- **목표:** 혈압 추정 입력의 Noise·Spike·비정상 파형을 정제하고 반복되는 이상 구간 선별을 자동화
 - **데이터:** ECG · PPG · ART 생체신호
 - **담당 범위:** 신호 품질 분석 · 정상/비정상 기준 정립 · Filtering · 혈압 추정 평가 · Autoencoder/CNN-Autoencoder 이상탐지
 - **주요 결과:** 정제된 PPG 기반 ART 혈압 추정 MAE 7.0 mmHg; 수작업 이상 구간 정제를 Reconstruction Error 기반 탐지 문제로 확장
@@ -905,7 +834,7 @@ BCG 생체신호의 집단별 특징을 비교하고 MLP·머신러닝 기반 �
 
 **기간:** 2020.09 ~ 2020.12
 
-- **문제:** 낙상/정상 클래스와 Bounding Box 품질 불일치로 불안정한 실시간 Object Detection 성능 개선
+- **목표:** 낙상/정상 라벨과 Bounding Box 품질을 정비해 실시간 Object Detection 성능을 안정화
 - **데이터:** 약 2만 장 규모의 CCTV/영상 이미지와 낙상·정상 Bounding Box 라벨
 - **담당 범위:** 데이터 분석 · 라벨/Bounding Box 품질 점검 · YOLO/Darknet 학습 · 성능 검증
 - **주요 결과:** 내부 검증 mAP 약 60~70% 수준에서 라벨 품질 재검토·재학습 후 95%; TTA V&V 검증으로 연결
@@ -971,7 +900,7 @@ Darknet 기반 YOLO 모델을 학습하고 OpenCV/PIL로 이미지 전처리와 
 **기간:** 2026.04 ~ 2026.05  
 **과정:** 서강대학교 AI·SW대학원 · 시계열 자료 분석과 예측
 
-- **문제:** ECG·PPG로 절대 혈압 수치를 얼마나 설명·예측할 수 있는지 검증하고, 회귀 한계가 클 경우 위험 상태 선별로 활용 범위를 재평가
+- **목표:** ECG·PPG의 혈압 설명·예측 가능성을 검증하고, 회귀 한계가 클 경우 위험 상태 선별 가능성을 평가
 - **데이터:** VitalDB · 3,729개 분석 가능 사례 중 500개 사용 · 1,526,607개 시간 구간
 - **평가 분할:** 같은 수술 사례가 학습과 시험에 섞이지 않도록 Case-level Train/Validation/Test 분할
 - **담당 범위:** EDA · 신호 특징 정의 · 통계 분석 · 회귀/분류 모델 비교 · Case-level 검증 · 결과 해석
