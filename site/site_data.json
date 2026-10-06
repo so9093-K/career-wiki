@@ -31,36 +31,58 @@
   ],
   "skills_preview": [
     {
-      "title": "Data Analysis / ML",
+      "title": "Data Analysis / Feature Engineering",
       "keywords": [
         "Python",
         "Pandas",
-        "scikit-learn",
-        "LightGBM"
+        "SciPy",
+        "Matplotlib",
+        "EDA"
       ]
     },
     {
-      "title": "Time-Series / Validation",
+      "title": "Time-Series / Anomaly Detection",
       "keywords": [
         "Signal Processing",
+        "Autoencoder",
         "Isolation Forest",
-        "Threshold Optimization",
+        "Threshold Optimization"
+      ]
+    },
+    {
+      "title": "Machine Learning / Validation",
+      "keywords": [
+        "scikit-learn",
+        "TensorFlow / Keras",
+        "XGBoost",
+        "Optuna",
         "SHAP"
       ]
     },
     {
-      "title": "Security / Data Pipeline",
+      "title": "Security Analytics / AI Risk",
       "keywords": [
         "UEBA",
+        "Behavior Analytics",
+        "Prompt Injection Detection",
+        "PII / Secret Detection"
+      ]
+    },
+    {
+      "title": "Data Engineering / ML Pipeline",
+      "keywords": [
+        "Apache Kafka",
         "Elasticsearch",
         "Polars",
-        "DuckDB"
+        "DuckDB",
+        "PostgreSQL"
       ]
     },
     {
       "title": "Model Serving / Operations",
       "keywords": [
         "FastAPI",
+        "ONNX",
         "vLLM",
         "Docker",
         "Prometheus",

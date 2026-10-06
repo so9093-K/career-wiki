@@ -1316,7 +1316,7 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 ### Data Engineering / ML Pipeline
 
-`Elasticsearch` · `Polars` · `DuckDB` · `PostgreSQL` · `SQL` · `Parquet`\
+`Apache Kafka` · `Elasticsearch` · `Polars` · `DuckDB` · `PostgreSQL` · `SQL` · `Parquet`\
 `Feature Pipeline` · `Batch / Incremental Processing` · `Data Reprocessing` · `Pipeline State Management`
 
 Feature 생성·저장·재처리 파이프라인 구성과 반복 실행·처리 상태 추적
