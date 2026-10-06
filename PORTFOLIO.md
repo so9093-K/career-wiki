@@ -62,11 +62,14 @@
   - [자격](#자격)
   - [수상](#수상)
 - [8. 기술](#8-기술)
-  - [Primary Competencies](#primary-competencies)
-  - [Development Practices](#development-practices)
-  - [Programming / Data Stack](#programming--data-stack)
+  - [Data Analysis / Statistics](#data-analysis--statistics)
+  - [Time-Series / Anomaly Detection](#time-series--anomaly-detection)
   - [Machine Learning / Deep Learning](#machine-learning--deep-learning)
-  - [Domain / Applied Experience](#domain--applied-experience)
+  - [Model Validation / Explainability](#model-validation--explainability)
+  - [Security Analytics / AI Risk](#security-analytics--ai-risk)
+  - [Data Engineering / ML Pipeline](#data-engineering--ml-pipeline)
+  - [API / Model Serving & Operations](#api--model-serving--operations)
+  - [Development Practices](#development-practices)
 - [9. 외부 링크](#9-외부-링크)
   - [Profile](#profile)
   - [주요 GitHub 저장소](#주요-github-저장소)
@@ -1279,31 +1282,58 @@ SMILES를 RDKit molecule로 변환한 뒤 물리화학 descriptor와 구조 fing
 
 ## 8. 기술
 
-### Primary Competencies
+### Data Analysis / Statistics
 
-- **Data Analysis & Feature Engineering:** `EDA` · `Statistical Analysis` · `Signal/Time-Series Feature Extraction` · `Multivariate Time-Series` · `Sliding Window` · `Time-Series Decomposition` · `Behavior Feature Engineering` · `Polars` · `DuckDB`
-- **Classification / Prediction / Anomaly Detection:** `Random Forest` · `LSTM-FCN` · `LightGBM` · `XGBoost` · `Isolation Forest` · `Autoencoder` · `LSTM-Autoencoder` · `Reconstruction Error` · `EVT/POT` · `Threshold Optimization`
-- **Validation & Explainability:** `Cross Validation` · `Stratified CV` · `Independent Test Set` · `PR Curve` · `SHAP` · `LIME` · `Grad-CAM` · `AUC` · `Sensitivity/Specificity`
-- **ML Pipeline & Serving:** `Feature Pipeline` · `Manifest` · `Watermark` · `Nearline Batch` · `FastAPI` · `ONNX` · `vLLM` · `Runtime Control` · `Model Profile/Switching` · `GPU Admission` · `Prometheus` · `Grafana` · `Loki`
+`Python` · `Pandas` · `NumPy` · `SciPy` · `Matplotlib`\
+`EDA` · `Feature Engineering` · `Statistical Analysis` · `Correlation Analysis` · `Regression Analysis`
 
-### Development Practices
+데이터 분포·변수 관계 탐색과 통계 분석을 통한 Feature 설계 및 모델 입력 구조 구체화
 
-`AI-assisted Development` · `Contract-driven Validation` · `Automated Testing` · `Runtime Verification`
+### Time-Series / Anomaly Detection
 
-### Programming / Data Stack
+`Time-Series Analysis` · `Signal Processing` · `Autoencoder` · `LSTM-Autoencoder` · `Isolation Forest`\
+`Anomaly Scoring` · `Threshold Optimization`
 
-`Python` · `Pandas` · `NumPy` · `SciPy` · `Polars` · `DuckDB` · `SQL` · `PostgreSQL` · `Elasticsearch` · `Parquet`
+시계열·신호의 패턴 및 상태 변화 분석, 이상 후보 탐지와 Threshold 설정·평가
 
 ### Machine Learning / Deep Learning
 
-`scikit-learn` · `TensorFlow` · `Keras` · `Random Forest` · `Ridge` · `Logistic Regression` · `LightGBM` · `XGBoost` · `Prophet` · `LSTM-FCN` · `ALSTM-FCN` · `Conditional GAN` · `YOLO/Darknet`
+`scikit-learn` · `TensorFlow / Keras` · `Random Forest` · `LightGBM` · `XGBoost` · `Optuna`
 
-### Domain / Applied Experience
+분류·회귀·예측 문제에 맞는 모델과 학습 조건 비교 및 실험·평가
 
-- **Biosignal / Medical AI:** `fNIRS` · `ECG` · `PPG` · `ART` · `BCG` · `Digital Signal Processing`
-- **Security / Generative AI Risk:** `UEBA` · `Prompt Risk Analysis` · `Prompt Injection Detection` · `PII Detection` · `Secret Detection` · `Risk Signal`
-- **Serving / Operations:** `Docker` · `OpenAI-compatible API` · `Scalar API Reference` · `MLX-VLM` · `DCGM Exporter` · `cAdvisor` · `Linux` · `Git`
-- **Documentation / Regulatory:** `TRIPOD Checklist` · `의료 AI 성능 검증 문서` · `식약처 인공지능 의료기기 인허가·규제 대응`
+### Model Validation / Explainability
+
+`Cross Validation` · `Independent Test Set` · `Precision-Recall Analysis` · `SHAP` · `LIME` · `Grad-CAM`
+
+교차검증·독립 평가를 통한 모델 일반화 성능 확인과 예측·탐지 주요 요인 분석
+
+### Security Analytics / AI Risk
+
+`UEBA` · `Behavior Analytics` · `Prompt Injection Detection` · `PII / Secret Detection` · `AI Risk Analysis`
+
+보안 로그·AI 사용 이벤트의 사용자별 행동 패턴 분석 및 이상 후보·위험 신호의 실제 이벤트 연계
+
+### Data Engineering / ML Pipeline
+
+`Elasticsearch` · `Polars` · `DuckDB` · `PostgreSQL` · `SQL` · `Parquet`\
+`Feature Pipeline` · `Batch / Incremental Processing` · `Data Reprocessing` · `Pipeline State Management`
+
+Feature 생성·저장·재처리 파이프라인 구성과 반복 실행·처리 상태 추적
+
+### API / Model Serving & Operations
+
+`FastAPI` · `ONNX` · `vLLM` · `OpenAI-compatible API` · `OpenAPI / JSON Schema`\
+`Docker` · `Docker Compose` · `Model Runtime Management` · `GPU Resource Management` · `Prometheus` · `Grafana` · `Loki`
+
+모델 API 제공과 Runtime 실행·전환, GPU 자원 관리·관측·검증을 위한 Serving 구조 설계·구현
+
+### Development Practices
+
+`Linux` · `Bash / Shell` · `Git` · `GitHub` · `GitHub Actions`\
+`AI-assisted Development` · `API / Configuration Validation` · `Automated Testing` · `Runtime Validation`
+
+AI-assisted Development 활용과 코드·설정 계약, 자동화 테스트 및 Runtime 검증 기반 구현 결과 확인
 
 ---
 
