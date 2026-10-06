@@ -200,6 +200,7 @@ main { display: block; }
 .timeline-item p { margin: 0; color: var(--body-text); }
 
 @media (min-width: 821px) {
+  .skill-card { min-height: 128px; }
   .hero-side .profile-portrait { margin-left: auto; margin-right: auto; }
   #experience .section-head { grid-template-columns: 190px 1fr; margin-bottom: 20px; }
   #experience .timeline-item { grid-template-columns: 190px 1fr; }
@@ -207,9 +208,10 @@ main { display: block; }
 }
 
 .skill-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.skill-card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.skill-card { display: flex; flex-direction: column; justify-content: center; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
 .skill-card h3 { margin: 0 0 8px; font-size: 1.03rem; line-height: 1.35; }
 .skill-card p { margin: 0; color: var(--muted); font-size: .92rem; overflow-wrap: break-word; }
+.skill-term { white-space: nowrap; }
 .skills-more { margin: 18px 0 0; font-weight: 700; font-size: .93rem; }
 
 .compact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }

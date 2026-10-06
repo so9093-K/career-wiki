@@ -62,6 +62,10 @@ def render_tags(tags: list[str]) -> str:
     return "".join(f'<span class="tag">{esc(t)}</span>' for t in tags)
 
 
+def render_skill_terms(terms: list[str]) -> str:
+    return " · ".join(f'<span class="skill-term">{esc(term)}</span>' for term in terms)
+
+
 def project_detail_href(project: dict) -> str:
     anchor = project.get("anchor", "")
     return f"portfolio.html#{esc(anchor)}" if anchor else "portfolio.html"
@@ -84,7 +88,7 @@ def landing_html(data: dict) -> str:
     skill_cards = "".join(
         '<article class="skill-card">'
         f'<h3>{esc(group["title"])}</h3>'
-        f'<p>{" · ".join(esc(term) for term in group["keywords"])}</p>'
+        f'<p>{render_skill_terms(group["keywords"])}</p>'
         '</article>'
         for group in data["skills_preview"]
     )
@@ -513,6 +517,9 @@ def validate_output(out: Path, data: dict) -> None:
     index_text = (out / "index.html").read_text(encoding="utf-8")
     if index_text.count('class="skill-card"') != len(data["skills_preview"]):
         raise RuntimeError("landing Skills preview card count mismatch")
+    expected_skill_terms = sum(len(group["keywords"]) for group in data["skills_preview"])
+    if index_text.count('class="skill-term"') != expected_skill_terms:
+        raise RuntimeError("landing Skills term count mismatch")
     if data["skills_anchor"] not in portfolio_ids:
         raise RuntimeError("Skills preview target anchor missing from portfolio.html")
     if index_text.count(f'href="portfolio.html#{esc(data["skills_anchor"])}"') != 1:
