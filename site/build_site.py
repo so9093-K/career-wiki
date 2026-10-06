@@ -81,6 +81,15 @@ def landing_html(data: dict) -> str:
         for x in data["capabilities"]
     )
 
+    skill_cards = "".join(
+        '<article class="skill-card">'
+        f'<h3>{esc(group["title"])}</h3>'
+        f'<p>{" · ".join(esc(term) for term in group["keywords"])}</p>'
+        '</article>'
+        for group in data["skills_preview"]
+    )
+    skills_anchor = esc(data["skills_anchor"])
+
     projects = []
     for p in data["featured_projects"]:
         cover = p.get("cover_asset")
@@ -249,6 +258,15 @@ def landing_html(data: dict) -> str:
       <div><h2>학력</h2></div>
     </div>
     <div class="compact-grid">{education}</div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="section-head">
+      <p class="section-kicker">Technical skills</p>
+      <div><h2>주요 기술 스택</h2><p class="section-intro">데이터 분석·모델 검증부터 Pipeline과 Model Serving까지 프로젝트에 활용한 기술.</p></div>
+    </div>
+    <div class="skill-grid">{skill_cards}</div>
+    <p class="skills-more"><a href="portfolio.html#{skills_anchor}">전체 Technical Skills 보기 →</a></p>
   </section>
 </main>
 <div id="project-preview-layer" hidden aria-hidden="true"><img alt=""></div>
@@ -491,6 +509,14 @@ def validate_output(out: Path, data: dict) -> None:
                 raise RuntimeError(f"path escapes site root: {path.name}: {ref}") from exc
             if not target.exists():
                 raise RuntimeError(f"broken local link in {path.name}: {ref}")
+
+    index_text = (out / "index.html").read_text(encoding="utf-8")
+    if index_text.count('class="skill-card"') != len(data["skills_preview"]):
+        raise RuntimeError("landing Skills preview card count mismatch")
+    if data["skills_anchor"] not in portfolio_ids:
+        raise RuntimeError("Skills preview target anchor missing from portfolio.html")
+    if index_text.count(f'href="portfolio.html#{esc(data["skills_anchor"])}"') != 1:
+        raise RuntimeError("landing Skills detail link missing or duplicated")
 
     for project in data["featured_projects"] + data["competitions"]:
         anchor = project.get("anchor")

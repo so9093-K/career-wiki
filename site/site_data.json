@@ -29,6 +29,46 @@
       "description": "Feature 생성·저장·재처리가 가능한 데이터 파이프라인과 모델 API·Runtime lifecycle·관측·배포 구조를 설계·구현하며, 모델 개발을 반복 가능한 ML Systems로 확장"
     }
   ],
+  "skills_preview": [
+    {
+      "title": "Data Analysis / ML",
+      "keywords": [
+        "Python",
+        "Pandas",
+        "scikit-learn",
+        "LightGBM"
+      ]
+    },
+    {
+      "title": "Time-Series / Validation",
+      "keywords": [
+        "Signal Processing",
+        "Isolation Forest",
+        "Threshold Optimization",
+        "SHAP"
+      ]
+    },
+    {
+      "title": "Security / Data Pipeline",
+      "keywords": [
+        "UEBA",
+        "Elasticsearch",
+        "Polars",
+        "DuckDB"
+      ]
+    },
+    {
+      "title": "Model Serving / Operations",
+      "keywords": [
+        "FastAPI",
+        "vLLM",
+        "Docker",
+        "Prometheus",
+        "Grafana"
+      ]
+    }
+  ],
+  "skills_anchor": "8-기술",
   "career": [
     {
       "company": "위즈베라",
