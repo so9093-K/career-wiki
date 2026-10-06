@@ -108,11 +108,11 @@
       "company": "엔서",
       "period": "2021.11 ~ 2024.06",
       "role": "의료기기 개발·연구원",
-      "summary": "fNIRS, ECG, PPG, ART 등 생체신호에서 데이터 특성과 자극 반응을 분석하고, Feature와 입력 구조 설계, 분류·회귀·이상탐지 모델 개발, XAI와 Cross Validation·Independent Test 기반 검증을 수행했다. fNIRS 기반 의료 AI는 성능 검증·기술문서화와 식약처 인허가·규제 대응을 지원했으며 임상 단계로 이어졌다."
+      "summary": "fNIRS, ECG, PPG, ART 등 생체신호에서 데이터 특성과 자극 반응을 분석하고, Feature와 입력 구조 설계, 분류·회귀·이상탐지 모델 개발, XAI와 Cross Validation·Independent Test 기반 검증을 수행했다. fNIRS 기반 의료 AI에서는 특징·모델 입력 설계부터 XAI·교차검증·독립 테스트까지 수행하고, 연구·검증 결과를 의료기기 성능평가·규제 대응 자료로 연계했다. 관련 논문 2편에 제3저자로 참여했다."
     },
     {
       "company": "소프트웨어융합연구소",
-      "period": "2020.08 ~ 2021.05",
+      "period": "2020.08 ~ 2021.05.31\\",
       "role": "연구원",
       "summary": "YOLO/Darknet 기반 실시간 낙상 감지에서 데이터 수집·라벨링, Bounding Box·클래스 품질 점검, 모델 재학습과 TTA V&V 검증을 수행했다. BCG 기반 생체신호에서는 집단별 특징 분석과 만성질환·혈당 예측 프로토타입 연구에 참여했다."
     }
@@ -127,7 +127,7 @@
       "summary": "보안 행동 로그의 구조와 사용자별 패턴을 분석해 Feature를 설계하고, 이상 후보·판단 이유·원본 로그 재확인 지점까지 연결한 UEBA 분석 시스템.",
       "tags": [
         "Isolation Forest",
-        "EVT/POT",
+        "Threshold Optimization",
         "SHAP",
         "UEBA"
       ],
@@ -177,7 +177,7 @@
       "code": "NB-01",
       "title": "제조 공정 시계열 이상징후 조기탐지 및 모니터링",
       "category": "Manufacturing AI",
-      "period": "",
+      "period": "2024.10.31 ~ 2025.01.31",
       "summary": "센서 시계열과 SOH 상태 전환을 분석해 사전 이상 구간과 Sliding Window를 구성하고, LSTM-Autoencoder의 재구성 오류와 Threshold로 이상 후보를 선별한 예지보전 PoC.",
       "tags": [
         "Multivariate Time-Series",
@@ -195,7 +195,7 @@
       "code": "NS-01",
       "title": "fNIRS 기반 아밀로이드 PET 양성 예측",
       "category": "Medical AI",
-      "period": "2021.11 ~ 2024.05",
+      "period": "2021.11.08 ~ 2024.05.31",
       "summary": "전처리된 후각 자극 fNIRS 신호의 집단·자극 반응을 EDA·통계적으로 분석해 Feature와 입력 구조를 설계하고, 모델 튜닝·XAI·독립 Test·의료기기 검증까지 연결한 PET 양성 예측 연구.",
       "tags": [
         "fNIRS",
